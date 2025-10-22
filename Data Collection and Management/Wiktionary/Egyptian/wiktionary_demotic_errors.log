@@ -1,0 +1,173 @@
+2025-10-22 11:29:59,800 - INFO - Starting Demotic lemma collection...
+2025-10-22 11:29:59,801 - INFO - Fetching list of Demotic lemmas...
+2025-10-22 11:30:00,837 - INFO - Saved lemma list to demotic_lemmas_list.json
+2025-10-22 11:30:00,864 - INFO - Found 56 lemmas.
+2025-10-22 11:30:00,869 - INFO - Processing 1/56: jby
+2025-10-22 11:30:01,796 - WARNING - No 'Demotic' section found for jby
+2025-10-22 11:30:01,799 - INFO - Saved lemma jby to demotic_lemmas.json
+2025-10-22 11:30:03,300 - INFO - Processing 2/56: jmn-jr-dj-s
+2025-10-22 11:30:04,297 - WARNING - No 'Demotic' section found for jmn-jr-dj-s
+2025-10-22 11:30:04,306 - INFO - Saved lemma jmn-jr-dj-s to demotic_lemmas.json
+2025-10-22 11:30:05,807 - INFO - Processing 3/56: jrj-\ua725\ua723
+2025-10-22 11:30:06,784 - WARNING - No 'Demotic' section found for jrj-\ua725\ua723
+2025-10-22 11:30:06,786 - INFO - Saved lemma jrj-\ua725\ua723 to demotic_lemmas.json
+2025-10-22 11:30:08,288 - INFO - Processing 4/56: jrt
+2025-10-22 11:30:09,205 - WARNING - No 'Demotic' section found for jrt
+2025-10-22 11:30:09,209 - INFO - Saved lemma jrt to demotic_lemmas.json
+2025-10-22 11:30:10,710 - INFO - Processing 5/56: j\u1e71
+2025-10-22 11:30:11,619 - WARNING - No 'Demotic' section found for j\u1e71
+2025-10-22 11:30:11,622 - INFO - Saved lemma j\u1e71 to demotic_lemmas.json
+2025-10-22 11:30:13,122 - INFO - Processing 6/56: eresgšyng\ua725l
+2025-10-22 11:30:13,993 - WARNING - No 'Demotic' section found for eresgšyng\ua725l
+2025-10-22 11:30:13,996 - INFO - Saved lemma eresgšyng\ua725l to demotic_lemmas.json
+2025-10-22 11:30:15,496 - INFO - Processing 7/56: \ua725\ua725n
+2025-10-22 11:30:16,473 - WARNING - No 'Demotic' section found for \ua725\ua725n
+2025-10-22 11:30:16,477 - INFO - Saved lemma \ua725\ua725n to demotic_lemmas.json
+2025-10-22 11:30:17,978 - INFO - Processing 8/56: \ua725f
+2025-10-22 11:30:19,009 - WARNING - No 'Demotic' section found for \ua725f
+2025-10-22 11:30:19,012 - INFO - Saved lemma \ua725f to demotic_lemmas.json
+2025-10-22 11:30:20,513 - INFO - Processing 9/56: \ua725.wy
+2025-10-22 11:30:21,410 - WARNING - No 'Demotic' section found for \ua725.wy
+2025-10-22 11:30:21,413 - INFO - Saved lemma \ua725.wy to demotic_lemmas.json
+2025-10-22 11:30:22,914 - INFO - Processing 10/56: \ua725.t-sb\ua723
+2025-10-22 11:30:23,823 - WARNING - No 'Demotic' section found for \ua725.t-sb\ua723
+2025-10-22 11:30:23,826 - INFO - Saved lemma \ua725.t-sb\ua723 to demotic_lemmas.json
+2025-10-22 11:30:25,327 - INFO - Processing 11/56: yr
+2025-10-22 11:30:26,326 - WARNING - No 'Demotic' section found for yr
+2025-10-22 11:30:26,329 - INFO - Saved lemma yr to demotic_lemmas.json
+2025-10-22 11:30:27,830 - INFO - Processing 12/56: yr-\ua725\ua723
+2025-10-22 11:30:28,758 - WARNING - No 'Demotic' section found for yr-\ua725\ua723
+2025-10-22 11:30:28,763 - INFO - Saved lemma yr-\ua725\ua723 to demotic_lemmas.json
+2025-10-22 11:30:30,264 - INFO - Processing 13/56: wynn
+2025-10-22 11:30:31,164 - WARNING - No 'Demotic' section found for wynn
+2025-10-22 11:30:31,168 - INFO - Saved lemma wynn to demotic_lemmas.json
+2025-10-22 11:30:32,669 - INFO - Processing 14/56: wp\u1e71
+2025-10-22 11:30:33,563 - WARNING - No 'Demotic' section found for wp\u1e71
+2025-10-22 11:30:33,568 - INFO - Saved lemma wp\u1e71 to demotic_lemmas.json
+2025-10-22 11:30:35,069 - INFO - Processing 15/56: wr\u1e71
+2025-10-22 11:30:36,028 - WARNING - No 'Demotic' section found for wr\u1e71
+2025-10-22 11:30:36,033 - INFO - Saved lemma wr\u1e71 to demotic_lemmas.json
+2025-10-22 11:30:37,534 - INFO - Processing 16/56: wsr-m\ua723\ua725.t-r\ua725
+2025-10-22 11:30:38,375 - WARNING - No 'Demotic' section found for wsr-m\ua723\ua725.t-r\ua725
+2025-10-22 11:30:38,379 - INFO - Saved lemma wsr-m\ua723\ua725.t-r\ua725 to demotic_lemmas.json
+2025-10-22 11:30:39,880 - INFO - Processing 17/56: bk
+2025-10-22 11:30:40,830 - WARNING - No 'Demotic' section found for bk
+2025-10-22 11:30:40,834 - INFO - Saved lemma bk to demotic_lemmas.json
+2025-10-22 11:30:42,334 - INFO - Processing 18/56: p
+2025-10-22 11:30:43,265 - WARNING - No 'Demotic' section found for p
+2025-10-22 11:30:43,270 - INFO - Saved lemma p to demotic_lemmas.json
+2025-10-22 11:30:44,771 - INFO - Processing 19/56: pr
+2025-10-22 11:30:45,675 - WARNING - No 'Demotic' section found for pr
+2025-10-22 11:30:45,680 - INFO - Saved lemma pr to demotic_lemmas.json
+2025-10-22 11:30:47,181 - INFO - Processing 20/56: pr-\ua725\ua723
+2025-10-22 11:30:48,057 - WARNING - No 'Demotic' section found for pr-\ua725\ua723
+2025-10-22 11:30:48,063 - INFO - Saved lemma pr-\ua725\ua723 to demotic_lemmas.json
+2025-10-22 11:30:49,563 - INFO - Processing 21/56: p.t
+2025-10-22 11:30:50,535 - WARNING - No 'Demotic' section found for p.t
+2025-10-22 11:30:50,540 - INFO - Saved lemma p.t to demotic_lemmas.json
+2025-10-22 11:30:52,041 - INFO - Processing 22/56: m\ua723\ua725
+2025-10-22 11:30:52,889 - WARNING - No 'Demotic' section found for m\ua723\ua725
+2025-10-22 11:30:52,895 - INFO - Saved lemma m\ua723\ua725 to demotic_lemmas.json
+2025-10-22 11:30:54,396 - INFO - Processing 23/56: mš\ua725
+2025-10-22 11:30:55,300 - WARNING - No 'Demotic' section found for mš\ua725
+2025-10-22 11:30:55,307 - INFO - Saved lemma mš\ua725 to demotic_lemmas.json
+2025-10-22 11:30:56,808 - INFO - Processing 24/56: nb
+2025-10-22 11:30:57,764 - WARNING - No 'Demotic' section found for nb
+2025-10-22 11:30:57,771 - INFO - Saved lemma nb to demotic_lemmas.json
+2025-10-22 11:30:59,272 - INFO - Processing 25/56: nby
+2025-10-22 11:31:00,171 - WARNING - No 'Demotic' section found for nby
+2025-10-22 11:31:00,177 - INFO - Saved lemma nby to demotic_lemmas.json
+2025-10-22 11:31:01,678 - INFO - Processing 26/56: nbw
+2025-10-22 11:31:02,656 - WARNING - No 'Demotic' section found for nbw
+2025-10-22 11:31:02,665 - INFO - Saved lemma nbw to demotic_lemmas.json
+2025-10-22 11:31:04,166 - INFO - Processing 27/56: nkt
+2025-10-22 11:31:05,076 - WARNING - No 'Demotic' section found for nkt
+2025-10-22 11:31:05,082 - INFO - Saved lemma nkt to demotic_lemmas.json
+2025-10-22 11:31:06,583 - INFO - Processing 28/56: ntr
+2025-10-22 11:31:07,549 - WARNING - No 'Demotic' section found for ntr
+2025-10-22 11:31:07,555 - INFO - Saved lemma ntr to demotic_lemmas.json
+2025-10-22 11:31:09,071 - INFO - Processing 29/56: r\ua725
+2025-10-22 11:31:10,065 - WARNING - No 'Demotic' section found for r\ua725
+2025-10-22 11:31:10,073 - INFO - Saved lemma r\ua725 to demotic_lemmas.json
+2025-10-22 11:31:11,574 - INFO - Processing 30/56: rmt
+2025-10-22 11:31:12,476 - WARNING - No 'Demotic' section found for rmt
+2025-10-22 11:31:12,483 - INFO - Saved lemma rmt to demotic_lemmas.json
+2025-10-22 11:31:13,984 - INFO - Processing 31/56: ls
+2025-10-22 11:31:14,880 - WARNING - No 'Demotic' section found for ls
+2025-10-22 11:31:14,887 - INFO - Saved lemma ls to demotic_lemmas.json
+2025-10-22 11:31:16,388 - INFO - Processing 32/56: h\ua725le\u1e71
+2025-10-22 11:31:17,368 - WARNING - No 'Demotic' section found for h\ua725le\u1e71
+2025-10-22 11:31:17,375 - INFO - Saved lemma h\ua725le\u1e71 to demotic_lemmas.json
+2025-10-22 11:31:18,876 - INFO - Processing 33/56: hy
+2025-10-22 11:31:19,840 - WARNING - No 'Demotic' section found for hy
+2025-10-22 11:31:19,851 - INFO - Saved lemma hy to demotic_lemmas.json
+2025-10-22 11:31:21,351 - INFO - Processing 34/56: \u1e25m.t
+2025-10-22 11:31:22,237 - WARNING - No 'Demotic' section found for \u1e25m.t
+2025-10-22 11:31:22,244 - INFO - Saved lemma \u1e25m.t to demotic_lemmas.json
+2025-10-22 11:31:23,745 - INFO - Processing 35/56: \u1e25n\ua725
+2025-10-22 11:31:24,727 - WARNING - No 'Demotic' section found for \u1e25n\ua725
+2025-10-22 11:31:24,735 - INFO - Saved lemma \u1e25n\ua725 to demotic_lemmas.json
+2025-10-22 11:31:26,237 - INFO - Processing 36/56: \u1e25ry
+2025-10-22 11:31:27,188 - WARNING - No 'Demotic' section found for \u1e25ry
+2025-10-22 11:31:27,196 - INFO - Saved lemma \u1e25ry to demotic_lemmas.json
+2025-10-22 11:31:28,698 - INFO - Processing 37/56: \u1e25rry
+2025-10-22 11:31:29,636 - WARNING - No 'Demotic' section found for \u1e25rry
+2025-10-22 11:31:29,643 - INFO - Saved lemma \u1e25rry to demotic_lemmas.json
+2025-10-22 11:31:31,144 - INFO - Processing 38/56: \u1e25l
+2025-10-22 11:31:32,054 - WARNING - No 'Demotic' section found for \u1e25l
+2025-10-22 11:31:32,064 - INFO - Saved lemma \u1e25l to demotic_lemmas.json
+2025-10-22 11:31:33,564 - INFO - Processing 39/56: \u1e25t
+2025-10-22 11:31:34,500 - WARNING - No 'Demotic' section found for \u1e25t
+2025-10-22 11:31:34,508 - INFO - Saved lemma \u1e25t to demotic_lemmas.json
+2025-10-22 11:31:36,009 - INFO - Processing 40/56: \u1e25tr
+2025-10-22 11:31:36,932 - WARNING - No 'Demotic' section found for \u1e25tr
+2025-10-22 11:31:36,939 - INFO - Saved lemma \u1e25tr to demotic_lemmas.json
+2025-10-22 11:31:38,440 - INFO - Processing 41/56: sb\ua723.t
+2025-10-22 11:31:39,336 - WARNING - No 'Demotic' section found for sb\ua723.t
+2025-10-22 11:31:39,345 - INFO - Saved lemma sb\ua723.t to demotic_lemmas.json
+2025-10-22 11:31:40,846 - INFO - Processing 42/56: sfy
+2025-10-22 11:31:41,878 - WARNING - No 'Demotic' section found for sfy
+2025-10-22 11:31:41,886 - INFO - Saved lemma sfy to demotic_lemmas.json
+2025-10-22 11:31:43,391 - INFO - Processing 43/56: sn
+2025-10-22 11:31:44,304 - WARNING - No 'Demotic' section found for sn
+2025-10-22 11:31:44,312 - INFO - Saved lemma sn to demotic_lemmas.json
+2025-10-22 11:31:45,814 - INFO - Processing 44/56: snf
+2025-10-22 11:31:46,680 - WARNING - No 'Demotic' section found for snf
+2025-10-22 11:31:46,687 - INFO - Saved lemma snf to demotic_lemmas.json
+2025-10-22 11:31:48,188 - INFO - Processing 45/56: srj
+2025-10-22 11:31:49,181 - WARNING - No 'Demotic' section found for srj
+2025-10-22 11:31:49,190 - INFO - Saved lemma srj to demotic_lemmas.json
+2025-10-22 11:31:50,691 - INFO - Processing 46/56: s\u1e0f
+2025-10-22 11:31:51,610 - WARNING - No 'Demotic' section found for s\u1e0f
+2025-10-22 11:31:51,623 - INFO - Saved lemma s\u1e0f to demotic_lemmas.json
+2025-10-22 11:31:53,124 - INFO - Processing 47/56: šr
+2025-10-22 11:31:54,043 - WARNING - No 'Demotic' section found for šr
+2025-10-22 11:31:54,051 - INFO - Saved lemma šr to demotic_lemmas.json
+2025-10-22 11:31:55,552 - INFO - Processing 48/56: gš
+2025-10-22 11:31:56,481 - WARNING - No 'Demotic' section found for gš
+2025-10-22 11:31:56,488 - INFO - Saved lemma gš to demotic_lemmas.json
+2025-10-22 11:31:57,990 - INFO - Processing 49/56: tb
+2025-10-22 11:31:58,914 - WARNING - No 'Demotic' section found for tb
+2025-10-22 11:31:58,923 - INFO - Saved lemma tb to demotic_lemmas.json
+2025-10-22 11:32:00,424 - INFO - Processing 50/56: tše
+2025-10-22 11:32:01,363 - WARNING - No 'Demotic' section found for tše
+2025-10-22 11:32:01,371 - INFO - Saved lemma tše to demotic_lemmas.json
+2025-10-22 11:32:02,872 - INFO - Processing 51/56: \u1e0fmp\u1e25
+2025-10-22 11:32:03,795 - WARNING - No 'Demotic' section found for \u1e0fmp\u1e25
+2025-10-22 11:32:03,807 - INFO - Saved lemma \u1e0fmp\u1e25 to demotic_lemmas.json
+2025-10-22 11:32:05,308 - INFO - Processing 52/56: Category:Demotic determiners
+2025-10-22 11:32:06,220 - WARNING - No 'Demotic' section found for Category:Demotic determiners
+2025-10-22 11:32:06,231 - INFO - Saved lemma Category:Demotic determiners to demotic_lemmas.json
+2025-10-22 11:32:07,732 - INFO - Processing 53/56: Category:Demotic multiword terms
+2025-10-22 11:32:08,746 - WARNING - No 'Demotic' section found for Category:Demotic multiword terms
+2025-10-22 11:32:08,754 - INFO - Saved lemma Category:Demotic multiword terms to demotic_lemmas.json
+2025-10-22 11:32:10,255 - INFO - Processing 54/56: Category:Demotic nouns
+2025-10-22 11:32:11,216 - WARNING - No 'Demotic' section found for Category:Demotic nouns
+2025-10-22 11:32:11,225 - INFO - Saved lemma Category:Demotic nouns to demotic_lemmas.json
+2025-10-22 11:32:12,726 - INFO - Processing 55/56: Category:Demotic prepositions
+2025-10-22 11:32:13,604 - WARNING - No 'Demotic' section found for Category:Demotic prepositions
+2025-10-22 11:32:13,613 - INFO - Saved lemma Category:Demotic prepositions to demotic_lemmas.json
+2025-10-22 11:32:15,114 - INFO - Processing 56/56: Category:Demotic verbs
+2025-10-22 11:32:15,961 - WARNING - No 'Demotic' section found for Category:Demotic verbs
+2025-10-22 11:32:15,969 - INFO - Saved lemma Category:Demotic verbs to demotic_lemmas.json
+2025-10-22 11:32:17,470 - INFO - Done! Processed 56 new Demotic lemmas. Data saved to demotic_lemmas.json
