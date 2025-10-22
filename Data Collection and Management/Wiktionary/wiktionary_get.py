@@ -23,7 +23,7 @@ API_BASE = "https://en.wiktionary.org/w/api.php"
 
 # Headers to mimic a polite browser request
 HEADERS = {
-    "User-Agent": "EgyptianLemmasScraper/1.0 (user@email.com)",  # Replace with your info!
+    "User-Agent": "EgyptianLemmasScraper/1.0 (email here)",  # Replace with your info!
     "Accept": "application/json",
     "Referer": "https://en.wiktionary.org/wiki/Category:{}_lemmas"
 }
