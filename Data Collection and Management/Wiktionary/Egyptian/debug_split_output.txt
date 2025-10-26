@@ -1,0 +1,43 @@
+﻿Full Egyptian section:
+==Egyptian==
+
+===Pronunciation===
+{{egy-IPA-E}}
+
+===Verb===
+{{egy-verb|2ae-inf|head=<hiero>A-i-A2</hiero>}}
+
+# {{def-uncertain|egy}}
+## {{lb|egy|intransitive}} to [[lament]]
+## {{lb|egy|intransitive}} to be [[broken]] by [[pain]]
+
+====Inflection====
+{{egy-conj-2ae-inf|Ω£új|intr=1}}
+
+====Alternative forms====
+{{egy-hieroforms
+|<hiero>A-A2-y-w</hiero>|read1=Ω£újw}}
+
+===References===
+* {{R:egy:Meeks 2010|6}}
+
+======================================================================
+
+Number of sections after split: 3
+
+
+Section 0:
+'==Egyptian==\n\n===Pronunciation===\n{{egy-IPA-E}}\n\n'
+...
+
+
+Section 1:
+'===Verb==='
+...
+
+
+Section 2:
+'\n{{egy-verb|2ae-inf|head=<hiero>A-i-A2</hiero>}}\n\n# {{def-uncertain|egy}}\n## {{lb|egy|intransitive}} to [[lament]]\n## {{lb|egy|intransitive}} to be [[broken]] by [[pain]]\n\n====Inflection====\n{{egy-con'
+...
+
+
