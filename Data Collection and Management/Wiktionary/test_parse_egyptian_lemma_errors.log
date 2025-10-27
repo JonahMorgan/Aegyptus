@@ -1,0 +1,68 @@
+2025-10-22 15:38:08,054 - INFO - Processing test lemma: \ua723
+2025-10-22 15:38:08,060 - WARNING - Invalid section title for \ua723: 'function' object has no attribute 'strip_code'
+2025-10-22 15:38:08,061 - WARNING - Invalid section title for \ua723: 'function' object has no attribute 'strip_code'
+2025-10-22 15:38:08,062 - WARNING - Invalid section title for \ua723: 'function' object has no attribute 'strip_code'
+2025-10-22 15:38:08,062 - WARNING - Invalid section title for \ua723: 'function' object has no attribute 'strip_code'
+2025-10-22 15:38:08,063 - WARNING - Invalid section title for \ua723: 'function' object has no attribute 'strip_code'
+2025-10-22 15:38:08,064 - WARNING - Invalid section title for \ua723: 'function' object has no attribute 'strip_code'
+2025-10-22 15:38:08,065 - WARNING - Invalid section title for \ua723: 'function' object has no attribute 'strip_code'
+2025-10-22 15:38:08,066 - WARNING - Invalid section title for \ua723: 'function' object has no attribute 'strip_code'
+2025-10-22 15:38:08,067 - WARNING - Invalid section title for \ua723: 'function' object has no attribute 'strip_code'
+2025-10-22 15:38:08,068 - WARNING - Invalid section title for \ua723: 'function' object has no attribute 'strip_code'
+2025-10-22 15:38:08,068 - WARNING - Invalid section title for \ua723: 'function' object has no attribute 'strip_code'
+2025-10-22 15:38:08,069 - WARNING - Invalid section title for \ua723: 'function' object has no attribute 'strip_code'
+2025-10-22 15:38:08,070 - WARNING - Invalid section title for \ua723: 'function' object has no attribute 'strip_code'
+2025-10-22 15:38:08,070 - WARNING - Invalid section title for \ua723: 'function' object has no attribute 'strip_code'
+2025-10-22 15:38:08,071 - WARNING - Invalid section title for \ua723: 'function' object has no attribute 'strip_code'
+2025-10-22 15:38:08,075 - INFO - Saved parsed data to test_parsed_egyptian_lemma.json
+2025-10-22 15:38:08,076 - INFO - Done! Parsed test lemma \ua723. Data saved to test_parsed_egyptian_lemma.json
+2025-10-22 15:40:38,176 - INFO - Processing test lemma: \ua723
+2025-10-22 15:40:38,182 - DEBUG - Found 15 sections for \ua723
+2025-10-22 15:40:38,183 - WARNING - Failed to extract title via strip_code: 'function' object has no attribute 'strip_code'
+2025-10-22 15:40:38,183 - DEBUG - Extracted section title via regex: translingual
+2025-10-22 15:40:38,184 - WARNING - Failed to extract title via strip_code: 'function' object has no attribute 'strip_code'
+2025-10-22 15:40:38,184 - DEBUG - Extracted section title via regex: letter
+2025-10-22 15:40:38,185 - WARNING - Failed to extract title via strip_code: 'function' object has no attribute 'strip_code'
+2025-10-22 15:40:38,185 - DEBUG - Extracted section title via regex: see also
+2025-10-22 15:40:38,186 - WARNING - Failed to extract title via strip_code: 'function' object has no attribute 'strip_code'
+2025-10-22 15:40:38,187 - DEBUG - Extracted section title via regex: egyptian
+2025-10-22 15:40:38,188 - WARNING - Failed to extract title via strip_code: 'function' object has no attribute 'strip_code'
+2025-10-22 15:40:38,188 - DEBUG - Extracted section title via regex: pronunciation
+2025-10-22 15:40:38,189 - WARNING - Failed to extract title via strip_code: 'function' object has no attribute 'strip_code'
+2025-10-22 15:40:38,189 - DEBUG - Extracted section title via regex: etymology 1
+2025-10-22 15:40:38,191 - DEBUG - Extracted etymology: ===Etymology 1=== Possibly from inh.<ref>{{R:HSED|...
+2025-10-22 15:40:38,192 - WARNING - Failed to extract title via strip_code: 'function' object has no attribute 'strip_code'
+2025-10-22 15:40:38,193 - DEBUG - Extracted section title via regex: noun
+2025-10-22 15:40:38,194 - DEBUG - Found 0 definitions for noun
+2025-10-22 15:40:38,195 - WARNING - Failed to extract title via strip_code: 'function' object has no attribute 'strip_code'
+2025-10-22 15:40:38,195 - DEBUG - Extracted section title via regex: etymology 2
+2025-10-22 15:40:38,197 - DEBUG - Extracted etymology: ===Etymology 2=== ====Particle==== egy-part # ng, ...
+2025-10-22 15:40:38,198 - WARNING - Failed to extract title via strip_code: 'function' object has no attribute 'strip_code'
+2025-10-22 15:40:38,198 - DEBUG - Extracted section title via regex: particle
+2025-10-22 15:40:38,200 - DEBUG - Found 0 definitions for particle
+2025-10-22 15:40:38,202 - WARNING - Failed to extract title via strip_code: 'function' object has no attribute 'strip_code'
+2025-10-22 15:40:38,202 - DEBUG - Extracted section title via regex: etymology 3
+2025-10-22 15:40:38,203 - DEBUG - Extracted etymology: ===Etymology 3=== Possibly from inh.<ref>{{R:HSED|...
+2025-10-22 15:40:38,204 - WARNING - Failed to extract title via strip_code: 'function' object has no attribute 'strip_code'
+2025-10-22 15:40:38,204 - DEBUG - Extracted section title via regex: verb
+2025-10-22 15:40:38,205 - DEBUG - Found 0 definitions for verb
+2025-10-22 15:40:38,205 - WARNING - Failed to extract title via strip_code: 'function' object has no attribute 'strip_code'
+2025-10-22 15:40:38,205 - DEBUG - Extracted section title via regex: etymology 4
+2025-10-22 15:40:38,206 - DEBUG - Extracted etymology: ===Etymology 4=== ====Verb==== egy-verb # only use...
+2025-10-22 15:40:38,206 - WARNING - Failed to extract title via strip_code: 'function' object has no attribute 'strip_code'
+2025-10-22 15:40:38,207 - DEBUG - Extracted section title via regex: verb
+2025-10-22 15:40:38,207 - DEBUG - Found 0 definitions for verb
+2025-10-22 15:40:38,208 - WARNING - Failed to extract title via strip_code: 'function' object has no attribute 'strip_code'
+2025-10-22 15:40:38,208 - DEBUG - Extracted section title via regex: see also
+2025-10-22 15:40:38,209 - WARNING - Failed to extract title via strip_code: 'function' object has no attribute 'strip_code'
+2025-10-22 15:40:38,209 - DEBUG - Extracted section title via regex: references
+2025-10-22 15:40:38,213 - INFO - Saved parsed data to test_parsed_egyptian_lemma.json
+2025-10-22 15:40:38,213 - INFO - Done! Parsed test lemma \ua723. Data saved to test_parsed_egyptian_lemma.json
+2025-10-22 20:48:29,209 - INFO - Processing test lemma: \ua723
+2025-10-22 20:48:29,210 - DEBUG - Total hieroglyphs extracted: 8
+2025-10-22 20:48:29,213 - INFO - Saved parsed data to test_parsed_egyptian_lemma.json
+2025-10-22 20:48:29,214 - INFO - Done! Parsed test lemma \ua723. Data saved to test_parsed_egyptian_lemma.json
+2025-10-22 20:48:49,695 - INFO - Processing test lemma: \ua723
+2025-10-22 20:48:49,695 - DEBUG - Total hieroglyphs extracted: 8
+2025-10-22 20:48:49,699 - INFO - Saved parsed data to test_parsed_egyptian_lemma.json
+2025-10-22 20:48:49,699 - INFO - Done! Parsed test lemma \ua723. Data saved to test_parsed_egyptian_lemma.json
