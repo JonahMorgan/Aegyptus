@@ -11,10 +11,12 @@ Key Design Decisions:
    - Egyptian alt forms with different dates → same lemma in different periods
    - Coptic alt forms with different dialects → same lemma in different regions
    
-2. TEMPORAL TRACKING: Three types of relationships
+2. TEMPORAL TRACKING: Five types of relationships
    - EVOLVES: Same language, different time period (via dated alt forms)
    - DESCENDS: Cross-language inheritance (Egyptian → Demotic → Coptic)
    - VARIANT: Same time/language, different spelling (undated alt forms, dialects)
+   - DERIVED: Derivational morphology (base word → derived term)
+   - COMPONENT: Compositional morphology (morpheme → compound/affixed word)
 
 3. NETWORK STRUCTURE: Graph-based representation
    - Nodes: {lemma, language, period/dialect, part_of_speech, meaning}
@@ -44,19 +46,21 @@ class LemmaNetworkBuilder:
             'Pyramid Texts', 'Coffin Texts', 'Book of the Dead'
         ]
         
-    def get_or_create_node_id(self, language, form, period=None, dialect=None, hieroglyphs=None):
+    def get_or_create_node_id(self, language, form, period=None, dialect=None, hieroglyphs=None, etymology_index=None):
         """Get existing node ID or create new one"""
-        # Include hieroglyphs to distinguish variants with same transliteration
-        key = (language, form, period or '', dialect or '', hieroglyphs or '')
+        # Include hieroglyphs AND etymology_index to distinguish:
+        # - variants with same transliteration but different glyphs
+        # - different etymologies of the same form (e.g., mwt = "mother" vs "to die")
+        key = (language, form, period or '', dialect or '', hieroglyphs or '', etymology_index if etymology_index is not None else '')
         if key not in self.lemma_index:
             self.lemma_index[key] = f"L{self.next_id:05d}"
             self.next_id += 1
         return self.lemma_index[key]
     
     def create_node(self, node_id, language, form, part_of_speech, meanings, 
-                    period=None, dialect=None, hieroglyphs=None, transliteration=None):
+                    period=None, dialect=None, hieroglyphs=None, transliteration=None, etymology_index=None):
         """Create a node in the network"""
-        return {
+        node = {
             'id': node_id,
             'language': language,
             'form': form,
@@ -67,6 +71,9 @@ class LemmaNetworkBuilder:
             'period': period,
             'dialect': dialect
         }
+        if etymology_index is not None:
+            node['etymology_index'] = etymology_index
+        return node
     
     def extract_period_from_date(self, date_str):
         """Extract standardized period from date string"""
@@ -158,6 +165,36 @@ class LemmaNetworkBuilder:
         
         return None, None
     
+    def parse_alternative_form_of(self, definitions):
+        """
+        Extract 'alternative form of' references from definitions.
+        Returns (language, form) tuple if found, otherwise (None, None).
+        
+        Patterns to detect:
+        - "Alternative form of X"
+        - "[dialect] Alternative form of X"
+        - In parsed definitions like: "[B] Alternative form of ⲟⲩⲟϣⲟⲩⲉϣ"
+        """
+        if not definitions:
+            return None, None
+        
+        for defn in definitions:
+            # Pattern: [dialect] Alternative form of <form>
+            # or just: Alternative form of <form>
+            pattern = r'(?:\[[^\]]+\]\s*)?[Aa]lternative form of\s+(.+?)(?:\s|$)'
+            match = re.search(pattern, defn)
+            
+            if match:
+                target_form = match.group(1).strip()
+                # Remove any trailing punctuation or markup
+                target_form = re.sub(r'[.,;!?]$', '', target_form)
+                target_form = re.sub(r'\{\{.*?\}\}', '', target_form).strip()
+                
+                # For now, assume same language (will be refined per language processing)
+                return None, target_form  # Language will be set by caller
+        
+        return None, None
+    
     def build_networks_from_parsed_data(self, egy_data, dem_data, cop_data):
         """Build lemma networks from all three language datasets"""
         
@@ -179,8 +216,13 @@ class LemmaNetworkBuilder:
         cop_count = self.process_coptic_lemmas(cop_data, dem_data, egy_data)
         print(f"   Created {cop_count} Coptic nodes")
         
+        # Merge networks for "alternative form of" references that were processed in wrong order
+        print("\n4. Merging alternative form networks...")
+        merged_count = self.merge_alternative_form_networks()
+        print(f"   Merged {merged_count} alternative form networks")
+        
         # Cleanup: Remove direct Egyptian→Coptic edges when Demotic descendant exists
-        print("\n4. Cleaning up routing (removing direct Egyptian→Coptic edges where Demotic exists)...")
+        print("\n5. Cleaning up routing (removing direct Egyptian→Coptic edges where Demotic exists)...")
         removed_edges = self.cleanup_coptic_routing()
         print(f"   Removed {removed_edges} direct Egyptian→Coptic edges")
         
@@ -192,19 +234,55 @@ class LemmaNetworkBuilder:
         node_count = 0
         
         for lemma_form, entry in egy_data.items():
-            for etym in entry.get('etymologies', []):
+            for etym_idx, etym in enumerate(entry.get('etymologies', [])):
                 for defn in etym.get('definitions', []):
                     pos = defn.get('part_of_speech', 'unknown')
                     meanings = defn.get('definitions', [])
+                    
+                    # Check if this is an "alternative form of" another Egyptian lemma
+                    _, alt_form_target = self.parse_alternative_form_of(meanings)
+                    
+                    # If this is an alternative form, try to merge into target's network
+                    if alt_form_target:
+                        target_id = self.get_or_create_node_id('egy', alt_form_target, etymology_index=etym_idx)
+                        
+                        # Check if target network exists
+                        if target_id in self.networks:
+                            # Add this form as a variant to the existing network
+                            network = self.networks[target_id]
+                            
+                            # Create node for this alternative form
+                            alt_id = self.get_or_create_node_id('egy', lemma_form, etymology_index=etym_idx)
+                            alt_node = self.create_node(alt_id, 'egy', lemma_form, pos, meanings, etymology_index=etym_idx)
+                            
+                            # Add node if not already present
+                            if not any(n['id'] == alt_id for n in network['nodes']):
+                                network['nodes'].append(alt_node)
+                                node_count += 1
+                            
+                            # Create VARIANT edge from target to this form
+                            edge_exists = any(e.get('from') == target_id and e.get('to') == alt_id 
+                                            for e in network['edges'])
+                            if not edge_exists:
+                                edge = {
+                                    'from': target_id,
+                                    'to': alt_id,
+                                    'type': 'VARIANT',
+                                    'notes': f'Alternative form of {alt_form_target}'
+                                }
+                                network['edges'].append(edge)
+                            
+                            # Skip normal processing for this entry
+                            continue
                     
                     # Collect all forms (main + alternatives), separating by inflection
                     # Key: (inflection_type, base_form) - e.g., ('plural', 'jꜥnw') or ('singular', '')
                     forms_by_inflection = {}
                     
                     # Main lemma form (singular/base form)
-                    main_id = self.get_or_create_node_id('egy', lemma_form)
+                    main_id = self.get_or_create_node_id('egy', lemma_form, etymology_index=etym_idx)
                     main_node = self.create_node(
-                        main_id, 'egy', lemma_form, pos, meanings
+                        main_id, 'egy', lemma_form, pos, meanings, etymology_index=etym_idx
                     )
                     
                     inflection_key = ('base', '')
@@ -221,7 +299,9 @@ class LemmaNetworkBuilder:
                     # Alternative forms - check if they're inflections (plural, dual, etc.)
                     for alt_form in defn.get('alternative_forms', []):
                         alt_hieroglyphs = alt_form.get('hieroglyphs')
-                        alt_translit = alt_form.get('transliteration', alt_form.get('form'))
+                        # Alternative forms typically don't have a separate transliteration
+                        # They use the main lemma's transliteration (same word, different writing)
+                        alt_translit = alt_form.get('transliteration') or alt_form.get('form') or lemma_form
                         period = self.extract_period_from_date(alt_form.get('date'))
                         title = alt_form.get('title', '')
                         note = alt_form.get('note', '')
@@ -250,12 +330,13 @@ class LemmaNetworkBuilder:
                         
                         inflection_key = (inflection_type, inflection_form)
                         
-                        alt_id = self.get_or_create_node_id('egy', alt_translit, period=period, hieroglyphs=alt_hieroglyphs)
+                        alt_id = self.get_or_create_node_id('egy', alt_translit, period=period, hieroglyphs=alt_hieroglyphs, etymology_index=etym_idx)
                         alt_node = self.create_node(
                             alt_id, 'egy', alt_translit, pos, meanings,
                             period=period,
                             hieroglyphs=alt_hieroglyphs,
-                            transliteration=alt_translit
+                            transliteration=alt_translit,
+                            etymology_index=etym_idx
                         )
                         
                         # Get period rank for sorting
@@ -283,7 +364,7 @@ class LemmaNetworkBuilder:
                             # For inflections, use the inflection form as base
                             # Create a unique network ID for this inflection
                             inflection_base = inflection_form if inflection_form else f"{lemma_form}_{inflection_type}"
-                            network_id = self.get_or_create_node_id('egy', inflection_base, dialect=inflection_type)
+                            network_id = self.get_or_create_node_id('egy', inflection_base, dialect=inflection_type, etymology_index=etym_idx)
                             network_label = f"{inflection_base} ({inflection_type})"
                         
                         # Find or create network
@@ -338,8 +419,8 @@ class LemmaNetworkBuilder:
                                 }
                                 network['edges'].append(edge)
                         
-                        # For EVOLVES edges: Only connect if transliteration changes across periods
-                        # This represents actual phonetic/spelling evolution, not just variant writings
+                        # For EVOLVES edges: Connect chronologically consecutive alternative forms
+                        # These represent temporal evolution of the same word (different writings over time)
                         for i in range(len(dated_periods) - 1):
                             current_period = dated_periods[i]
                             next_period = dated_periods[i + 1]
@@ -347,53 +428,25 @@ class LemmaNetworkBuilder:
                             current_forms = by_period[current_period]
                             next_forms = by_period[next_period]
                             
-                            # Get unique transliterations for each period
-                            current_translits = {f['node']['form'] for f in current_forms}
-                            next_translits = {f['node']['form'] for f in next_forms}
+                            # Connect each form in current period to the first form in next period
+                            # This creates a chain showing temporal evolution of alternative forms
+                            for curr_form in current_forms:
+                                # Connect to first form of next period
+                                if next_forms:
+                                    edge = {
+                                        'from': curr_form['id'],
+                                        'to': next_forms[0]['id'],
+                                        'type': 'EVOLVES',
+                                        'notes': f"Evolution from {curr_form.get('period', '?')} to {next_forms[0].get('period', '?')}"
+                                    }
+                                    network['edges'].append(edge)
                             
-                            # If transliterations changed between periods, it's evolution
-                            if current_translits != next_translits:
-                                # Connect representative forms from each period
-                                # Pick first form from each unique transliteration group
-                                for curr_form in current_forms:
-                                    curr_translit = curr_form['node']['form']
-                                    # Find if this transliteration appears in next period
-                                    matching_next = [f for f in next_forms if f['node']['form'] == curr_translit]
-                                    
-                                    if matching_next:
-                                        # Same transliteration continues - connect first instances
-                                        edge = {
-                                            'from': curr_form['id'],
-                                            'to': matching_next[0]['id'],
-                                            'type': 'EVOLVES',
-                                            'notes': f"Continues from {curr_form.get('period', '?')} to {matching_next[0].get('period', '?')}"
-                                        }
-                                        network['edges'].append(edge)
-                                        break  # Only connect once per transliteration group
-                                
-                                # Also connect forms where transliteration changed
-                                # Find forms unique to current period that don't continue
-                                for curr_form in current_forms:
-                                    curr_translit = curr_form['node']['form']
-                                    if curr_translit not in next_translits:
-                                        # This form disappeared or changed - try to find closest match
-                                        # For now, connect to the most common form in next period
-                                        if next_forms:
-                                            # Find most common transliteration in next period
-                                            from collections import Counter
-                                            next_translit_counts = Counter(f['node']['form'] for f in next_forms)
-                                            most_common_translit = next_translit_counts.most_common(1)[0][0]
-                                            most_common_form = next((f for f in next_forms if f['node']['form'] == most_common_translit), None)
-                                            
-                                            if most_common_form:
-                                                edge = {
-                                                    'from': curr_form['id'],
-                                                    'to': most_common_form['id'],
-                                                    'type': 'EVOLVES',
-                                                    'notes': f"Form change: {curr_translit} → {most_common_translit}"
-                                                }
-                                                network['edges'].append(edge)
-                                                break  # Only connect once
+                            # If multiple forms exist in the next period, connect them as variants
+                            if len(next_forms) > 1:
+                                # Connect subsequent forms in the same period as VARIANT edges
+                                for j in range(1, len(next_forms)):
+                                    # Already handled by VARIANT logic below
+                                    pass
                         
                         # Create VARIANT edges: Different forms in the same period
                         for period_rank, forms in by_period.items():
@@ -467,12 +520,12 @@ class LemmaNetworkBuilder:
                                     else:
                                         desc_lang_code = desc_lang
                                     
-                                    # Create placeholder descendant node if not exists
-                                    desc_id = self.get_or_create_node_id(desc_lang_code, desc_word)
+                                    # Create placeholder descendant node with same etymology index as parent
+                                    desc_id = self.get_or_create_node_id(desc_lang_code, desc_word, etymology_index=etym_idx)
                                     
                                     # Add node to network if not already there
                                     if not any(n['id'] == desc_id for n in network['nodes']):
-                                        desc_node = self.create_node(desc_id, desc_lang_code, desc_word, pos, [])
+                                        desc_node = self.create_node(desc_id, desc_lang_code, desc_word, pos, [], etymology_index=etym_idx)
                                         network['nodes'].append(desc_node)
                                     
                                     # Create edge from latest Egyptian form (not root)
@@ -493,38 +546,66 @@ class LemmaNetworkBuilder:
         node_count = 0
         
         for lemma_form, entry in dem_data.items():
-            for etym in entry.get('etymologies', []):
+            for etym_idx, etym in enumerate(entry.get('etymologies', [])):
                 etym_text = etym.get('etymology_text', '')
                 
                 # Find Egyptian ancestor
                 ancestor_lang, ancestor_form = self.parse_etymology_for_ancestor(etym_text, 'egx-dem')
                 
-                for defn in etym.get('definitions', []):
+                definitions = etym.get('definitions', [])
+                
+                # If no definitions, we still need to create a node if there's an etymology
+                # This handles cases like Determiners that have descendants but no formal definitions
+                if not definitions:
+                    definitions = [{'part_of_speech': 'unknown', 'definitions': [], 'descendants': []}]
+                
+                for defn in definitions:
                     pos = defn.get('part_of_speech', 'unknown')
                     meanings = defn.get('definitions', [])
                     
                     # Create Demotic node
-                    dem_id = self.get_or_create_node_id('dem', lemma_form)
-                    dem_node = self.create_node(dem_id, 'dem', lemma_form, pos, meanings)
+                    dem_id = self.get_or_create_node_id('dem', lemma_form, etymology_index=etym_idx)
+                    dem_node = self.create_node(dem_id, 'dem', lemma_form, pos, meanings, etymology_index=etym_idx)
                     
-                    # If has Egyptian ancestor, add to that network
+                    # Create a new network for this Demotic etymology
+                    # Different etymologies of the same lemma should be in separate networks initially
+                    # The merge step will combine them later if they share nodes
+                    if dem_id not in self.networks:
+                        self.networks[dem_id] = {
+                            'root_node': dem_node,
+                            'nodes': [dem_node],
+                            'edges': [],
+                            'has_demotic_descendant': False
+                        }
+                        network = self.networks[dem_id]
+                        node_count += 1
+                    else:
+                        network = self.networks[dem_id]
+                    
+                    # If has Egyptian ancestor, add Egyptian node to this network and create edge
                     if ancestor_lang == 'egy' and ancestor_form:
-                        # Find the Egyptian network
+                        # Try to find an existing Egyptian node (without etymology index since we don't know which Egyptian etymology)
                         egy_id = self.get_or_create_node_id('egy', ancestor_form)
                         
-                        if egy_id in self.networks:
-                            network = self.networks[egy_id]
-                        else:
-                            # Create a minimal network if ancestor not found
-                            network = {
-                                'root_node': self.create_node(egy_id, 'egy', ancestor_form, pos, []),
-                                'nodes': [self.create_node(egy_id, 'egy', ancestor_form, pos, [])],
-                                'edges': [],
-                                'has_demotic_descendant': False
-                            }
-                            self.networks[egy_id] = network
+                        # Check if Egyptian node exists in any network
+                        egy_node = None
+                        for net in self.networks.values():
+                            for n in net['nodes']:
+                                if n['id'] == egy_id:
+                                    egy_node = n
+                                    break
+                            if egy_node:
+                                break
                         
-                        # Mark that this network now has a Demotic descendant
+                        # If not found, create placeholder Egyptian node
+                        if not egy_node:
+                            egy_node = self.create_node(egy_id, 'egy', ancestor_form, pos, [])
+                        
+                        # Add Egyptian node to current network if not already there
+                        if not any(n['id'] == egy_id for n in network['nodes']):
+                            network['nodes'].append(egy_node)
+                        
+                        # Mark that this network has a Demotic descendant
                         network['has_demotic_descendant'] = True
                         
                         # Find the latest Egyptian form in the network to connect from
@@ -543,23 +624,16 @@ class LemmaNetworkBuilder:
                                     latest_rank = rank
                                     latest_egy_node = egy_node
                         
-                        # If no dated forms found, use the root node
-                        if not latest_egy_node:
-                            latest_egy_node = network['root_node']
+                        # If no dated forms found, use the first Egyptian node
+                        if not latest_egy_node and egy_nodes:
+                            latest_egy_node = egy_nodes[0]
+                        elif not latest_egy_node:
+                            # No Egyptian nodes found, use the one we just added
+                            latest_egy_node = egy_node
                         
                         parent_egy_id = latest_egy_node['id']
                         
-                        # Add Demotic node to network (update placeholder if exists)
-                        existing_node = next((n for n in network['nodes'] if n['id'] == dem_id), None)
-                        if existing_node:
-                            # Update placeholder node with full data
-                            existing_node['part_of_speech'] = pos
-                            existing_node['meanings'] = meanings
-                        else:
-                            network['nodes'].append(dem_node)
-                            node_count += 1
-                        
-                        # Create inheritance edge from latest Egyptian form (check if already exists)
+                        # Create inheritance edge from Egyptian to Demotic (check if already exists)
                         edge_exists = any(e.get('from') == parent_egy_id and e.get('to') == dem_id 
                                         for e in network['edges'])
                         if not edge_exists:
@@ -570,17 +644,6 @@ class LemmaNetworkBuilder:
                                 'etymology_snippet': etym_text[:200]
                             }
                             network['edges'].append(edge)
-                    else:
-                        # Standalone Demotic word (no known Egyptian ancestor)
-                        if dem_id not in self.networks:
-                            self.networks[dem_id] = {
-                                'root_node': dem_node,
-                                'nodes': [dem_node],
-                                'edges': [],
-                                'has_demotic_descendant': False
-                            }
-                            network = self.networks[dem_id]
-                            node_count += 1
                     
                     # Add descendants (to Coptic)
                     for desc in defn.get('descendants', []):
@@ -592,12 +655,12 @@ class LemmaNetworkBuilder:
                                 # Map language codes
                                 desc_lang_code = 'cop' if desc_lang == 'cop' else desc_lang
                                 
-                                # Create placeholder descendant node
-                                desc_id = self.get_or_create_node_id(desc_lang_code, desc_word)
+                                # Create placeholder descendant node with same etymology index as parent
+                                desc_id = self.get_or_create_node_id(desc_lang_code, desc_word, etymology_index=etym_idx)
                                 
                                 # Add node to network if not already there
                                 if not any(n['id'] == desc_id for n in network['nodes']):
-                                    desc_node = self.create_node(desc_id, desc_lang_code, desc_word, pos, [])
+                                    desc_node = self.create_node(desc_id, desc_lang_code, desc_word, pos, [], etymology_index=etym_idx)
                                     network['nodes'].append(desc_node)
                                 
                                 edge = {
@@ -615,85 +678,120 @@ class LemmaNetworkBuilder:
         node_count = 0
         
         for lemma_form, entry in cop_data.items():
-            for etym in entry.get('etymologies', []):
+            for etym_idx, etym in enumerate(entry.get('etymologies', [])):
                 etym_text = etym.get('etymology_text', '')
                 
-                # Find ancestor (Demotic or Egyptian)
-                ancestor_lang_dem, ancestor_form_dem = self.parse_etymology_for_ancestor(etym_text, 'cop')
+                # Find ancestor - prefer structured etymology_ancestors over text parsing
+                ancestor_lang_dem = None
+                ancestor_form_dem = None
+                
+                # First check structured etymology ancestors
+                etym_ancestors = etym.get('etymology_ancestors', [])
+                if etym_ancestors:
+                    # Look for Demotic ancestor first
+                    dem_ancestor = next((a for a in etym_ancestors if a.get('language') in ['egx-dem', 'dem']), None)
+                    if dem_ancestor:
+                        ancestor_lang_dem = 'egx-dem'
+                        ancestor_form_dem = dem_ancestor.get('form')
+                    else:
+                        # Fall back to Egyptian ancestor
+                        egy_ancestor = next((a for a in etym_ancestors if a.get('language') == 'egy'), None)
+                        if egy_ancestor:
+                            ancestor_lang_dem = 'egy'
+                            ancestor_form_dem = egy_ancestor.get('form')
+                
+                # Fall back to text parsing if no structured data
+                if not ancestor_form_dem:
+                    ancestor_lang_dem, ancestor_form_dem = self.parse_etymology_for_ancestor(etym_text, 'cop')
                 
                 for defn in etym.get('definitions', []):
                     pos = defn.get('part_of_speech', 'unknown')
                     meanings = defn.get('definitions', [])
                     
+                    # Check if this is an "alternative form of" another Coptic lemma
+                    _, alt_form_target = self.parse_alternative_form_of(meanings)
+                    
                     # Create main Coptic node
-                    cop_id = self.get_or_create_node_id('cop', lemma_form)
-                    cop_node = self.create_node(cop_id, 'cop', lemma_form, pos, meanings)
+                    cop_id = self.get_or_create_node_id('cop', lemma_form, etymology_index=etym_idx)
+                    cop_node = self.create_node(cop_id, 'cop', lemma_form, pos, meanings, etymology_index=etym_idx)
                     
-                    # Find the network to add to
-                    network = None
-                    parent_id = None
-                    
-                    # Try Demotic ancestor first
-                    if ancestor_lang_dem == 'egx-dem' and ancestor_form_dem:
-                        parent_id = self.get_or_create_node_id('dem', ancestor_form_dem)
-                        network = self.networks.get(parent_id)
-                        
-                        # Create network with placeholder Demotic node if not found
-                        if not network:
-                            parent_node = self.create_node(parent_id, 'dem', ancestor_form_dem, pos, [])
-                            network = {
-                                'root_node': parent_node,
-                                'nodes': [parent_node],
-                                'edges': [],
-                                'has_demotic_descendant': False
-                            }
-                            self.networks[parent_id] = network
-                    
-                    # Try Egyptian ancestor
-                    if not network and ancestor_lang_dem == 'egy' and ancestor_form_dem:
-                        parent_id = self.get_or_create_node_id('egy', ancestor_form_dem)
-                        network = self.networks.get(parent_id)
-                        
-                        # Check if Egyptian network has a Demotic descendant
-                        # If so, Coptic should connect through Demotic, not directly to Egyptian
-                        if network and network.get('has_demotic_descendant', False):
-                            # Find the Demotic node(s) in this network
-                            demotic_nodes = [n for n in network['nodes'] if n['language'] == 'dem']
-                            if demotic_nodes:
-                                # Connect through the first Demotic descendant instead
-                                parent_id = demotic_nodes[0]['id']
-                                # Network stays the same, but parent changes to Demotic
-                        elif not network:
-                            # Create network with placeholder Egyptian node if not found
-                            parent_node = self.create_node(parent_id, 'egy', ancestor_form_dem, pos, [])
-                            network = {
-                                'root_node': parent_node,
-                                'nodes': [parent_node],
-                                'edges': [],
-                                'has_demotic_descendant': False
-                            }
-                            self.networks[parent_id] = network
-                    
-                    # Create standalone if no ancestor mentioned at all
-                    if not network:
-                        network = {
+                    # Create a new network for this Coptic etymology
+                    # Different etymologies of the same lemma should be in separate networks initially
+                    # The merge step will combine them later if they share nodes
+                    if cop_id not in self.networks:
+                        self.networks[cop_id] = {
                             'root_node': cop_node,
                             'nodes': [cop_node],
                             'edges': [],
                             'has_demotic_descendant': False
                         }
-                        self.networks[cop_id] = network
-                        parent_id = None
-                    
-                    # Add Coptic node (update placeholder if exists, otherwise add new)
-                    existing_node = next((n for n in network['nodes'] if n['id'] == cop_id), None)
-                    if existing_node:
-                        # Update placeholder node with full data
-                        existing_node['part_of_speech'] = pos
-                        existing_node['meanings'] = meanings
-                    else:
-                        network['nodes'].append(cop_node)
+                        network = self.networks[cop_id]
                         node_count += 1
+                    else:
+                        network = self.networks[cop_id]
+                    
+                    parent_id = None
+                    
+                    # If this is an alternative form of another Coptic word, find that network
+                    if alt_form_target:
+                        # Find the target Coptic lemma's network (try without etymology index first)
+                        target_id = self.get_or_create_node_id('cop', alt_form_target)
+                        
+                        # Search for existing target node to link to
+                        for net in self.networks.values():
+                            target_node = next((n for n in net['nodes'] if n['id'] == target_id), None)
+                            if target_node:
+                                parent_id = target_id
+                                # Add target node to current network if not already there
+                                if not any(n['id'] == target_id for n in network['nodes']):
+                                    network['nodes'].append(target_node)
+                                break
+                        
+                        # If target not found, create placeholder
+                        if not parent_id:
+                            target_node = self.create_node(target_id, 'cop', alt_form_target, pos, [])
+                            network['nodes'].append(target_node)
+                            parent_id = target_id
+                    
+                    # If not an alternative form, add ancestor node to this network
+                    elif ancestor_form_dem:
+                        # Try Demotic ancestor first
+                        if ancestor_lang_dem == 'egx-dem':
+                            parent_id = self.get_or_create_node_id('dem', ancestor_form_dem)
+                            
+                            # Check if Demotic node exists in any network
+                            parent_node = None
+                            for net in self.networks.values():
+                                parent_node = next((n for n in net['nodes'] if n['id'] == parent_id), None)
+                                if parent_node:
+                                    break
+                            
+                            # If not found, create placeholder Demotic node
+                            if not parent_node:
+                                parent_node = self.create_node(parent_id, 'dem', ancestor_form_dem, pos, [])
+                            
+                            # Add Demotic node to current network if not already there
+                            if not any(n['id'] == parent_id for n in network['nodes']):
+                                network['nodes'].append(parent_node)
+                        
+                        # Try Egyptian ancestor
+                        elif ancestor_lang_dem == 'egy':
+                            parent_id = self.get_or_create_node_id('egy', ancestor_form_dem)
+                            
+                            # Check if Egyptian node exists in any network
+                            parent_node = None
+                            for net in self.networks.values():
+                                parent_node = next((n for n in net['nodes'] if n['id'] == parent_id), None)
+                                if parent_node:
+                                    break
+                            
+                            # If not found, create placeholder Egyptian node
+                            if not parent_node:
+                                parent_node = self.create_node(parent_id, 'egy', ancestor_form_dem, pos, [])
+                            
+                            # Add Egyptian node to current network if not already there
+                            if not any(n['id'] == parent_id for n in network['nodes']):
+                                network['nodes'].append(parent_node)
                     
                     # Create inheritance edge if has parent
                     if parent_id:
@@ -701,12 +799,23 @@ class LemmaNetworkBuilder:
                         edge_exists = any(e.get('from') == parent_id and e.get('to') == cop_id 
                                         for e in network['edges'])
                         if not edge_exists:
-                            edge = {
-                                'from': parent_id,
-                                'to': cop_id,
-                                'type': 'DESCENDS',
-                                'etymology_snippet': etym_text[:200]
-                            }
+                            # Determine edge type based on relationship
+                            if alt_form_target:
+                                # Alternative form = VARIANT edge
+                                edge = {
+                                    'from': parent_id,
+                                    'to': cop_id,
+                                    'type': 'VARIANT',
+                                    'notes': f'Alternative form of {alt_form_target}'
+                                }
+                            else:
+                                # Cross-language inheritance = DESCENDS edge
+                                edge = {
+                                    'from': parent_id,
+                                    'to': cop_id,
+                                    'type': 'DESCENDS',
+                                    'etymology_snippet': etym_text[:200]
+                                }
                             network['edges'].append(edge)
                     
                     # Add dialectal variants
@@ -715,7 +824,7 @@ class LemmaNetworkBuilder:
                         dialect = alt_form.get('dialect')
                         
                         if alt_form_text:
-                            alt_id = self.get_or_create_node_id('cop', alt_form_text, dialect=dialect)
+                            alt_id = self.get_or_create_node_id('cop', alt_form_text, dialect=dialect, etymology_index=etym_idx)
                             alt_node = self.create_node(
                                 alt_id, 'cop', alt_form_text, pos, meanings,
                                 dialect=dialect
@@ -731,6 +840,138 @@ class LemmaNetworkBuilder:
                                 'to': alt_id,
                                 'type': 'VARIANT',
                                 'dialect': dialect
+                            }
+                            network['edges'].append(edge)
+                    
+                    # Add derived terms
+                    for derived_term in defn.get('derived_terms', []):
+                        if derived_term:
+                            derived_id = self.get_or_create_node_id('cop', derived_term)
+                            derived_node = self.create_node(
+                                derived_id, 'cop', derived_term, pos, []
+                            )
+                            
+                            if not any(n['id'] == derived_id for n in network['nodes']):
+                                network['nodes'].append(derived_node)
+                                node_count += 1
+                            
+                            # Create DERIVED edge (base → derived)
+                            edge = {
+                                'from': cop_id,
+                                'to': derived_id,
+                                'type': 'DERIVED',
+                                'notes': f'Derived from {lemma_form}'
+                            }
+                            network['edges'].append(edge)
+                
+                # Add etymology components (compound/affix relationships)
+                # ONLY for compounds - prefix/suffix should use DERIVED edges instead
+                # Special case: Egyptian components in Coptic etymology should connect to Demotic ancestor
+                for component_info in etym.get('etymology_components', []):
+                    component_form = component_info.get('form')
+                    component_role = component_info.get('role', 'base')  # prefix, suffix, or base
+                    template_type = component_info.get('template_type', 'compound')
+                    component_lang = component_info.get('language', 'cop')  # Default to Coptic
+                    
+                    if component_form:
+                        # Get the main node for this etymology
+                        definitions = etym.get('definitions', [])
+                        if not definitions:
+                            continue  # Skip if no definitions
+                        
+                        main_defn = definitions[0]
+                        main_pos = main_defn.get('part_of_speech', 'unknown')
+                        main_meanings = main_defn.get('definitions', [])
+                        main_id = self.get_or_create_node_id('cop', lemma_form, etymology_index=etym_idx)
+                        
+                        # Special case: Egyptian components with Demotic ancestor
+                        # These should connect to the Demotic word, not the Coptic word
+                        if component_lang == 'egy' and ancestor_lang_dem == 'egx-dem' and ancestor_form_dem:
+                            # Create Egyptian node
+                            comp_id = self.get_or_create_node_id('egy', component_form)
+                            comp_node = self.create_node(comp_id, 'egy', component_form, 'word', [])
+                            
+                            if not any(n['id'] == comp_id for n in network['nodes']):
+                                network['nodes'].append(comp_node)
+                                node_count += 1
+                            
+                            # Create COMPONENT edge to Demotic ancestor
+                            dem_id = self.get_or_create_node_id('dem', ancestor_form_dem)
+                            edge = {
+                                'from': comp_id,
+                                'to': dem_id,
+                                'type': 'COMPONENT',
+                                'notes': f'Egyptian component of Demotic compound'
+                            }
+                            # Check if edge already exists
+                            if not any(e.get('from') == comp_id and e.get('to') == dem_id for e in network['edges']):
+                                network['edges'].append(edge)
+                            continue
+                        
+                        # For prefix/suffix formations: treat as DERIVED (base → derived)
+                        if template_type in ['prefix', 'suffix', 'affix', 'confix']:
+                            # Only create edge from base word(s), not from affixes
+                            if component_role == 'base':
+                                component_id = self.get_or_create_node_id('cop', component_form)
+                                component_node = self.create_node(
+                                    component_id, 'cop', component_form, 'word', []
+                                )
+                                
+                                if not any(n['id'] == component_id for n in network['nodes']):
+                                    network['nodes'].append(component_node)
+                                    node_count += 1
+                                
+                                # Create DERIVED edge (base → affixed word)
+                                edge = {
+                                    'from': component_id,
+                                    'to': main_id,
+                                    'type': 'DERIVED',
+                                    'notes': f'Affixed with {template_type}'
+                                }
+                                network['edges'].append(edge)
+                                
+                                # If the main word has a Demotic/Egyptian ancestor, the base word likely does too
+                                # Connect base word to same ancestor
+                                if ancestor_lang_dem == 'egx-dem' and ancestor_form_dem:
+                                    dem_id = self.get_or_create_node_id('dem', ancestor_form_dem)
+                                    desc_edge = {
+                                        'from': dem_id,
+                                        'to': component_id,
+                                        'type': 'DESCENDS',
+                                        'notes': f'Coptic base word from Demotic'
+                                    }
+                                    # Check if edge already exists
+                                    if not any(e.get('from') == dem_id and e.get('to') == component_id for e in network['edges']):
+                                        network['edges'].append(desc_edge)
+                                elif ancestor_lang_dem == 'egy' and ancestor_form_dem:
+                                    egy_id = self.get_or_create_node_id('egy', ancestor_form_dem)
+                                    desc_edge = {
+                                        'from': egy_id,
+                                        'to': component_id,
+                                        'type': 'DESCENDS',
+                                        'notes': f'Coptic base word from Egyptian'
+                                    }
+                                    # Check if edge already exists
+                                    if not any(e.get('from') == egy_id and e.get('to') == component_id for e in network['edges']):
+                                        network['edges'].append(desc_edge)
+                        
+                        # For compound formations: use COMPONENT edges for all parts
+                        elif template_type == 'compound':
+                            component_id = self.get_or_create_node_id('cop', component_form)
+                            component_node = self.create_node(
+                                component_id, 'cop', component_form, 'word', []
+                            )
+                            
+                            if not any(n['id'] == component_id for n in network['nodes']):
+                                network['nodes'].append(component_node)
+                                node_count += 1
+                            
+                            # Create COMPONENT edge (component → compound)
+                            edge = {
+                                'from': component_id,
+                                'to': main_id,
+                                'type': 'COMPONENT',
+                                'notes': f'Component of compound'
                             }
                             network['edges'].append(edge)
         
@@ -778,22 +1019,66 @@ class LemmaNetworkBuilder:
         for lang, count in sorted(lang_counts.items()):
             print(f"  {lang}: {count}")
     
+    def merge_alternative_form_networks(self):
+        """
+        Merge networks where one node is an 'alternative form of' another node  
+        that ended up in a different network (due to processing order).
+        """
+        merged_count = 0
+        networks_to_remove = set()
+        
+        # Find all VARIANT edges that point to nodes in other networks
+        for source_net_id, source_network in list(self.networks.items()):
+            for edge in source_network['edges']:
+                if edge['type'] == 'VARIANT' and 'Alternative form of' in edge.get('notes', ''):
+                    # This is an alternative form edge
+                    target_node_id = edge['from']  # The target of "alternative form of"
+                    variant_node_id = edge['to']    # The variant form
+                    
+                    # Find which network contains the target
+                    target_network_id = None
+                    for net_id, network in self.networks.items():
+                        if net_id != source_net_id and any(n['id'] == target_node_id for n in network['nodes']):
+                            target_network_id = net_id
+                            break
+                    
+                    # If target is in a different network, merge them
+                    if target_network_id and target_network_id != source_net_id:
+                        target_network = self.networks[target_network_id]
+                        
+                        # Merge source network into target network
+                        for node in source_network['nodes']:
+                            if not any(n['id'] == node['id'] for n in target_network['nodes']):
+                                target_network['nodes'].append(node)
+                        
+                        for edge_item in source_network['edges']:
+                            if not any(e == edge_item for e in target_network['edges']):
+                                target_network['edges'].append(edge_item)
+                        
+                        # Mark source network for removal
+                        networks_to_remove.add(source_net_id)
+                        merged_count += 1
+                        break  # Move to next network
+        
+        # Remove merged networks
+        for net_id in networks_to_remove:
+            del self.networks[net_id]
+        
+        return merged_count
+    
     def cleanup_coptic_routing(self):
         """
         Reroute Egyptian→Coptic DESCENDS edges through Demotic when Demotic descendant exists.
         Instead of removing these edges, we change them to go Demotic→Coptic.
         """
         rerouted_count = 0
+        removed_count = 0
         
         for network_id, network in self.networks.items():
-            # Only process networks with Demotic descendants
-            if not network.get('has_demotic_descendant', False):
-                continue
-            
             # Find the Demotic node(s) in this network
-            demotic_nodes = [n for n in network['nodes'] if n['language'] == 'dem']
+            demotic_nodes = [n for n in network['nodes'] if n['language'] == 'dem' or n['language'] == 'egx-dem']
             if not demotic_nodes:
-                continue
+                continue  # No Demotic in this network, nothing to clean up
             
             # Use first Demotic node as the new parent for Coptic
             demotic_id = demotic_nodes[0]['id']
@@ -827,11 +1112,149 @@ class LemmaNetworkBuilder:
                     else:
                         # Edge already exists, mark this one for removal
                         edge['_remove'] = True
+                        removed_count += 1
             
             # Remove any marked duplicate edges
             network['edges'] = [e for e in network['edges'] if not e.get('_remove', False)]
         
-        return rerouted_count
+        return rerouted_count + removed_count
+
+    def merge_networks_with_shared_nodes(self):
+        """
+        Merge networks that share common nodes. Networks sharing any node should be unified
+        into a single network, as they represent the same etymological family.
+        """
+        print("\nMerging networks with shared nodes...")
+        
+        # Convert dict to list with indices for processing
+        network_ids = list(self.networks.keys())
+        network_list = [self.networks[nid] for nid in network_ids]
+        
+        # Build a map from node_id to set of network indices containing that node
+        node_to_networks = {}
+        for net_idx, network in enumerate(network_list):
+            for node in network['nodes']:
+                node_id = (
+                    node['language'],
+                    node['form'],
+                    node.get('period'),
+                    node.get('dialect'),
+                    tuple(node.get('hieroglyphs') or []),
+                    node.get('etymology_index', 0)
+                )
+                if node_id not in node_to_networks:
+                    node_to_networks[node_id] = set()
+                node_to_networks[node_id].add(net_idx)
+        
+        # Find groups of networks that should be merged (using union-find)
+        parent = list(range(len(network_list)))
+        
+        def find(x):
+            if parent[x] != x:
+                parent[x] = find(parent[x])
+            return parent[x]
+        
+        def union(x, y):
+            px, py = find(x), find(y)
+            if px != py:
+                parent[px] = py
+        
+        # Union networks that share any node
+        for node_id, net_indices in node_to_networks.items():
+            if len(net_indices) > 1:
+                net_list = list(net_indices)
+                for i in range(1, len(net_list)):
+                    union(net_list[0], net_list[i])
+        
+        # Group networks by their root parent
+        merge_groups = {}
+        for net_idx in range(len(network_list)):
+            root = find(net_idx)
+            if root not in merge_groups:
+                merge_groups[root] = []
+            merge_groups[root].append(net_idx)
+        
+        # Merge networks in each group and rebuild dictionary
+        merged_networks = {}
+        merges_performed = 0
+        new_net_id = 0
+        
+        for root, net_indices in merge_groups.items():
+            if len(net_indices) == 1:
+                # No merging needed - keep original
+                merged_networks[f'N{new_net_id:05d}'] = network_list[net_indices[0]]
+                new_net_id += 1
+            else:
+                # Merge multiple networks
+                merges_performed += len(net_indices) - 1
+                merged_net = {
+                    'nodes': [],
+                    'edges': []
+                }
+                
+                # Build ID mapping: old node IDs -> canonical node ID
+                # Multiple nodes with different IDs might represent same conceptual node
+                id_mapping = {}
+                seen_nodes = set()
+                
+                for net_idx in net_indices:
+                    for node in network_list[net_idx]['nodes']:
+                        node_id = (
+                            node['language'],
+                            node['form'],
+                            node.get('period'),
+                            node.get('dialect'),
+                            tuple(node.get('hieroglyphs') or []),
+                            node.get('etymology_index', 0)
+                        )
+                        
+                        if node_id not in seen_nodes:
+                            # First time seeing this conceptual node - use its ID as canonical
+                            seen_nodes.add(node_id)
+                            canonical_id = node['id']
+                            id_mapping[node['id']] = canonical_id
+                            merged_net['nodes'].append(node)
+                        else:
+                            # Already have this node - map this ID to the canonical one
+                            # Find the canonical ID
+                            for existing_node in merged_net['nodes']:
+                                existing_node_id = (
+                                    existing_node['language'],
+                                    existing_node['form'],
+                                    existing_node.get('period'),
+                                    existing_node.get('dialect'),
+                                    tuple(existing_node.get('hieroglyphs') or []),
+                                    existing_node.get('etymology_index', 0)
+                                )
+                                if existing_node_id == node_id:
+                                    id_mapping[node['id']] = existing_node['id']
+                                    break
+                
+                # Collect all edges, remapping IDs and deduplicating
+                seen_edges = set()
+                for net_idx in net_indices:
+                    for edge in network_list[net_idx]['edges']:
+                        # Remap the IDs
+                        from_id = id_mapping.get(edge['from'], edge['from'])
+                        to_id = id_mapping.get(edge['to'], edge['to'])
+                        
+                        edge_id = (from_id, to_id, edge['type'])
+                        if edge_id not in seen_edges:
+                            seen_edges.add(edge_id)
+                            # Create new edge with remapped IDs
+                            new_edge = edge.copy()
+                            new_edge['from'] = from_id
+                            new_edge['to'] = to_id
+                            merged_net['edges'].append(new_edge)
+                
+                merged_networks[f'N{new_net_id:05d}'] = merged_net
+                new_net_id += 1
+        
+        original_count = len(self.networks)
+        self.networks = merged_networks
+        
+        print(f"Merged {merges_performed} networks ({original_count} → {len(self.networks)})")
+        return merges_performed
 
 def main():
     # Load the three parsed files
@@ -851,6 +1274,14 @@ def main():
     # Build networks
     builder = LemmaNetworkBuilder()
     networks = builder.build_networks_from_parsed_data(egy_data, dem_data, cop_data)
+    
+    # Merge networks that share common nodes
+    builder.merge_networks_with_shared_nodes()
+    
+    # Cleanup again after merging (merged networks may have duplicate Egyptian→Coptic edges)
+    print("\n6. Re-cleaning routing after merge...")
+    removed_edges_after_merge = builder.cleanup_coptic_routing()
+    print(f"   Removed {removed_edges_after_merge} additional direct Egyptian→Coptic edges")
     
     # Export
     builder.export_networks('lemma_networks.json')

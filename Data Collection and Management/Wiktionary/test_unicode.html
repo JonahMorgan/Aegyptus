@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Test Hieroglyph Unicode</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Egyptian+Hieroglyphs&display=swap');
+        
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .test-block {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #fafafa;
+        }
+        
+        .hieroglyph {
+            font-family: 'Noto Sans Egyptian Hieroglyphs', sans-serif;
+            font-size: 3em;
+            color: #8B4513;
+            margin: 10px 0;
+        }
+        
+        .code {
+            font-family: monospace;
+            background: #f0f0f0;
+            padding: 4px 8px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hieroglyph Unicode Test</h1>
+    
+    <div class="test-block">
+        <h3>Test 1: Direct Unicode Characters</h3>
+        <div class="hieroglyph">𓆓𓀀𓇋𓆑</div>
+        <p>Characters: U+13193 U+13000 U+131CB U+130F2</p>
+        <p>Expected: M3 (owl) + A1 (man) + M17 (reed) + F27 (cattle horn)</p>
+    </div>
+    
+    <div class="test-block">
+        <h3>Test 2: Lion (mꜣj) - mA-A-i-F27</h3>
+        <div class="hieroglyph" id="lion"></div>
+        <p>Code: <span class="code">mA-A-i-F27</span></p>
+    </div>
+    
+    <div class="test-block">
+        <h3>Test 3: Common Signs</h3>
+        <div class="hieroglyph">
+            𓀀 A1<br>
+            𓆓 I10<br>
+            𓇋 M17<br>
+            𓈖 N35<br>
+            𓊃 Q3<br>
+            𓊪 P1<br>
+            𓋴 S3<br>
+            𓏏 Y1<br>
+            𓏤 Z1
+        </div>
+    </div>
+    
+    <div class="test-block">
+        <h3>Test 4: What browser sees</h3>
+        <p>U+13193 renders as: <span style="font-size: 2em;">&#x13193;</span></p>
+        <p>U+13000 renders as: <span style="font-size: 2em;">&#x13000;</span></p>
+        <p>U+131CB renders as: <span style="font-size: 2em;">&#x131CB;</span></p>
+        <p>U+130F2 renders as: <span style="font-size: 2em;">&#x130F2;</span></p>
+    </div>
+    
+    <script>
+        // Test the MdC conversion
+        const gardinerMap = {
+            'M3': '𓆳',
+            'A': '𓀀',  // A1
+            'A1': '𓀀',
+            'i': '𓇋',  // M17
+            'M17': '𓇋',
+            'F27': '𓄊',
+            'I10': '𓆓',
+        };
+        
+        function mdcToUnicode(mdcCode) {
+            const cleanCode = mdcCode.replace(/<\/?hiero>/g, '').trim();
+            const parts = cleanCode.split(/[\s:\-&*]+/);
+            let result = '';
+            
+            for (const part of parts) {
+                if (!part || part.includes('_')) continue;
+                
+                if (gardinerMap[part]) {
+                    result += gardinerMap[part];
+                } else if (gardinerMap[part.toUpperCase()]) {
+                    result += gardinerMap[part.toUpperCase()];
+                } else {
+                    console.log('Unknown code:', part);
+                }
+            }
+            
+            return result;
+        }
+        
+        // Test mA-A-i-F27
+        const lionCode = 'mA-A-i-F27';
+        const lionGlyphs = mdcToUnicode(lionCode);
+        document.getElementById('lion').textContent = lionGlyphs;
+        
+        console.log('Lion code:', lionCode);
+        console.log('Lion glyphs:', lionGlyphs);
+        console.log('Lion glyphs length:', lionGlyphs.length);
+    </script>
+</body>
+</html>

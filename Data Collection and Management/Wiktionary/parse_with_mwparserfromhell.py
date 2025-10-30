@@ -26,41 +26,37 @@ def parse_egy_hieroforms(template) -> List[Dict[str, str]]:
     # Extract title if present
     title = params.get('title')
     
-    # Group parameters by number (read1, date1, note1, etc.)
-    form_groups = {}
+    # The template format is:
+    # {{egy-hieroforms
+    # |<hiero>...</hiero>|date1=...|note1=...|read1=...
+    # |<hiero>...</hiero>|date2=...|note2=...|read2=...
+    # }}
+    # Where numbered params (1, 2, 3...) are the hieroglyphs
+    # and date1, note1, read1 etc. are metadata for that form
+    
+    # Collect numbered hieroglyph parameters
     hieroglyphs_by_index = {}
-    
-    # First, collect all numbered forms
     for i in range(1, 100):  # Reasonable upper limit
-        read_key = f'read{i}'
-        if read_key in params:
-            form_groups[i] = {
-                'transliteration': params[read_key]
-            }
-            if f'date{i}' in params:
-                form_groups[i]['date'] = params[f'date{i}']
-            if f'note{i}' in params:
-                form_groups[i]['note'] = params[f'note{i}']
+        if str(i) in params:
+            hieroglyphs_by_index[i] = params[str(i)]
     
-    # Find hieroglyphs - they're positional parameters (no name, just value)
-    # They come before their corresponding read# parameter
-    positional_params = []
-    for param in template.params:
-        if not str(param.name).strip() or str(param.name).strip().isdigit():
-            hieroglyphs = str(param.value).strip()
-            if hieroglyphs and hieroglyphs not in ['title']:
-                positional_params.append(hieroglyphs)
-    
-    # Match hieroglyphs to forms (they should be in order)
-    for i, (form_num, form_data) in enumerate(sorted(form_groups.items())):
-        if i < len(positional_params):
-            form_entry = {
-                'hieroglyphs': positional_params[i]
-            }
-            form_entry.update(form_data)
-            if title:
-                form_entry['title'] = title
-            alt_forms.append(form_entry)
+    # Build alternative forms from hieroglyphs and their metadata
+    for i in sorted(hieroglyphs_by_index.keys()):
+        form_entry = {
+            'hieroglyphs': hieroglyphs_by_index[i]
+        }
+        
+        # Add metadata if present
+        if f'read{i}' in params:
+            form_entry['transliteration'] = params[f'read{i}']
+        if f'date{i}' in params:
+            form_entry['date'] = params[f'date{i}']
+        if f'note{i}' in params:
+            form_entry['note'] = params[f'note{i}']
+        if title:
+            form_entry['title'] = title
+        
+        alt_forms.append(form_entry)
     
     return alt_forms
 
@@ -283,6 +279,164 @@ def parse_etymology_section(wikicode, etym_num: Optional[int] = None, pos_level:
         'etymology_number': etym_num
     }
     
+    # Extract alternative forms from etymology-level sections (common in Coptic)
+    etym_alt_forms = []
+    alt_forms_sections = wikicode.get_sections(matches='Alternative forms')
+    for alt_section in alt_forms_sections:
+        for template in alt_section.filter_templates():
+            name = str(template.name).strip()
+            if name in ['alter', 'alt']:
+                # Format: {{alter|lang|form1|form2|...|dialect_code}}
+                params = [str(p.value).strip() for p in template.params]
+                if len(params) < 2:
+                    continue
+                
+                # Skip language code (first param)
+                forms_and_info = params[1:]
+                
+                # Dialect codes and full names
+                dialect_codes = {'L': 'Lycopolitan', 'A': 'Akhmimic', 'B': 'Bohairic', 
+                                'S': 'Sahidic', 'F': 'Fayyumic', 'P': 'Proto-Coptic',
+                                'V': 'Sub-Akhmimic'}
+                dialect_names = set(dialect_codes.values()) | {'Sahidic', 'Bohairic', 'Lycopolitan', 
+                                                                'Akhmimic', 'Fayyumic', 'Proto-Coptic',
+                                                                'Sub-Akhmimic'}
+                
+                # Parse parameters: form, optional gloss (empty), dialect codes/names
+                i = 0
+                while i < len(forms_and_info):
+                    form = forms_and_info[i].strip()
+                    if not form:
+                        i += 1
+                        continue
+                    
+                    # Check if this is a dialect code or name
+                    if form in dialect_codes:
+                        # Single-letter code
+                        if etym_alt_forms:
+                            dialect = dialect_codes[form]
+                            if 'dialect' not in etym_alt_forms[-1]:
+                                etym_alt_forms[-1]['dialect'] = dialect
+                    elif form in dialect_names:
+                        # Full dialect name
+                        if etym_alt_forms:
+                            if 'dialect' not in etym_alt_forms[-1]:
+                                etym_alt_forms[-1]['dialect'] = form
+                    else:
+                        # It's a form (not a dialect indicator)
+                        form_entry = {'form': form}
+                        
+                        # Check next param for gloss (usually empty) or dialect
+                        if i + 1 < len(forms_and_info):
+                            next_param = forms_and_info[i + 1].strip()
+                            if next_param in dialect_codes or next_param in dialect_names:
+                                # Next param is dialect, will be handled in next iteration
+                                pass
+                            elif next_param:
+                                # Next param might be a gloss (usually empty though)
+                                pass
+                        
+                        etym_alt_forms.append(form_entry)
+                    i += 1
+    
+    # Extract derived terms from etymology-level sections
+    etym_derived = []
+    derived_sections = wikicode.get_sections(matches='Derived terms')
+    for derived_section in derived_sections:
+        for template in derived_section.filter_templates():
+            name = str(template.name).strip()
+            if name in ['l', 'link', 'm', 'mention']:
+                params = [str(p.value).strip() for p in template.params]
+                if len(params) >= 2:
+                    etym_derived.append(params[1])
+            elif name in ['col3', 'col4', 'col5']:
+                params = [str(p.value).strip() for p in template.params]
+                for v in params[1:]:
+                    if v and not v.startswith('title='):
+                        etym_derived.append(v)
+    
+    # Extract etymology components (prefix, suffix, compound, etc.)
+    etym_components = []
+    etym_ancestors = []  # Track {{der}} templates for ancestry
+    etym_sections = wikicode.get_sections(matches='Etymology')
+    for etym_section in etym_sections:
+        for template in etym_section.filter_templates():
+            name = str(template.name).strip()
+            
+            # Parse derived/inherited ancestry templates
+            if name in ['der', 'derived', 'inh', 'inherited']:
+                params = [str(p.value).strip() for p in template.params]
+                # Format: {{der|target_lang|source_lang|form|gloss}}
+                if len(params) >= 3:
+                    source_lang = params[1]
+                    source_form = params[2]
+                    if source_form:
+                        etym_ancestors.append({
+                            'language': source_lang,
+                            'form': source_form,
+                            'type': name
+                        })
+            
+            # Parse mention templates (often show components within der templates)
+            elif name in ['m', 'mention', 'l', 'link']:
+                params = [str(p.value).strip() for p in template.params]
+                # Format: {{m|lang|form|gloss}}
+                if len(params) >= 2:
+                    lang = params[0]
+                    form = params[1]
+                    # Only track if it's Egyptian/Demotic (components of compound)
+                    if lang in ['egy', 'egx-dem', 'dem'] and form:
+                        # Check if this is nested in a der template context
+                        # by looking at the parent text
+                        parent_text = str(etym_section)
+                        if '{{der' in parent_text or '{{compound' in parent_text:
+                            etym_components.append({
+                                'form': form,
+                                'role': 'base',
+                                'template_type': 'compound',
+                                'language': lang
+                            })
+            
+            # Parse prefix/suffix/compound templates
+            if name in ['prefix', 'suffix', 'compound', 'affix', 'confix']:
+                params = [str(p.value).strip() for p in template.params]
+                # Format: {{prefix|lang|affix|base|gloss1=...|gloss2=...}}
+                # For prefix: first component is prefix, rest are base words
+                # For suffix: last component is suffix, rest are base words
+                # For compound: all are base words
+                
+                components = []
+                # Skip language code (first param) and collect non-named params
+                for param in params[1:]:
+                    # Skip named parameters like gloss1=, gloss2=, t1=, t2=, etc.
+                    if '=' in param or not param:
+                        continue
+                    # Skip if it's in Latin alphabet (likely English gloss)
+                    if param and all(ord(c) < 0x370 for c in param if c.isalpha()):
+                        continue
+                    components.append(param)
+                
+                # Determine role of each component based on template type
+                for idx, comp in enumerate(components):
+                    role = 'base'  # default
+                    if name == 'prefix' and idx == 0:
+                        role = 'prefix'
+                    elif name == 'suffix' and idx == len(components) - 1:
+                        role = 'suffix'
+                    elif name in ['affix', 'confix']:
+                        # For affix/confix, assume first and last are affixes
+                        if idx == 0:
+                            role = 'prefix'
+                        elif idx == len(components) - 1 and len(components) > 1:
+                            role = 'suffix'
+                    # For compound, all remain 'base'
+                    
+                    etym_components.append({
+                        'form': comp,
+                        'role': role,
+                        'template_type': name
+                    })
+    
     # Extract etymology text (before any POS sections)
     text_before_pos = []
     for node in wikicode.nodes:
@@ -297,6 +451,14 @@ def parse_etymology_section(wikicode, etym_num: Optional[int] = None, pos_level:
         etym_text = ''.join(text_before_pos).strip()
         result['etymology_text'] = etym_text
     
+    # Store etymology components
+    if etym_components:
+        result['etymology_components'] = etym_components
+    
+    # Store etymology ancestors
+    if etym_ancestors:
+        result['etymology_ancestors'] = etym_ancestors
+    
     # Get POS sections
     pos_sections = wikicode.get_sections(levels=[pos_level])
     
@@ -307,8 +469,29 @@ def parse_etymology_section(wikicode, etym_num: Optional[int] = None, pos_level:
         
         pos_name = str(headings[0].title).strip()
         if pos_name in ['Noun', 'Verb', 'Adjective', 'Adverb', 'Particle', 'Proper noun', 
-                        'Preposition', 'Pronoun', 'Numeral', 'Letter']:
+                        'Preposition', 'Pronoun', 'Numeral', 'Letter', 'Determiner']:
             pos_data = parse_pos_section(section, pos_name, pos_level + 1)
+            
+            # Add etymology-level alternative forms to this POS definition
+            if etym_alt_forms and 'alternative_forms' not in pos_data:
+                pos_data['alternative_forms'] = etym_alt_forms.copy()
+            elif etym_alt_forms and 'alternative_forms' in pos_data:
+                # Merge, avoiding duplicates
+                existing_forms = {f['form'] for f in pos_data['alternative_forms']}
+                for form in etym_alt_forms:
+                    if form['form'] not in existing_forms:
+                        pos_data['alternative_forms'].append(form)
+            
+            # Add etymology-level derived terms to this POS definition
+            if etym_derived and 'derived_terms' not in pos_data:
+                pos_data['derived_terms'] = etym_derived.copy()
+            elif etym_derived and 'derived_terms' in pos_data:
+                # Merge, avoiding duplicates
+                existing_derived = set(pos_data['derived_terms'])
+                for term in etym_derived:
+                    if term not in existing_derived:
+                        pos_data['derived_terms'].append(term)
+            
             result['definitions'].append(pos_data)
     
     return result
@@ -380,8 +563,8 @@ def main():
     # Define files to process
     files_to_process = [
         ('egyptian_lemmas.json', 'egyptian_lemmas_parsed_mwp.json', 'Egyptian'),
-        ('demotic_lemmas.json', 'demotic_lemmas_parsed_mwp.json', 'Demotic'),
-        ('coptic_lemmas.json', 'coptic_lemmas_parsed_mwp.json', 'Coptic')
+        # ('demotic_lemmas.json', 'demotic_lemmas_parsed_mwp.json', 'Demotic'),
+        # ('coptic_lemmas.json', 'coptic_lemmas_parsed_mwp.json', 'Coptic')
     ]
     
     for input_file, output_file, language in files_to_process:

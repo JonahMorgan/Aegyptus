@@ -3,12 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Egyptian Lemma Network Visualizer</title>
+    <title>Egyptian Lemma Network Visualization</title>
     <style>
-        * {
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Egyptian+Hieroglyphs&display=swap');
+        
+        body {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+        
+        .hieroglyph-display {
+            font-family: 'Noto Sans Egyptian Hieroglyphs', sans-serif;
+            font-size: 2em;
+            line-height: 1.4;
+            letter-spacing: 0.02em;
         }
 
         body {
@@ -249,6 +258,138 @@
             margin: 5px 0;
             color: #555;
         }
+
+        /* Lightbox styles */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-content {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 40px;
+            cursor: pointer;
+            color: #666;
+            background: #f5f5f5;
+            border: 2px solid #ddd;
+            padding: 5px;
+            width: 45px;
+            height: 45px;
+            line-height: 35px;
+            text-align: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+            z-index: 10;
+            font-weight: normal;
+        }
+
+        .lightbox-close:hover {
+            background: #e74c3c;
+            color: white;
+            border-color: #c0392b;
+            transform: rotate(90deg);
+        }
+
+        .lightbox-content h2 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            padding-right: 40px;
+        }
+
+        .lightbox-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .lightbox-section h3 {
+            color: #2a5298;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .lightbox-section p {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        .lightbox-section ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .lightbox-section li {
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        .wiktionary-link {
+            display: inline-block;
+            background: #2a5298;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin: 15px 0;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .wiktionary-link:hover {
+            background: #1e3c72;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .info-item {
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 3px solid #2a5298;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #666;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            color: #333;
+            font-size: 1.1em;
+        }
     </style>
 </head>
 <body>
@@ -308,7 +449,9 @@
                     <strong>Edge Types:</strong> 
                     <span style="color: #e74c3c;">━ EVOLVES</span> | 
                     <span style="color: #3498db;">━ DESCENDS</span> | 
-                    <span style="color: #95a5a6;">┄ VARIANT</span>
+                    <span style="color: #95a5a6;">↔ VARIANT</span> | 
+                    <span style="color: #f39c12;">━ DERIVED</span> | 
+                    <span style="color: #9b59b6;">··· COMPONENT</span>
                 </div>
             </div>
             
@@ -318,6 +461,14 @@
         </div>
 
         <div id="nodeInfo" class="node-info"></div>
+    </div>
+
+    <!-- Lightbox for node details -->
+    <div id="lightbox" class="lightbox-overlay">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+            <div id="lightboxContent"></div>
+        </div>
     </div>
 
     <script src="https://d3js.org/d3.v7.min.js"></script>

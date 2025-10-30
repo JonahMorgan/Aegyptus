@@ -80,7 +80,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "jrj-ꜥꜣ",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -152,7 +159,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "jt",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -176,7 +190,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "sux",
+            "form": "𒀭𒊩𒌆𒆠𒃲",
+            "type": "der"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -216,7 +237,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "jꜥn",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -248,7 +276,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ꜥff",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -304,7 +339,19 @@
             ]
           }
         ],
-        "etymology_number": 1
+        "etymology_number": 1,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ꜥ",
+            "type": "inh"
+          },
+          {
+            "language": "egy",
+            "form": "ꜥt",
+            "type": "inh"
+          }
+        ]
       },
       {
         "etymology_text": "===Etymology 2===\n<div>From {{inh|egx-dem|egy|ꜥ|<hiero>a:Z1</hiero>|tr={{m|egy|ꜥ}}|arm, part, portion, pair, region}}.</div>",
@@ -330,7 +377,14 @@
             ]
           }
         ],
-        "etymology_number": 2
+        "etymology_number": 2,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ꜥ",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -364,7 +418,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ꜥt-sbꜣw",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -403,7 +464,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "jtrw",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -459,7 +527,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "jtrw ꜥꜣ",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -499,7 +574,19 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "arc-imp",
+            "form": "-",
+            "type": "der"
+          },
+          {
+            "language": "grc",
+            "form": "Ἴων",
+            "type": "der"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -525,7 +612,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "wpwtj",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -594,6 +688,17 @@
                 "language": "en",
                 "word": "Ozymandias"
               }
+            ],
+            "alternative_forms": [
+              {
+                "form": "smn-rꜥ"
+              },
+              {
+                "form": "ns-mn-rꜥ"
+              },
+              {
+                "form": "wsy-mn-rꜥ"
+              }
             ]
           }
         ],
@@ -630,7 +735,14 @@
             ]
           }
         ],
-        "etymology_number": 1
+        "etymology_number": 1,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "bꜣk",
+            "type": "inh"
+          }
+        ]
       },
       {
         "etymology_text": "===Etymology 2===\n<div>From {{inh|egx-dem|egy|bꜣkw|<hiero>bA-k:H_SPACE-w-D40:Z2</hiero>|tr={{m|egy|bꜣkw}}|work, taxes, tribute}}.</div>",
@@ -643,7 +755,14 @@
             ]
           }
         ],
-        "etymology_number": 2
+        "etymology_number": 2,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "bꜣkw",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -703,7 +822,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "pr",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -755,7 +881,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "pr-ꜥꜣ",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -787,7 +920,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "pt",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -857,7 +997,14 @@
             ]
           }
         ],
-        "etymology_number": 2
+        "etymology_number": 2,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "mꜣꜥ",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -891,7 +1038,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "mšꜥ",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -910,8 +1064,54 @@
     "etymologies": [
       {
         "etymology_text": "===Etymology 1===\n<div>From {{inh|egx-dem|egy|nb|<hiero>nb</hiero>|tr={{l|egy|nb}}|all, every}}.</div>\n\n====Pronunciation====\n* {{IPA|egx-dem|/niːβ/}}\n\n====Determiner====\n{{head|egx-dem|determiner|head={{t2i-Egyd|nb}}}}\n\n# {{lb|egx-dem|definite}} [[all]], [[every]]\n# {{lb|egx-dem|indefinite}} [[any]]\n\n=====Descendants=====\n* {{desc|cop-akh|ⲛⲓⲙ}}\n* {{desc|cop-boh|ⲛⲓⲃⲉⲛ}}\n* {{desc|cop-fay|ⲛⲓⲃⲓ}}\n* {{desc|cop-lyc|ⲛⲓⲙ}}\n* {{desc|cop-oxy|ⲛⲓⲙ}}\n* {{desc|cop-ppp|ⲛⲓⲃ}}\n* {{desc|cop-sah|ⲛⲓⲙ}}",
-        "definitions": [],
-        "etymology_number": 1
+        "definitions": [
+          {
+            "part_of_speech": "determiner",
+            "parameters": "",
+            "definitions": [
+              "[definite] all, every",
+              "[indefinite] any"
+            ],
+            "descendants": [
+              {
+                "language": "cop-akh",
+                "word": "ⲛⲓⲙ"
+              },
+              {
+                "language": "cop-boh",
+                "word": "ⲛⲓⲃⲉⲛ"
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲛⲓⲃⲓ"
+              },
+              {
+                "language": "cop-lyc",
+                "word": "ⲛⲓⲙ"
+              },
+              {
+                "language": "cop-oxy",
+                "word": "ⲛⲓⲙ"
+              },
+              {
+                "language": "cop-ppp",
+                "word": "ⲛⲓⲃ"
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲛⲓⲙ"
+              }
+            ]
+          }
+        ],
+        "etymology_number": 1,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "nb",
+            "type": "inh"
+          }
+        ]
       },
       {
         "etymology_text": "===Etymology 2===\n<div>From {{inh|egx-dem|egy|nb|<hiero>nb-A1</hiero>|tr={{l|egy|nb}}|lord}}.</div>\n\n====Pronunciation====\n* {{IPA|egx-dem|/neːβ/}}",
@@ -934,7 +1134,14 @@
             ]
           }
         ],
-        "etymology_number": 2
+        "etymology_number": 2,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "nb",
+            "type": "inh"
+          }
+        ]
       },
       {
         "etymology_text": "===Etymology 3===\n<div>From {{inh|egx-dem|egy|nbt|<hiero>nb:t</hiero>|tr={{l|egy|nbt}}|mistress, lady}}.</div>\n\n====Pronunciation====\n* {{IPA|egx-dem|/ˈneːβə/}}",
@@ -947,7 +1154,14 @@
             ]
           }
         ],
-        "etymology_number": 3
+        "etymology_number": 3,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "nbt",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -999,7 +1213,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "nb",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -1031,7 +1252,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "nbw",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -1063,7 +1291,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "nkt",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -1107,7 +1342,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "nṯr",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -1144,7 +1386,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "rꜥ",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -1197,7 +1446,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "rmṯ",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -1310,7 +1566,14 @@
             ]
           }
         ],
-        "etymology_number": 1
+        "etymology_number": 1,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "hj",
+            "type": "inh"
+          }
+        ]
       },
       {
         "etymology_text": "===Etymology 2===\n<div>From {{inh|egx-dem|egy|hꜣj|<hiero>h-A-D54</hiero>|tr={{m|egy|hꜣj}}|to descend}}.</div>",
@@ -1329,7 +1592,14 @@
             ]
           }
         ],
-        "etymology_number": 2
+        "etymology_number": 2,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "hꜣj",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -1377,7 +1647,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ḥmt",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -1409,7 +1686,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ḥnꜥ",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -1445,7 +1729,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ḥrj",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -1485,7 +1776,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ḥrrt",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -1521,7 +1819,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ḥrj",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -1555,7 +1860,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ḥḏ",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -1592,7 +1904,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ḥtrj",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -1673,7 +1992,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "zft",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -1706,7 +2032,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "sn",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -1758,7 +2091,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "znf",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -1788,7 +2128,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "sr",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -1861,7 +2208,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "šr",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -1906,7 +2260,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "gꜣš",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -1942,7 +2303,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ḏbt",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -1978,7 +2346,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "*tꜣšj",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],
@@ -2014,7 +2389,14 @@
             ]
           }
         ],
-        "etymology_number": null
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy-lat",
+            "form": "ḏpḥ",
+            "type": "inh"
+          }
+        ]
       }
     ],
     "related_terms": [],

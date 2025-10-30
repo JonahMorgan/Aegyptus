@@ -20,13 +20,61 @@ const mimeTypes = {
 const server = http.createServer((req, res) => {
     console.log(`${req.method} ${req.url}`);
     
-    // Redirect root to index.html
-    let filePath = req.url === '/' ? '/index.html' : req.url;
-    
     // Remove query string if present
-    filePath = filePath.split('?')[0];
+    let filePath = req.url.split('?')[0];
     
-    // Build full file path
+    // Redirect root to index.html
+    if (filePath === '/') {
+        filePath = '/index.html';
+    }
+    
+    // Special handling for JSON files - try parent directory first
+    if (filePath.endsWith('.json')) {
+        const jsonFileName = path.basename(filePath);
+        const parentPath = path.join(__dirname, '..', jsonFileName);
+        const currentPath = path.join(__dirname, jsonFileName);
+        
+        // Check if parent path is a directory
+        fs.stat(parentPath, (statErr, stats) => {
+            if (statErr || stats.isDirectory()) {
+                // Parent path doesn't exist or is a directory, try current directory
+                fs.readFile(currentPath, (err, data) => {
+                    if (!err) {
+                        console.log(`Serving ${jsonFileName} from current directory`);
+                        res.writeHead(200, { 'Content-Type': 'application/json' });
+                        res.end(data, 'utf-8');
+                    } else {
+                        res.writeHead(404, { 'Content-Type': 'text/html' });
+                        res.end('<h1>404 - JSON File Not Found</h1>', 'utf-8');
+                    }
+                });
+            } else {
+                // Parent path exists and is a file
+                fs.readFile(parentPath, (error, content) => {
+                    if (!error) {
+                        console.log(`Serving ${jsonFileName} from parent directory`);
+                        res.writeHead(200, { 'Content-Type': 'application/json' });
+                        res.end(content, 'utf-8');
+                    } else {
+                        // Try current directory as fallback
+                        fs.readFile(currentPath, (err, data) => {
+                            if (!err) {
+                                console.log(`Serving ${jsonFileName} from current directory`);
+                                res.writeHead(200, { 'Content-Type': 'application/json' });
+                                res.end(data, 'utf-8');
+                            } else {
+                                res.writeHead(404, { 'Content-Type': 'text/html' });
+                                res.end('<h1>404 - JSON File Not Found</h1>', 'utf-8');
+                            }
+                        });
+                    }
+                });
+            }
+        });
+        return;
+    }
+    
+    // Build full file path for other files
     filePath = path.join(__dirname, filePath);
     
     // Get file extension
@@ -37,22 +85,8 @@ const server = http.createServer((req, res) => {
     fs.readFile(filePath, (error, content) => {
         if (error) {
             if (error.code === 'ENOENT') {
-                // File not found - try parent directory for lemma_networks.json
-                if (req.url.includes('lemma_networks.json')) {
-                    const parentPath = path.join(__dirname, '..', 'lemma_networks.json');
-                    fs.readFile(parentPath, (err, data) => {
-                        if (err) {
-                            res.writeHead(404, { 'Content-Type': 'text/html' });
-                            res.end('<h1>404 - File Not Found</h1>', 'utf-8');
-                        } else {
-                            res.writeHead(200, { 'Content-Type': 'application/json' });
-                            res.end(data, 'utf-8');
-                        }
-                    });
-                } else {
-                    res.writeHead(404, { 'Content-Type': 'text/html' });
-                    res.end('<h1>404 - File Not Found</h1>', 'utf-8');
-                }
+                res.writeHead(404, { 'Content-Type': 'text/html' });
+                res.end('<h1>404 - File Not Found</h1>', 'utf-8');
             } else {
                 res.writeHead(500);
                 res.end(`Server Error: ${error.code}`, 'utf-8');
