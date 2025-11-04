@@ -98,6 +98,64 @@ class EgocentricLemmaNetworkBuilder:
         
         return date_str  # Return as-is if we can't standardize
     
+    def get_period_rank(self, period):
+        """Get chronological ranking of a period (lower = earlier)"""
+        if not period:
+            return 999
+        
+        # Textual periods
+        period_rankings = {
+            'Predynastic': 0,
+            'Early Dynastic': 1,
+            'Pyramid Texts': 2,
+            'Old Kingdom': 2,
+            'First Intermediate Period': 3,
+            'Middle Kingdom': 4,
+            'Coffin Texts': 4,  # Middle Kingdom era
+            'Second Intermediate Period': 5,
+            'New Kingdom': 6,
+            'Book of the Dead': 6,  # New Kingdom era
+            'Third Intermediate Period': 7,
+            'Late Period': 8,
+            'Late Egyptian': 8,
+            'Ptolemaic': 9,
+            'Ptolemaic Period': 9,
+            'Roman': 10,
+            'Greco-Roman Period': 10,
+        }
+        
+        # Check if period is in our known rankings
+        for known_period, rank in period_rankings.items():
+            if known_period.lower() in period.lower():
+                return rank
+        
+        # Dynasty numbers (approximate chronology)
+        dynasty_match = re.search(r'(\d+)(?:st|nd|rd|th)', period)
+        if dynasty_match:
+            dynasty_num = int(dynasty_match.group(1))
+            # Map dynasties to approximate periods
+            if dynasty_num <= 2:
+                return 1  # Early Dynastic
+            elif dynasty_num <= 6:
+                return 2  # Old Kingdom
+            elif dynasty_num <= 11:
+                return 3  # First Intermediate Period
+            elif dynasty_num <= 13:
+                return 4  # Middle Kingdom
+            elif dynasty_num <= 17:
+                return 5  # Second Intermediate Period
+            elif dynasty_num <= 20:
+                return 6  # New Kingdom
+            elif dynasty_num <= 25:
+                return 7  # Third Intermediate Period
+            elif dynasty_num <= 31:
+                return 8  # Late Period
+            else:
+                return 9  # Ptolemaic/Greco-Roman
+        
+        # Default: unknown period
+        return 500
+    
     def extract_hieroglyphs_from_params(self, params):
         """Extract hieroglyphs from template parameters (e.g., head parameter)"""
         if not params:
@@ -170,6 +228,11 @@ class EgocentricLemmaNetworkBuilder:
         # Combine all networks
         self.networks = egy_networks + dem_standalone + cop_standalone
         
+        # Clean up redundant edges
+        print(f"\n6. Cleaning up redundant descendant edges...")
+        removed_count = self.cleanup_redundant_descendant_edges()
+        print(f"   Removed {removed_count} redundant edges")
+        
         print(f"\n{'='*80}")
         print(f"Total networks created: {len(self.networks)}")
         print(f"  - Egyptian-rooted: {len(egy_networks)}")
@@ -238,8 +301,13 @@ class EgocentricLemmaNetworkBuilder:
                     network['nodes'].append(main_node)
                     pos_main_nodes.append(main_node)
                     
-                    # Add alternative forms as variant nodes
+                    # Add alternative forms as variant nodes with temporal evolution
+                    # Group by inflection type (base, plural, godhood, etc.) for separate chains
                     alt_forms = defn.get('alternative_forms', [])
+                    
+                    # Organize alternative forms by type (base, plural, dual, fem, godhood, etc.)
+                    alt_forms_by_type = {}  # type -> list of form data
+                    
                     for alt in alt_forms:
                         alt_hieroglyphs = alt.get('hieroglyphs')
                         # Strip <hiero> tags from alternative forms
@@ -248,6 +316,25 @@ class EgocentricLemmaNetworkBuilder:
                         
                         alt_translit = alt.get('transliteration') or alt.get('form') or lemma_form
                         period = self.extract_period_from_date(alt.get('date'))
+                        period_rank = self.get_period_rank(period) if period else 999
+                        title = alt.get('title', '')
+                        note = alt.get('note', '')
+                        
+                        # Detect type from title/note
+                        type_info = f"{title} {note}".lower()
+                        alt_type = 'base'  # Default type
+                        
+                        # Check for special types
+                        if 'plural' in type_info or 'pl.' in type_info:
+                            alt_type = 'plural'
+                        elif 'dual' in type_info:
+                            alt_type = 'dual'
+                        elif 'feminine' in type_info or 'fem.' in type_info:
+                            alt_type = 'feminine'
+                        elif 'god' in type_info or 'deity' in type_info or 'divine' in type_info:
+                            alt_type = 'godhood'
+                        elif 'determinative' in type_info:
+                            alt_type = 'determinative'
                         
                         # Create variant node
                         variant_node = self.create_node(
@@ -263,15 +350,127 @@ class EgocentricLemmaNetworkBuilder:
                         )
                         network['nodes'].append(variant_node)
                         
-                        # Create VARIANT edge from main to alternative
-                        period_str = period or 'undated'
-                        edge = self.create_edge(
-                            from_id=main_node['id'],
-                            to_id=variant_node['id'],
-                            edge_type='VARIANT',
-                            notes=f'Hieroglyphic variant ({period_str})'
-                        )
-                        network['edges'].append(edge)
+                        # Add to type group
+                        if alt_type not in alt_forms_by_type:
+                            alt_forms_by_type[alt_type] = []
+                        
+                        alt_forms_by_type[alt_type].append({
+                            'node': variant_node,
+                            'period': period,
+                            'period_rank': period_rank,
+                            'type': alt_type
+                        })
+                    
+                    # Create temporal edges for EACH type separately
+                    # Track the latest form node (for descendants)
+                    latest_form_node = main_node
+                    latest_period_rank = 999
+                    
+                    for alt_type, alt_forms_data in alt_forms_by_type.items():
+                        # Sort by period rank (chronological order)
+                        alt_forms_data.sort(key=lambda x: x['period_rank'])
+                        
+                        # Group forms by period within this type
+                        by_period = {}
+                        for form_data in alt_forms_data:
+                            period_rank = form_data['period_rank']
+                            if period_rank not in by_period:
+                                by_period[period_rank] = []
+                            by_period[period_rank].append(form_data)
+                        
+                        # Get sorted periods
+                        sorted_periods = sorted(by_period.keys())
+                        dated_periods = [p for p in sorted_periods if p < 500]
+                        undated_forms = by_period.get(999, [])
+                        
+                        # Connect main node to earliest dated form of this type
+                        if dated_periods:
+                            # Connect main to earliest dated alternative of this type
+                            earliest_forms = by_period[dated_periods[0]]
+                            
+                            # Determine edge type based on alt_type
+                            if alt_type == 'base':
+                                edge_type = 'EVOLVES'
+                                notes = f"First attestation in {earliest_forms[0]['period']}"
+                            else:
+                                edge_type = 'DERIVED'
+                                notes = f"{alt_type.capitalize()} form from {earliest_forms[0]['period']}"
+                            
+                            edge = self.create_edge(
+                                from_id=main_node['id'],
+                                to_id=earliest_forms[0]['node']['id'],
+                                edge_type=edge_type,
+                                notes=notes
+                            )
+                            network['edges'].append(edge)
+                            
+                            # Create EVOLVES edges between chronologically consecutive forms
+                            for i in range(len(dated_periods) - 1):
+                                current_period = dated_periods[i]
+                                next_period = dated_periods[i + 1]
+                                
+                                current_forms = by_period[current_period]
+                                next_forms = by_period[next_period]
+                                
+                                # Connect last form of current period to first form of next period
+                                edge = self.create_edge(
+                                    from_id=current_forms[-1]['node']['id'],
+                                    to_id=next_forms[0]['node']['id'],
+                                    edge_type='EVOLVES',
+                                    notes=f"Evolution from {current_forms[-1]['period']} to {next_forms[0]['period']}"
+                                )
+                                network['edges'].append(edge)
+                                
+                                # Create VARIANT edges within same period - ALL forms connect to each other
+                                if len(current_forms) > 1:
+                                    for j in range(len(current_forms)):
+                                        for k in range(j + 1, len(current_forms)):
+                                            edge = self.create_edge(
+                                                from_id=current_forms[j]['node']['id'],
+                                                to_id=current_forms[k]['node']['id'],
+                                                edge_type='VARIANT',
+                                                notes=f"Hieroglyphic variant ({current_forms[j]['period']})"
+                                            )
+                                            network['edges'].append(edge)
+                            
+                            # Handle variants in the last period - ALL forms connect to each other
+                            if len(by_period[dated_periods[-1]]) > 1:
+                                last_period_forms = by_period[dated_periods[-1]]
+                                for j in range(len(last_period_forms)):
+                                    for k in range(j + 1, len(last_period_forms)):
+                                        edge = self.create_edge(
+                                            from_id=last_period_forms[j]['node']['id'],
+                                            to_id=last_period_forms[k]['node']['id'],
+                                            edge_type='VARIANT',
+                                            notes=f"Hieroglyphic variant ({last_period_forms[j]['period']})"
+                                        )
+                                        network['edges'].append(edge)
+                            
+                            # Track the overall latest form (across all types) for descendants
+                            # Only base forms should be considered for descendants
+                            if alt_type == 'base':
+                                last_period_rank = dated_periods[-1]
+                                if last_period_rank < latest_period_rank:
+                                    latest_period_rank = last_period_rank
+                                    latest_form_node = by_period[dated_periods[-1]][-1]['node']
+                        
+                        # If only undated forms, connect them as variants/derived to main node
+                        elif undated_forms:
+                            for form_data in undated_forms:
+                                if alt_type == 'base':
+                                    edge_type = 'VARIANT'
+                                    notes = 'Hieroglyphic variant (undated)'
+                                else:
+                                    edge_type = 'DERIVED'
+                                    notes = f'{alt_type.capitalize()} form (undated)'
+                                
+                                edge = self.create_edge(
+                                    from_id=main_node['id'],
+                                    to_id=form_data['node']['id'],
+                                    edge_type=edge_type,
+                                    notes=notes
+                                )
+                                network['edges'].append(edge)
                     
                     # Add descendants listed in this definition (hierarchical)
                     descendants = defn.get('descendants', [])
@@ -427,8 +626,9 @@ class EgocentricLemmaNetworkBuilder:
                                         )
                                         network['edges'].append(edge)
                     
-                    # Start recursive processing with main_node as root
-                    process_descendants_recursive(descendants, main_node, 'egy')
+                    # Start recursive processing with latest_form_node as root
+                    # Descendants descend from the LATEST dated form (or main if no dated forms)
+                    process_descendants_recursive(descendants, latest_form_node, 'egy')
                     
                     # Add derived terms listed in this definition
                     derived_terms = defn.get('derived_terms', [])
@@ -592,6 +792,144 @@ class EgocentricLemmaNetworkBuilder:
         first_meaning = meanings[0].lower()
         return (first_meaning.startswith('alternative form of') or 
                 first_meaning.startswith('alternative spelling of'))
+    
+    def cleanup_redundant_descendant_edges(self):
+        """
+        Clean up redundant DESCENDS edges:
+        1. Remove edges from early Egyptian forms if descendant already connects from latest form
+        2. Remove direct Egyptian→Coptic edges if there's an Egyptian→Demotic→Coptic path
+        
+        Returns: count of removed edges
+        """
+        removed_count = 0
+        
+        for network in self.networks:
+            edges_to_remove = []
+            
+            # Get all Egyptian nodes and sort by period
+            egy_nodes = [n for n in network['nodes'] if n['language'] == 'egy']
+            if len(egy_nodes) <= 1:
+                continue  # No cleanup needed if only one Egyptian node
+            
+            # Sort Egyptian nodes by period rank to identify earliest and latest
+            egy_nodes_with_rank = []
+            for node in egy_nodes:
+                period = node.get('period')
+                rank = self.get_period_rank(period) if period else 999
+                egy_nodes_with_rank.append({'node': node, 'rank': rank})
+            
+            egy_nodes_with_rank.sort(key=lambda x: x['rank'])
+            
+            # Find the latest DATED form, or fall back to undated main form
+            # Latest = highest rank among DATED forms (rank < 500)
+            dated_nodes = [n for n in egy_nodes_with_rank if n['rank'] < 500]
+            if dated_nodes:
+                latest_egy_node = dated_nodes[-1]['node']  # Last (highest rank) dated node
+            else:
+                # No dated forms, use the first undated node (main form)
+                latest_egy_node = egy_nodes_with_rank[0]['node']
+            
+            # Get all DESCENDS edges
+            descends_edges = [e for e in network['edges'] if e['type'] == 'DESCENDS']
+            
+            # Build a map of what descendants connect from which Egyptian nodes
+            egy_to_descendants = {}  # egy_id -> set of descendant_ids
+            for edge in descends_edges:
+                from_node = next((n for n in network['nodes'] if n['id'] == edge['from']), None)
+                to_node = next((n for n in network['nodes'] if n['id'] == edge['to']), None)
+                
+                if from_node and to_node and from_node['language'] == 'egy':
+                    if from_node['id'] not in egy_to_descendants:
+                        egy_to_descendants[from_node['id']] = set()
+                    egy_to_descendants[from_node['id']].add(to_node['id'])
+            
+            # Issue 1: ALL descendants should ONLY connect from the latest Egyptian node
+            # Remove ANY edge from earlier Egyptian nodes to dem/cop descendants
+            # Then ensure all descendants connect from the latest node
+            
+            all_descendants = set()  # All dem/cop descendants in the network
+            for edge in descends_edges:
+                from_node = next((n for n in network['nodes'] if n['id'] == edge['from']), None)
+                to_node = next((n for n in network['nodes'] if n['id'] == edge['to']), None)
+                
+                if from_node and to_node:
+                    if from_node['language'] == 'egy' and to_node['language'] in ['dem', 'cop']:
+                        all_descendants.add(to_node['id'])
+                        
+                        # Remove if from ANY node except the latest
+                        if from_node['id'] != latest_egy_node['id']:
+                            edges_to_remove.append(edge)
+                            removed_count += 1
+            
+            # Now ensure all descendants connect from latest node
+            latest_descendants = egy_to_descendants.get(latest_egy_node['id'], set())
+            for desc_id in all_descendants:
+                if desc_id not in latest_descendants:
+                    # Add missing edge from latest to this descendant
+                    desc_node = next(n for n in network['nodes'] if n['id'] == desc_id)
+                    edge = self.create_edge(
+                        from_id=latest_egy_node['id'],
+                        to_id=desc_id,
+                        edge_type='DESCENDS',
+                        notes=f'Egy → {desc_node["language"].title()}'
+                    )
+                    network['edges'].append(edge)
+            
+            # Issue 2: Remove direct Egyptian→Coptic if there's Egyptian→Demotic→Coptic path
+            # Re-capture DESCENDS edges after adding new ones from latest node
+            descends_edges = [e for e in network['edges'] if e['type'] == 'DESCENDS']
+            
+            # Rebuild the egy_to_descendants map with the updated edges
+            egy_to_descendants = {}
+            for edge in descends_edges:
+                from_node = next((n for n in network['nodes'] if n['id'] == edge['from']), None)
+                to_node = next((n for n in network['nodes'] if n['id'] == edge['to']), None)
+                
+                if from_node and to_node and from_node['language'] == 'egy':
+                    if from_node['id'] not in egy_to_descendants:
+                        egy_to_descendants[from_node['id']] = set()
+                    egy_to_descendants[from_node['id']].add(to_node['id'])
+            
+            # Build a map of Demotic→Coptic edges
+            dem_to_cop = {}  # dem_id -> set of cop_ids
+            for edge in descends_edges:
+                from_node = next((n for n in network['nodes'] if n['id'] == edge['from']), None)
+                to_node = next((n for n in network['nodes'] if n['id'] == edge['to']), None)
+                
+                if from_node and to_node and from_node['language'] == 'dem' and to_node['language'] == 'cop':
+                    if from_node['id'] not in dem_to_cop:
+                        dem_to_cop[from_node['id']] = set()
+                    dem_to_cop[from_node['id']].add(to_node['id'])
+            
+            # Find which Coptic nodes are reachable via Demotic
+            coptic_via_demotic = set()
+            for egy_id, dem_ids in egy_to_descendants.items():
+                for dem_id in dem_ids:
+                    dem_node = next((n for n in network['nodes'] if n['id'] == dem_id), None)
+                    if dem_node and dem_node['language'] == 'dem':
+                        # Get Coptic descendants of this Demotic node
+                        cop_ids = dem_to_cop.get(dem_id, set())
+                        coptic_via_demotic.update(cop_ids)
+            
+            # Remove direct Egyptian→Coptic edges if Coptic is reachable via Demotic
+            for edge in descends_edges:
+                if edge in edges_to_remove:
+                    continue  # Already marked for removal
+                
+                from_node = next((n for n in network['nodes'] if n['id'] == edge['from']), None)
+                to_node = next((n for n in network['nodes'] if n['id'] == edge['to']), None)
+                
+                if from_node and to_node:
+                    if from_node['language'] == 'egy' and to_node['language'] == 'cop':
+                        if to_node['id'] in coptic_via_demotic:
+                            edges_to_remove.append(edge)
+                            removed_count += 1
+            
+            # Remove the edges
+            for edge in edges_to_remove:
+                network['edges'].remove(edge)
+        
+        return removed_count
     
     def find_egyptian_network(self, networks, lemma_form, etym_idx=None):
         """Find the Egyptian network for a given lemma and etymology"""
@@ -925,6 +1263,91 @@ class EgocentricLemmaNetworkBuilder:
                         )
                         network['nodes'].append(cop_node)
                         pos_main_nodes.append(cop_node)
+                        
+                        # Add alternative forms as dialect variants
+                        alt_forms = defn.get('alternative_forms', [])
+                        for alt in alt_forms:
+                            alt_form = alt.get('form', '')
+                            alt_dialect = alt.get('dialect', '')
+                            
+                            if not alt_form:
+                                continue
+                            
+                            # Check if this alt form already exists
+                            existing_alt = next((n for n in network['nodes'] 
+                                               if n['form'] == alt_form and n['language'] == 'cop'), None)
+                            
+                            if not existing_alt:
+                                # Create variant node
+                                alt_node = self.create_node(
+                                    language='cop',
+                                    form=alt_form,
+                                    pos=pos,
+                                    meanings=meanings,
+                                    dialect=alt_dialect,
+                                    etymology_index=etym_idx
+                                )
+                                network['nodes'].append(alt_node)
+                                
+                                # Create VARIANT edge
+                                edge = self.create_edge(
+                                    from_id=cop_node['id'],
+                                    to_id=alt_node['id'],
+                                    edge_type='VARIANT',
+                                    notes=f'Dialectal variant ({alt_dialect})' if alt_dialect else 'Variant form'
+                                )
+                                network['edges'].append(edge)
+                                
+                                # Check if this alt form has its own entry with derived terms
+                                if alt_form in cop_data:
+                                    alt_entry = cop_data[alt_form]
+                                    for alt_etym in alt_entry.get('etymologies', []):
+                                        for alt_defn in alt_etym.get('definitions', []):
+                                            # Add derived terms from the alt form's own entry
+                                            for derived_form in alt_defn.get('derived_terms', []):
+                                                if not derived_form or derived_form == alt_form:
+                                                    continue
+                                                
+                                                # Check if already added
+                                                existing_derived = next((n for n in network['nodes']
+                                                                       if n['form'] == derived_form and n['language'] == 'cop'), None)
+                                                
+                                                if not existing_derived:
+                                                    # Create derived term node
+                                                    derived_node = self.create_node(
+                                                        language='cop',
+                                                        form=derived_form,
+                                                        pos='unknown',
+                                                        meanings=[f'Derived from {alt_form}'],
+                                                        dialect=None,
+                                                        etymology_index=etym_idx
+                                                    )
+                                                    network['nodes'].append(derived_node)
+                                                    
+                                                    # Create DERIVED edge from alt form to derived term
+                                                    edge = self.create_edge(
+                                                        from_id=alt_node['id'],
+                                                        to_id=derived_node['id'],
+                                                        edge_type='DERIVED',
+                                                        notes=f'Derived from {alt_form}'
+                                                    )
+                                                    network['edges'].append(edge)
+                            else:
+                                # Node exists - just add dialect if needed
+                                if alt_dialect:
+                                    self.add_dialect_to_node(existing_alt, alt_dialect)
+                                
+                                # Create edge if it doesn't exist
+                                edge_exists = any(e['from'] == cop_node['id'] and e['to'] == existing_alt['id'] 
+                                                for e in network['edges'])
+                                if not edge_exists:
+                                    edge = self.create_edge(
+                                        from_id=cop_node['id'],
+                                        to_id=existing_alt['id'],
+                                        edge_type='VARIANT',
+                                        notes=f'Dialectal variant ({alt_dialect})' if alt_dialect else 'Variant form'
+                                    )
+                                    network['edges'].append(edge)
                     
                     # Process etymology components for Coptic compound words
                     etymology_components = etymology.get('etymology_components', [])
