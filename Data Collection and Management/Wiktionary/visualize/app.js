@@ -728,7 +728,7 @@ async function openWiktionaryPage(node, network) {
 async function loadNetworks() {
     try {
         // Load from parent directory (the authoritative source)
-        const response = await fetch('../lemma_networks.json');
+        const response = await fetch('../lemma_networks_v2.json');
         
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -854,19 +854,23 @@ function getNodeColor(language) {
 
 // Get edge color based on type
 function getEdgeColor(type) {
-    if (type === 'EVOLVES') return '#e74c3c';
-    if (type === 'DESCENDS') return '#3498db';
-    if (type === 'VARIANT') return '#95a5a6';
-    if (type === 'DERIVED') return '#f39c12';      // Orange for derived terms
-    if (type === 'COMPONENT') return '#9b59b6';    // Purple for components
+    if (type === 'EVOLVES') return '#e74c3c';       // Red for temporal evolution
+    if (type === 'DESCENDS') return '#3498db';      // Blue for cross-language descent
+    if (type === 'VARIANT') return '#95a5a6';       // Gray for variants
+    if (type === 'DERIVED') return '#f39c12';       // Orange for derived terms
+    if (type === 'COMPONENT') return '#9b59b6';     // Purple for components
+    if (type === 'BORROWED') return '#1abc9c';      // Teal for borrowings
+    if (type === 'INHERITED') return '#e67e22';     // Dark orange for inherited
     return '#999';
 }
 
 // Get edge style based on type
 function getEdgeStyle(type) {
-    if (type === 'VARIANT') return '5,5'; // Dashed
-    if (type === 'COMPONENT') return '3,3'; // Dotted for components
-    return '0'; // Solid
+    if (type === 'VARIANT') return '5,5';          // Dashed for variants
+    if (type === 'COMPONENT') return '3,3';        // Dotted for components
+    if (type === 'BORROWED') return '8,4';         // Long dash for borrowings
+    if (type === 'INHERITED') return '2,2';        // Short dots for inherited
+    return '0'; // Solid for EVOLVES, DESCENDS, DERIVED
 }
 
 // Visualize network using D3.js force-directed graph
@@ -1018,11 +1022,29 @@ function visualizeNetwork(network) {
         .attr('font-weight', d => d.isRoot ? 'bold' : 'normal')
         .attr('fill', '#333');
     
-    // Add period/dialect labels
+    // Add part of speech label (first line under node)
     node.append('text')
-        .text(d => d.period || d.dialect || '')
+        .text(d => {
+            if (d.part_of_speech && d.part_of_speech !== 'unknown') {
+                return d.part_of_speech;
+            }
+            return '';
+        })
         .attr('x', 0)
         .attr('y', 45)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '9px')
+        .attr('fill', '#666')
+        .attr('font-style', 'italic');
+    
+    // Add period/dialect labels (second line under node)
+    node.append('text')
+        .text(d => {
+            const dialectInfo = d.dialects && d.dialects.length > 0 ? d.dialects.join(', ') : d.dialect;
+            return d.period || dialectInfo || '';
+        })
+        .attr('x', 0)
+        .attr('y', 57)
         .attr('text-anchor', 'middle')
         .attr('font-size', '9px')
         .attr('fill', '#666')
@@ -1138,8 +1160,10 @@ function showNodeInfo(event, d) {
         html += `<p><strong>Period:</strong> ${d.period}</p>`;
     }
     
-    if (d.dialect) {
-        html += `<p><strong>Dialect:</strong> ${d.dialect}</p>`;
+    // Check both dialects (plural array) and dialect (singular string) for backwards compatibility
+    const dialectInfo = d.dialects && d.dialects.length > 0 ? d.dialects.join(', ') : d.dialect;
+    if (dialectInfo) {
+        html += `<p><strong>Dialect:</strong> ${dialectInfo}</p>`;
     }
     
     if (d.meanings && d.meanings.length > 0) {
@@ -1192,6 +1216,9 @@ function showLightbox(node, network) {
     const wiktUrl = getWiktionaryUrl(node, network);
     const parsedData = getParsedDataForNode(node);
     
+    // Track whether we actually show definitions from parsed data
+    let shownParsedDefinitions = false;
+    
     let html = `
         <h2>${node.form}</h2>
         
@@ -1224,11 +1251,22 @@ function showLightbox(node, network) {
         `;
     }
     
-    if (node.dialect) {
+    // Check both dialects (plural array) and dialect (singular string) for backwards compatibility
+    const dialectInfo = node.dialects && node.dialects.length > 0 ? node.dialects.join(', ') : node.dialect;
+    if (dialectInfo) {
         html += `
             <div class="info-item">
                 <div class="info-label">Dialect</div>
-                <div class="info-value">${node.dialect}</div>
+                <div class="info-value">${dialectInfo}</div>
+            </div>
+        `;
+    }
+    
+    if (node.part_of_speech && node.part_of_speech !== 'unknown') {
+        html += `
+            <div class="info-item">
+                <div class="info-label">Part of Speech</div>
+                <div class="info-value">${node.part_of_speech}</div>
             </div>
         `;
     }
@@ -1325,7 +1363,8 @@ function showLightbox(node, network) {
                 
                 if (etym.etymology_text) {
                     const cleanedText = etym.etymology_text
-                        .replace(/===Etymology \d+===/g, '')
+                        .replace(/===Etymology(?: \d+)?===/g, '')  // Remove Etymology headers (with or without numbers)
+                        .replace(/==.*?==/g, '')  // Remove other section headers
                         .replace(/\{\{[^}]+\}\}/g, (match) => {
                             // Simple template parser - extract readable text
                             const parts = match.slice(2, -2).split('|');
@@ -1346,6 +1385,7 @@ function showLightbox(node, network) {
                         }
                         
                         if (def.definitions && def.definitions.length > 0) {
+                            shownParsedDefinitions = true;  // Mark that we showed definitions
                             html += `<ol style="margin-left: 20px;">`;
                             def.definitions.forEach(d => {
                                 // Clean up templates and formatting
@@ -1407,21 +1447,36 @@ function showLightbox(node, network) {
                 html += `</div>`;
             });
         }
-    } else {
-        // Fallback to node.meanings if no parsed data
-        if (node.meanings && node.meanings.length > 0) {
+    }
+    
+    // Always show node.meanings if available and not already shown in parsed data
+    // This handles cases where parsed data exists but doesn't have the specific etymology
+    if (node.meanings && node.meanings.length > 0) {
+        // Only show if we didn't already show definitions from the relevant parsed data
+        if (!shownParsedDefinitions) {
             html += `
                 <div class="lightbox-section">
                     <h3>Meanings</h3>
-                    <ul>
             `;
+            
+            // Show part of speech if available
+            if (node.part_of_speech && node.part_of_speech !== 'unknown') {
+                html += `<h4 style="margin-top: 10px; color: #1e3c72;">${node.part_of_speech}</h4>`;
+            }
+            
+            html += `<ol style="margin-left: 20px;">`;
             node.meanings.forEach(m => {
-                html += `<li>${m}</li>`;
+                // Clean up the meaning text
+                const cleaned = m
+                    .replace(/\{\{[^}]+\}\}/g, '')
+                    .replace(/\[\[([^\]|]+)\|([^\]]+)\]\]/g, '$2')
+                    .replace(/\[\[([^\]]+)\]\]/g, '$1')
+                    .trim();
+                if (cleaned && cleaned.length > 2) {
+                    html += `<li>${cleaned}</li>`;
+                }
             });
-            html += `
-                    </ul>
-                </div>
-            `;
+            html += `</ol></div>`;
         }
     }
     

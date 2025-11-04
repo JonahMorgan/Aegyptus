@@ -149,6 +149,22 @@ def parse_pos_section(section_code, pos_name: str, subsection_level: int) -> Dic
     # Extract definitions
     result['definitions'] = extract_definitions(section_code, level=1)
     
+    # Check definitions for "Alternative form of X" pattern
+    variant_forms_from_defs = []
+    for defn in result['definitions']:
+        # Pattern: "Alternative form of X"  or "Alternative spelling of X"
+        import re
+        match = re.search(r'(?:Alternative|Alternate)\s+(?:form|spelling|orthography)\s+of\s+(\S+)', defn, re.IGNORECASE)
+        if match:
+            variant_form = match.group(1).strip()
+            # Clean up any remaining wiki markup
+            variant_form = mwparserfromhell.parse(variant_form).strip_code()
+            if variant_form:
+                variant_forms_from_defs.append({'form': variant_form})
+    
+    if variant_forms_from_defs:
+        result['alternative_forms_from_definitions'] = variant_forms_from_defs
+    
     # Look for subsections
     sections = section_code.get_sections(levels=[subsection_level])
     
@@ -244,28 +260,165 @@ def parse_pos_section(section_code, pos_name: str, subsection_level: int) -> Dic
                     values = list(params.values())
                     if len(values) > 1:
                         derived.append(values[1])
-                elif name == 'col':
+                elif name in ['col', 'col2', 'col3', 'col4', 'col5']:
+                    # Column layout with terms (col2 is most common)
+                    params = parse_template_params(template)
+                    for v in list(params.values())[1:]:  # Skip language code
+                        if v and not v.startswith('col'):
+                            # Remove template annotations like <t:...>
+                            clean_v = v.split('<')[0].strip()
+                            if clean_v:
+                                derived.append(clean_v)
+            if derived:
+                result['derived_terms'] = list(set(derived))
+        
+        # Synonyms
+        elif heading_text == 'Synonyms':
+            synonyms = []
+            for template in subsection.filter_templates():
+                name = str(template.name).strip()
+                if name == 'l':
+                    params = parse_template_params(template)
+                    values = list(params.values())
+                    if len(values) > 1:
+                        synonyms.append(values[1])
+                elif name in ['col', 'col2', 'col3', 'col4', 'col5']:
                     # Column layout with terms
                     params = parse_template_params(template)
                     for v in list(params.values())[1:]:  # Skip language code
                         if v and not v.startswith('col'):
-                            derived.append(v)
-            if derived:
-                result['derived_terms'] = list(set(derived))
+                            # Remove template annotations
+                            clean_v = v.split('<')[0].strip()
+                            if clean_v:
+                                synonyms.append(clean_v)
+            if synonyms:
+                result['synonyms'] = list(set(synonyms))
         
         # Descendants
         elif heading_text == 'Descendants':
             descendants = []
-            for template in subsection.filter_templates():
-                name = str(template.name).strip()
-                if name == 'desc':
-                    params = parse_template_params(template)
-                    values = list(params.values())
-                    if len(values) >= 2:
-                        descendants.append({
-                            'language': values[0],
-                            'word': values[1]
-                        })
+            # Parse raw wikitext to preserve nesting structure
+            subsection_text = str(subsection)
+            lines = subsection_text.split('\n')
+            
+            parent_stack = []  # Stack to track parent descendants at each level
+            
+            for line in lines:
+                # Count asterisks to determine nesting level
+                # * = level 0 (direct descendant)
+                # ** = level 1 (descendant of previous level 0)
+                # *** = level 2, etc.
+                stripped = line.lstrip()
+                if stripped.startswith('*'):
+                    # Count consecutive asterisks
+                    level = 0
+                    for char in stripped:
+                        if char == '*':
+                            level += 1
+                        else:
+                            break
+                    level = level - 1  # * = level 0, ** = level 1, etc.
+                    
+                    # Find {{desc}} template in this line
+                    import re
+                    desc_match = re.search(r'\{\{desc\|(.+)\}\}', line)
+                    if desc_match:
+                        # Parse the desc template - need to handle nested templates carefully
+                        template_content = desc_match.group(1)
+                        
+                        # Split by | but respect nested templates {{...}}
+                        parts = []
+                        current_part = ""
+                        depth = 0
+                        i = 0
+                        while i < len(template_content):
+                            c = template_content[i]
+                            if i < len(template_content) - 1 and template_content[i:i+2] == '{{':
+                                depth += 1
+                                current_part += '{{'
+                                i += 2
+                                continue
+                            elif i < len(template_content) - 1 and template_content[i:i+2] == '}}':
+                                depth -= 1
+                                current_part += '}}'
+                                i += 2
+                                continue
+                            elif c == '|' and depth == 0:
+                                parts.append(current_part.strip())
+                                current_part = ""
+                                i += 1
+                                continue
+                            else:
+                                current_part += c
+                                i += 1
+                        
+                        if current_part:
+                            parts.append(current_part.strip())
+                        
+                        if len(parts) >= 1:
+                            lang = parts[0]
+                            
+                            # Collect all word forms (positional parameters after language)
+                            words = []
+                            named_params = {}
+                            
+                            for part in parts[1:]:
+                                # Check if this is a named parameter
+                                if '=' in part:
+                                    # Make sure the = isn't inside a nested template
+                                    equals_pos = part.find('=')
+                                    before_equals = part[:equals_pos]
+                                    if '{{' not in before_equals:
+                                        # This is a named parameter
+                                        key, val = part.split('=', 1)
+                                        named_params[key.strip()] = val.strip()
+                                        continue
+                                
+                                # Positional parameter - skip if it's entirely a template
+                                if part.startswith('{{') and part.endswith('}}'):
+                                    continue
+                                
+                                # Extract word, removing <alt:...> markup
+                                word = part.split('<')[0].strip()
+                                if word:
+                                    words.append(word)
+                            
+                            # If no words found, check for 'tr' (transliteration) parameter
+                            if not words and 'tr' in named_params:
+                                tr_value = named_params['tr']
+                                # Extract word from {{l|lang|word}} template if present
+                                l_match = re.search(r'\{\{l\|[^|]+\|([^}|]+)', tr_value)
+                                if l_match:
+                                    words.append(l_match.group(1).strip())
+                                else:
+                                    words.append(tr_value.strip())
+                            
+                            # Create a descendant entry for EACH word form
+                            # (Multiple forms in one {{desc}} are dialectal variants)
+                            for word in words:
+                                desc_entry = {
+                                    'language': lang,
+                                    'word': word,
+                                    'level': level,
+                                    'children': []
+                                }
+                                
+                                # Adjust parent stack to current level
+                                parent_stack_copy = parent_stack[:level]
+                                
+                                # Add to appropriate parent
+                                if level == 0:
+                                    descendants.append(desc_entry)
+                                    # Update stack only for the first word of this template
+                                    if word == words[0]:
+                                        parent_stack = [desc_entry]
+                                else:
+                                    if parent_stack_copy:
+                                        parent_stack_copy[-1]['children'].append(desc_entry)
+                                        # Update stack only for the first word of this template
+                                        if word == words[0]:
+                                            parent_stack = parent_stack_copy + [desc_entry]
+            
             if descendants:
                 result['descendants'] = descendants
     
@@ -363,8 +516,8 @@ def parse_etymology_section(wikicode, etym_num: Optional[int] = None, pos_level:
         for template in etym_section.filter_templates():
             name = str(template.name).strip()
             
-            # Parse derived/inherited ancestry templates
-            if name in ['der', 'derived', 'inh', 'inherited']:
+            # Parse derived/inherited/borrowed ancestry templates
+            if name in ['der', 'derived', 'inh', 'inherited', 'bor', 'borrowed']:
                 params = [str(p.value).strip() for p in template.params]
                 # Format: {{der|target_lang|source_lang|form|gloss}}
                 if len(params) >= 3:
@@ -398,43 +551,84 @@ def parse_etymology_section(wikicode, etym_num: Optional[int] = None, pos_level:
                             })
             
             # Parse prefix/suffix/compound templates
-            if name in ['prefix', 'suffix', 'compound', 'affix', 'confix']:
-                params = [str(p.value).strip() for p in template.params]
+            if name in ['prefix', 'suffix', 'compound', 'affix', 'af', 'confix', 'pre', 'suf', 'com']:
                 # Format: {{prefix|lang|affix|base|gloss1=...|gloss2=...}}
                 # For prefix: first component is prefix, rest are base words
                 # For suffix: last component is suffix, rest are base words
                 # For compound: all are base words
                 
-                components = []
-                # Skip language code (first param) and collect non-named params
-                for param in params[1:]:
-                    # Skip named parameters like gloss1=, gloss2=, t1=, t2=, etc.
-                    if '=' in param or not param:
-                        continue
-                    # Skip if it's in Latin alphabet (likely English gloss)
-                    if param and all(ord(c) < 0x370 for c in param if c.isalpha()):
-                        continue
-                    components.append(param)
+                # Get language code from first parameter (should be positional)
+                lang_code = ''
+                if template.params:
+                    first_param_name = str(template.params[0].name).strip()
+                    # Positional params have numeric names like '1', '2'
+                    if first_param_name.isdigit() or first_param_name == '':
+                        lang_code = str(template.params[0].value).strip()
                 
-                # Determine role of each component based on template type
+                components = []
+                component_lang = lang_code  # Default to template language
+                
+                # Skip language code (first param) and collect non-named params
+                for i, param in enumerate(template.params):
+                    if i == 0:  # Skip language code
+                        continue
+                    
+                    # Check if this is a named parameter (has a name like t1, gloss1, etc.)
+                    param_name = str(param.name).strip()
+                    param_value = str(param.value).strip()
+                    
+                    # Skip named parameters (they have explicit names like t1=, gloss2=, pos1=, etc.)
+                    # Positional parameters have numeric names like '1', '2', '3'
+                    if param_name and not param_name.isdigit():
+                        continue
+                    
+                    # Skip empty values
+                    if not param_value:
+                        continue
+                    
+                    # For Egyptian/Demotic/Coptic, the transliteration uses Latin alphabet
+                    # So we should NOT filter out Latin characters for these languages
+                    if lang_code in ['egy', 'egx-dem', 'dem', 'cop']:
+                        # Accept all non-named positional parameters for Egyptian languages
+                        components.append(param_value)
+                    else:
+                        # For other languages, skip if it's in Latin alphabet (likely English gloss)
+                        # BUT keep it if it ends with - (affix marker) or has Egyptian characters
+                        if param_value and all(ord(c) < 0x370 for c in param_value if c.isalpha()):
+                            # Keep if it ends with - (affix marker) or starts with - (suffix)
+                            if not (param_value.endswith('-') or param_value.startswith('-')):
+                                continue
+                        components.append(param_value)
+                
+                # Determine role of each component based on template type and affix markers
                 for idx, comp in enumerate(components):
                     role = 'base'  # default
-                    if name == 'prefix' and idx == 0:
+                    
+                    # Check if component has affix markers (- at start/end)
+                    is_prefix_marker = comp.startswith('-') or (comp.endswith('-') and not comp.startswith('-'))
+                    is_suffix_marker = comp.endswith('-') and not is_prefix_marker
+                    
+                    if name in ['prefix', 'pre'] and idx == 0:
                         role = 'prefix'
-                    elif name == 'suffix' and idx == len(components) - 1:
+                    elif name in ['suffix', 'suf'] and idx == len(components) - 1:
                         role = 'suffix'
-                    elif name in ['affix', 'confix']:
-                        # For affix/confix, assume first and last are affixes
-                        if idx == 0:
+                    elif name in ['affix', 'af', 'confix']:
+                        # For affix/af/confix, check affix markers to determine role
+                        # A component ending with '-' (like 's-') is a prefix
+                        # A component starting with '-' (like '-t') is a suffix
+                        # Otherwise it's a base word
+                        if is_prefix_marker:
                             role = 'prefix'
-                        elif idx == len(components) - 1 and len(components) > 1:
+                        elif is_suffix_marker:
                             role = 'suffix'
-                    # For compound, all remain 'base'
+                        # else: remains 'base'
+                    # For compound/com, all remain 'base'
                     
                     etym_components.append({
                         'form': comp,
                         'role': role,
-                        'template_type': name
+                        'template_type': name,
+                        'language': component_lang
                     })
     
     # Extract etymology text (before any POS sections)
@@ -491,6 +685,10 @@ def parse_etymology_section(wikicode, etym_num: Optional[int] = None, pos_level:
                 for term in etym_derived:
                     if term not in existing_derived:
                         pos_data['derived_terms'].append(term)
+            
+            # Add etymology-level components to this POS definition
+            if etym_components and 'etymology_components' not in pos_data:
+                pos_data['etymology_components'] = etym_components.copy()
             
             result['definitions'].append(pos_data)
     
@@ -564,7 +762,7 @@ def main():
     files_to_process = [
         ('egyptian_lemmas.json', 'egyptian_lemmas_parsed_mwp.json', 'Egyptian'),
         # ('demotic_lemmas.json', 'demotic_lemmas_parsed_mwp.json', 'Demotic'),
-        # ('coptic_lemmas.json', 'coptic_lemmas_parsed_mwp.json', 'Coptic')
+        ('coptic_lemmas.json', 'coptic_lemmas_parsed_mwp.json', 'Coptic')
     ]
     
     for input_file, output_file, language in files_to_process:
@@ -613,12 +811,12 @@ def main():
         
         print(f"Done! Parsed {len(parsed_data)} lemmas.")
         
-        # Show sample
-        if parsed_data:
-            first_lemma = next(iter(parsed_data.keys()))
-            print(f"\nSample parsed entry for '{first_lemma}':")
-            print(json.dumps(parsed_data[first_lemma], indent=2, ensure_ascii=False)[:500])
-            print("...\n")
+        # Show sample (skip due to encoding issues on Windows)
+        # if parsed_data:
+        #     first_lemma = next(iter(parsed_data.keys()))
+        #     print(f"\nSample parsed entry for '{first_lemma}':")
+        #     print(json.dumps(parsed_data[first_lemma], indent=2, ensure_ascii=False)[:500])
+        #     print("...\n")
 
 if __name__ == '__main__':
     main()
