@@ -304,27 +304,38 @@ def parse_pos_section(section_code, pos_name: str, subsection_level: int) -> Dic
             parent_stack = []  # Stack to track parent descendants at each level
             
             for line in lines:
-                # Count asterisks to determine nesting level
+                # Count asterisks AND colons to determine nesting level
                 # * = level 0 (direct descendant)
+                # *: = level 1 (child of previous *)
                 # ** = level 1 (descendant of previous level 0)
-                # *** = level 2, etc.
+                # **: = level 2, etc.
                 stripped = line.lstrip()
                 if stripped.startswith('*'):
-                    # Count consecutive asterisks
+                    # Count consecutive asterisks and colons
                     level = 0
-                    for char in stripped:
-                        if char == '*':
+                    i = 0
+                    while i < len(stripped):
+                        if stripped[i] == '*':
                             level += 1
+                            i += 1
+                        elif stripped[i] == ':':
+                            # Colon adds one more level (child relationship)
+                            level += 1
+                            i += 1
+                        elif stripped[i] == ' ':
+                            # Skip spaces
+                            i += 1
                         else:
                             break
-                    level = level - 1  # * = level 0, ** = level 1, etc.
+                    level = level - 1  # * = level 0, *: = level 1, ** = level 1, etc.
                     
-                    # Find {{desc}} template in this line
+                    # Find {{desc}} or {{desctree}} template in this line
                     import re
-                    desc_match = re.search(r'\{\{desc\|(.+)\}\}', line)
+                    desc_match = re.search(r'\{\{(desc|desctree)\|(.+)\}\}', line)
                     if desc_match:
-                        # Parse the desc template - need to handle nested templates carefully
-                        template_content = desc_match.group(1)
+                        template_type = desc_match.group(1)  # 'desc' or 'desctree'
+                        # Parse the desc/desctree template - need to handle nested templates carefully
+                        template_content = desc_match.group(2)
                         
                         # Split by | but respect nested templates {{...}}
                         parts = []
@@ -356,13 +367,11 @@ def parse_pos_section(section_code, pos_name: str, subsection_level: int) -> Dic
                             parts.append(current_part.strip())
                         
                         if len(parts) >= 1:
-                            lang = parts[0]
-                            
-                            # Collect all word forms (positional parameters after language)
-                            words = []
+                            # First, separate named parameters from positional parameters
+                            positional = []
                             named_params = {}
                             
-                            for part in parts[1:]:
+                            for part in parts:
                                 # Check if this is a named parameter
                                 if '=' in part:
                                     # Make sure the = isn't inside a nested template
@@ -374,7 +383,20 @@ def parse_pos_section(section_code, pos_name: str, subsection_level: int) -> Dic
                                         named_params[key.strip()] = val.strip()
                                         continue
                                 
-                                # Positional parameter - skip if it's entirely a template
+                                # This is a positional parameter
+                                positional.append(part)
+                            
+                            # Now extract language from first positional parameter
+                            if len(positional) < 1:
+                                continue  # Skip if no positional parameters at all
+                            
+                            lang = positional[0]
+                            
+                            # Collect all word forms (remaining positional parameters after language)
+                            words = []
+                            
+                            for part in positional[1:]:
+                                # Skip if it's entirely a template
                                 if part.startswith('{{') and part.endswith('}}'):
                                     continue
                                 
@@ -383,7 +405,37 @@ def parse_pos_section(section_code, pos_name: str, subsection_level: int) -> Dic
                                 if word:
                                     words.append(word)
                             
-                            # If no words found, check for 'tr' (transliteration) parameter
+                            # If words contain only numeric placeholders or codes (like "665"),
+                            # prefer alt* parameters instead
+                            if words and all(w.isdigit() or len(w) < 3 for w in words):
+                                # Check if we have better alternatives in alt* params
+                                alt_words = []
+                                for i in range(1, 10):
+                                    alt_key = f'alt{i}'
+                                    if alt_key in named_params:
+                                        alt_value = named_params[alt_key]
+                                        # Remove prefixes like "-" (diacritical variants)
+                                        word = alt_value.lstrip('-').strip()
+                                        if word and word not in alt_words:
+                                            alt_words.append(word)
+                                
+                                # If we found good alternatives, use them instead
+                                if alt_words:
+                                    words = alt_words
+                            
+                            # If no words found, check for 'alt*' (alternative forms) parameters
+                            if not words:
+                                # Look for alt1, alt2, alt3, etc.
+                                for i in range(1, 10):
+                                    alt_key = f'alt{i}'
+                                    if alt_key in named_params:
+                                        alt_value = named_params[alt_key]
+                                        # Remove prefixes like "-" (diacritical variants)
+                                        word = alt_value.lstrip('-').strip()
+                                        if word and word not in words:
+                                            words.append(word)
+                            
+                            # If still no words found, check for 'tr' (transliteration) parameter
                             if not words and 'tr' in named_params:
                                 tr_value = named_params['tr']
                                 # Extract word from {{l|lang|word}} template if present
@@ -393,13 +445,58 @@ def parse_pos_section(section_code, pos_name: str, subsection_level: int) -> Dic
                                 else:
                                     words.append(tr_value.strip())
                             
+                            # Check if this is a language-only marker (like {{desc|akk|-|bor=1}})
+                            if not words and '-' in positional:
+                                # Determine edge type from named parameters
+                                edge_type = 'inherited'  # default
+                                if 'bor' in named_params:
+                                    edge_type = 'borrowed'
+                                elif 'calque' in named_params:
+                                    edge_type = 'calque'
+                                elif 'der' in named_params:
+                                    edge_type = 'derived'
+                                
+                                # This is a language marker for children descendants
+                                desc_entry = {
+                                    'language': lang,
+                                    'word': None,  # No specific word
+                                    'level': level,
+                                    'template_type': template_type,
+                                    'edge_type': edge_type,
+                                    'params': named_params if named_params else None,
+                                    'children': [],
+                                    'is_language_marker': True
+                                }
+                                
+                                parent_stack_copy = parent_stack[:level]
+                                
+                                if level == 0:
+                                    descendants.append(desc_entry)
+                                    parent_stack = [desc_entry]
+                                else:
+                                    if parent_stack_copy:
+                                        parent_stack_copy[-1]['children'].append(desc_entry)
+                                        parent_stack = parent_stack_copy + [desc_entry]
+                            
                             # Create a descendant entry for EACH word form
-                            # (Multiple forms in one {{desc}} are dialectal variants)
+                            # (Multiple forms in one {{desc}} or {{desctree}} are dialectal variants)
                             for word in words:
+                                # Determine edge type from named parameters
+                                edge_type = 'inherited'  # default
+                                if 'bor' in named_params:
+                                    edge_type = 'borrowed'
+                                elif 'calque' in named_params:
+                                    edge_type = 'calque'
+                                elif 'der' in named_params:
+                                    edge_type = 'derived'
+                                
                                 desc_entry = {
                                     'language': lang,
                                     'word': word,
                                     'level': level,
+                                    'template_type': template_type,  # 'desc' or 'desctree'
+                                    'edge_type': edge_type,  # inherited, borrowed, calque, derived
+                                    'params': named_params if named_params else None,
                                     'children': []
                                 }
                                 

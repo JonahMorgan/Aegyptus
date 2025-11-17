@@ -375,35 +375,40 @@ class EgocentricLemmaNetworkBuilder:
         Each network contains the main form + alternative forms.
         """
         networks = []
+        debug_count = 0
         
         for lemma_form, entry in egy_data.items():
             etymologies = entry.get('etymologies', [])
             
             for etym_idx, etymology in enumerate(etymologies):
-                # Create network for this etymology
-                network = {
-                    'network_id': self.get_new_network_id(),
-                    'root_lemma': lemma_form,
-                    'root_language': 'egy',
-                    'root_etymology_index': etym_idx,
-                    'nodes': [],
-                    'edges': []
-                }
-                
-                # Track main nodes for each POS to create VARIANT edges between them
-                pos_main_nodes = []
-                
-                # Track which descendants/derived terms we've added to avoid duplicates
-                added_descendants = set()  # Track (language, form) pairs
-                added_derived_terms = set()  # Track Egyptian derived forms
-                
                 # Process each definition in this etymology
+                # Create ONE network per definition (POS/meaning), not one per etymology
                 for defn_idx, defn in enumerate(etymology.get('definitions', [])):
+                    # Create network for THIS DEFINITION
+                    network = {
+                        'network_id': self.get_new_network_id(),
+                        'root_lemma': lemma_form,
+                        'root_language': 'egy',
+                        'root_etymology_index': etym_idx,
+                        'root_definition_index': defn_idx,
+                        'nodes': [],
+                        'edges': []
+                    }
+                    
+                    # Track main nodes for each POS to create VARIANT edges between them
+                    pos_main_nodes = []
+                    
+                    # Track which descendants/derived terms we've added to avoid duplicates
+                    added_descendants = set()  # Track (language, form) pairs
+                    added_derived_terms = set()  # Track Egyptian derived forms
                     pos = defn.get('part_of_speech', 'unknown')
                     meanings = defn.get('definitions', [])
                     
                     # Skip if this is "alternative form of" another word
                     if self.is_alternative_form_of(meanings):
+                        debug_count += 1
+                        if lemma_form == 'twr':
+                            print(f"   DEBUG twr: Skipping etym {etym_idx} def {defn_idx} because 'alternative form of'")
                         continue
                     
                     # Extract hieroglyphs from definition or parameters
@@ -989,11 +994,15 @@ class EgocentricLemmaNetworkBuilder:
                             notes=f'Part-of-speech variant: {pos1} ↔ {pos2}'
                         )
                         network['edges'].append(edge)
-                
-                # Only add network if it has nodes
-                if network['nodes']:
-                    networks.append(network)
+                    
+                    # Only add network if it has nodes (inside defn loop)
+                    if network['nodes']:
+                        networks.append(network)
+                        if lemma_form == 'twr':
+                            print(f"   DEBUG twr: Created network etym {etym_idx} def {defn_idx}, nodes={len(network['nodes'])}")
         
+        print(f"   DEBUG: Filtered as 'alternative form of': {debug_count} definitions")
+        print(f"   DEBUG: Created networks: {len(networks)}")
         return networks
     
     def is_alternative_form_of(self, meanings):

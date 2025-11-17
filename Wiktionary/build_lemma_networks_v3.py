@@ -730,7 +730,15 @@ class EgocentricLemmaNetworkBuilder:
         return total_added
 
     def add_coptic_descendants(self, egy_networks, egy_data, cop_data):
-        """Add Coptic descendants to Egyptian networks"""
+        """Add Coptic descendants to Egyptian networks
+        
+        Handles both hierarchical (with level/children) and flat descendant structures.
+        For desctree templates, attaches them to Coptic parents instead of Egyptian root.
+        
+        Supports two data structures:
+        1. Old: {'sections': {'Descendants': [...]}}
+        2. New: {'etymologies': [{'definitions': [{'descendants': [...]}]}]}
+        """
         total_added = 0
 
         for network in egy_networks:
@@ -738,60 +746,164 @@ class EgocentricLemmaNetworkBuilder:
 
             # Find descendants in Egyptian data
             if root_form in egy_data:
-                sections = egy_data[root_form].get('sections', {})
-
+                entry = egy_data[root_form]
+                
+                # Collect all descendants from different possible locations
+                all_descendants = []
+                
+                # Check old structure: sections -> Descendants
+                sections = entry.get('sections', {})
                 for section_name, section_data in sections.items():
                     if 'descendant' in section_name.lower():
-                        descendants = section_data
-                        if isinstance(descendants, list):
-                            for desc in descendants:
-                                if isinstance(desc, dict):
-                                    lang = desc.get('language', '')
-                                    if 'cop' in lang:
-                                        cop_form = desc.get('word', desc.get('form', ''))
-                                        if cop_form:
-                                            if cop_form in cop_data:
-                                                # Add Coptic node from dataset
-                                                cop_entry = cop_data[cop_form]
-                                                cop_sections = cop_entry.get('sections', {})
+                        if isinstance(section_data, list):
+                            all_descendants.extend(section_data)
+                
+                # Check new structure: etymologies -> definitions -> descendants
+                etymologies = entry.get('etymologies', [])
+                for etym in etymologies:
+                    definitions = etym.get('definitions', [])
+                    for defn in definitions:
+                        descendants = defn.get('descendants', [])
+                        if descendants:
+                            all_descendants.extend(descendants)
+                
+                if all_descendants:
+                    # First pass: add Coptic descendants and track them
+                    coptic_nodes = {}  # form -> node
 
-                                                cop_pos = 'unknown'
-                                                cop_meanings = []
-                                                cop_hieroglyphs = None
+                    for desc in all_descendants:
+                        if isinstance(desc, dict):
+                            lang = desc.get('language', '')
+                            
+                            # Check if this is a Coptic descendant
+                            if 'cop' in lang:
+                                cop_form = desc.get('word', desc.get('form', ''))
+                                if cop_form and cop_form != '-':
+                                    # Add Coptic node from dataset
+                                    if cop_form in cop_data:
+                                        cop_entry = cop_data[cop_form]
+                                        cop_sections = cop_entry.get('sections', {})
 
-                                                for sec_name, sec_data in cop_sections.items():
-                                                    if sec_name.lower() in ['noun', 'verb', 'adjective', 'adverb']:
-                                                        cop_pos = sec_name.lower()
-                                                        cop_meanings = sec_data.get('definitions', [])
-                                                        cop_hieroglyphs = sec_data.get('hieroglyphs')
-                                                        break
-                                            else:
-                                                # Placeholder for missing Coptic entry
-                                                cop_pos = 'unknown'
-                                                cop_meanings = [f'Placeholder entry for {cop_form}']
-                                                cop_hieroglyphs = None
+                                        cop_pos = 'unknown'
+                                        cop_meanings = []
+                                        cop_hieroglyphs = None
 
-                                            cop_node = self.create_node(
-                                                language=lang,
-                                                form=cop_form,
-                                                pos=cop_pos,
-                                                meanings=cop_meanings,
-                                                hieroglyphs=cop_hieroglyphs
+                                        for sec_name, sec_data in cop_sections.items():
+                                            if sec_name.lower() in ['noun', 'verb', 'adjective', 'adverb']:
+                                                cop_pos = sec_name.lower()
+                                                cop_meanings = sec_data.get('definitions', [])
+                                                cop_hieroglyphs = sec_data.get('hieroglyphs')
+                                                break
+                                    else:
+                                        cop_pos = 'unknown'
+                                        cop_meanings = [f'Placeholder entry for {cop_form}']
+                                        cop_hieroglyphs = None
+
+                                    cop_node = self.create_node(
+                                        language=lang,
+                                        form=cop_form,
+                                        pos=cop_pos,
+                                        meanings=cop_meanings,
+                                        hieroglyphs=cop_hieroglyphs
+                                    )
+
+                                    network['nodes'].append(cop_node)
+                                    coptic_nodes[cop_form] = cop_node
+                                    total_added += 1
+
+                                    # Add edge from Egyptian to Coptic
+                                    for egy_node in network['nodes']:
+                                        if egy_node['language'] == 'egy' and egy_node['form'] == root_form:
+                                            network['edges'].append({
+                                                'source': egy_node['node_id'],
+                                                'target': cop_node['node_id'],
+                                                'type': 'INHERITED',
+                                                'relation': 'descends_to'
+                                            })
+                                            break
+
+                    # Second pass: add descendants of Coptic or non-Coptic descendants
+                    # These should be attached to Coptic parents if they exist
+                    for desc in all_descendants:
+                        if isinstance(desc, dict):
+                            lang = desc.get('language', '')
+                            template_type = desc.get('template_type', 'desc')
+                            
+                            # Skip Coptic descendants (already added in first pass)
+                            if 'cop' in lang:
+                                continue
+                            
+                            # Skip language markers (they don't represent actual descendants)
+                            if desc.get('is_language_marker'):
+                                continue
+                            
+                            child_form = desc.get('word', desc.get('form', ''))
+                            
+                            # Skip placeholders
+                            if not child_form or child_form == '-':
+                                continue
+                            
+                            # For desctree templates or other non-Coptic descendants,
+                            # attach to Coptic parent if one exists, otherwise to Egyptian root
+                            parent_node = None
+                            
+                            # Try to find a Coptic parent
+                            if coptic_nodes:
+                                # Use the first Coptic parent (in jmn-htp there's only one)
+                                parent_node = next(iter(coptic_nodes.values()))
+                            else:
+                                # No Coptic parent, attach to Egyptian root
+                                for node in network['nodes']:
+                                    if node['language'] == 'egy' and node['form'] == root_form:
+                                        parent_node = node
+                                        break
+                            
+                            if parent_node:
+                                # Create node for this descendant
+                                child_node = self.create_node(
+                                    language=lang,
+                                    form=child_form,
+                                    pos='unknown',
+                                    meanings=[f'Descendant of {parent_node["form"]}'],
+                                    hieroglyphs=None
+                                )
+
+                                network['nodes'].append(child_node)
+                                total_added += 1
+
+                                # Add edge from parent to child
+                                network['edges'].append({
+                                    'source': parent_node['node_id'],
+                                    'target': child_node['node_id'],
+                                    'type': 'INHERITED',
+                                    'relation': 'descends_to'
+                                })
+
+                                # Handle children of this descendant (hierarchical descendants)
+                                if desc.get('children'):
+                                    for grandchild_desc in desc['children']:
+                                        grandchild_lang = grandchild_desc.get('language', '')
+                                        grandchild_form = grandchild_desc.get('word', grandchild_desc.get('form', ''))
+
+                                        if grandchild_form and grandchild_form != '-':
+                                            grandchild_node = self.create_node(
+                                                language=grandchild_lang,
+                                                form=grandchild_form,
+                                                pos='unknown',
+                                                meanings=[f'Descendant of {child_form}'],
+                                                hieroglyphs=None
                                             )
 
-                                            network['nodes'].append(cop_node)
+                                            network['nodes'].append(grandchild_node)
                                             total_added += 1
 
-                                            # Add INHERITED edge from Egyptian to Coptic
-                                            for egy_node in network['nodes']:
-                                                if egy_node['language'] == 'egy' and egy_node['form'] == root_form:
-                                                    network['edges'].append({
-                                                        'source': egy_node['node_id'],
-                                                        'target': cop_node['node_id'],
-                                                        'type': 'INHERITED',
-                                                        'relation': 'descends_to'
-                                                    })
-                                                    break
+                                            # Add edge from child to grandchild
+                                            network['edges'].append({
+                                                'source': child_node['node_id'],
+                                                'target': grandchild_node['node_id'],
+                                                'type': 'INHERITED',
+                                                'relation': 'descends_to'
+                                            })
 
         return total_added
 

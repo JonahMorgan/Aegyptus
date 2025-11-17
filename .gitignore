@@ -1,5 +1,6 @@
 Wiktionary/debug
 Wiktionary/visualize2
+Wiktionary/jonahmorgan.github.io
 
 # Python virtual environments
 venv/
@@ -22,6 +23,8 @@ __pycache__/
 # OS files
 .DS_Store
 Thumbs.db
+
+Etymological Dictionary of Egyptian/debug
 
 # Generated data files (optional - uncomment if you don't want to track these)
 # Data Collection and Management/Wiktionary/*.json

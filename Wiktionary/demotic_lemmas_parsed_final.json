@@ -1,0 +1,3438 @@
+{
+  "jby": {
+    "pronunciations": [],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy||<hiero>L2-t-W24:Z2</hiero>|tr={{m|egy|bjt}}|honey}}.</div>",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "honey"
+            ],
+            "descendants": [
+              {
+                "language": "cop",
+                "word": "ⲉⲃⲓⲱ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|26}}\n* {{R:egx-dem:CDD|Ꞽ (11.1)|80–81}}"
+  },
+  "jmn-jr-dj-s": {
+    "pronunciations": [],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==",
+        "definitions": [
+          {
+            "part_of_speech": "proper noun",
+            "parameters": "",
+            "definitions": []
+          }
+        ],
+        "etymology_number": null
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egy:Beckerath|279}}\n* {{R:cop:Spiegelberg|SDC|page=93}}"
+  },
+  "jrj-ꜥꜣ": {
+    "pronunciations": [],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\nFrom {{inh|egx-dem|egy|jrj-ꜥꜣ||doorkeeper}}.",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "doorkeeper",
+              "pastophorus"
+            ],
+            "descendants": [
+              {
+                "language": "grc",
+                "word": "παστοφόρος",
+                "level": 0,
+                "template_type": "desc",
+                "params": {
+                  "calque": "1"
+                },
+                "children": [
+                  {
+                    "language": "la",
+                    "word": "pastophorus",
+                    "level": 1,
+                    "template_type": "desc",
+                    "params": {
+                      "bor": "1"
+                    },
+                    "children": [
+                      {
+                        "language": "en",
+                        "word": "pastophorus",
+                        "level": 2,
+                        "template_type": "desc",
+                        "params": {
+                          "bor": "1"
+                        },
+                        "children": []
+                      },
+                      {
+                        "language": "en",
+                        "word": "pastophore",
+                        "level": 2,
+                        "template_type": "desc",
+                        "params": {
+                          "bor": "1"
+                        },
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "jrj-ꜥꜣ",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egy:TLA|ı͗rj-ꜥꜣ|dm38}}\n* Friedhelm Hoffmann and Joachim Friedrich Quack (2014), “[https://archiv.ub.uni-heidelberg.de/propylaeumdok/4924/1/Hoffmann_Quack_Pastophoros_2014.pdf Pastophoros]” in A. M. Dodson, J. J. Johnston, W. Monkhouse (Hg.), ''A good scribe and an exceedingly wise man: Studies in Honour of W. J. Tait'' (GHP Egyptology 21), London, pages 127—155."
+  },
+  "jrt": {
+    "pronunciations": [
+      "1=egx-dem|2=/ʔəˈɾoːtə/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy||<hiero>i-r:T:t-W20</hiero>|tr={{m|egy|jrṯt}}|milk}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/ʔəˈɾoːtə/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "milk"
+            ],
+            "descendants": [
+              {
+                "language": "cop-boh",
+                "word": "ⲉⲣⲱϯ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲉⲣⲱⲧⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": ""
+  },
+  "jṱ": {
+    "pronunciations": [
+      "1=egx-dem|2=/joːt/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|jt|<hiero>i-t:f-A1</hiero>|tr={{m|egy|jt}}|father}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/joːt/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "father"
+            ],
+            "descendants": [
+              {
+                "language": "cop-boh",
+                "word": "ⲓⲱⲧ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲉⲓⲱⲧ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "jt",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|45–46}}"
+  },
+  "eresgšyngꜥl": {
+    "pronunciations": [],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\nUltimately from {{der|egx-dem|sux|𒀭𒊩𒌆𒆠𒃲}}.",
+        "definitions": [
+          {
+            "part_of_speech": "proper noun",
+            "parameters": "",
+            "definitions": [
+              "Ereshkigal"
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "sux",
+            "form": "𒀭𒊩𒌆𒆠𒃲",
+            "type": "der"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* Griffith, Francis Llewellyn and Thompson, Herbert (1904) ''The Demotic Magical Papyrus of London and Leiden'', volume I, pages 60–61; volume II, plate VII; volume III, page 118\n\n{{C|egx-dem|Mesopotamian deities}}"
+  },
+  "ꜥꜥn": {
+    "pronunciations": [
+      "1=egx-dem|2=/ʔaˈʕen/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|jꜥn|<hiero>i-a:n-E32</hiero>|tr={{l|egy|jꜥn}}|baboon}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/ʔaˈʕen/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "baboon"
+            ],
+            "descendants": [
+              {
+                "language": "cop-boh",
+                "word": "ⲉⲛ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-old",
+                "word": "ⲁⲛⲁ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲏⲛ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "jꜥn",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|56}}"
+  },
+  "ꜥf": {
+    "pronunciations": [
+      "1=egx-dem|2=/ʕef/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|ꜥff|<hiero>a:f:f-L3</hiero>|tr={{l|egy|ꜥff}}|fly}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/ʕef/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "fly "
+            ],
+            "descendants": [
+              {
+                "language": "cop",
+                "word": "ⲁϥ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ꜥff",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": ""
+  },
+  "ꜥ.wy": {
+    "pronunciations": [],
+    "etymologies": [
+      {
+        "etymology_text": "===Etymology 1===\n<div>From Late Period {{inh|egx-dem|egy|ꜥ|<hiero>a:Z1-pr</hiero>|tr={{m|egy|ꜥ}}|house}}, from earlier {{inh|egx-dem|egy|ꜥt|<hiero>a:t*pr</hiero>|tr={{m|egy|ꜥt}}|room}} (or else a formation from the same root).</div>",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "house",
+              "household, family",
+              "room",
+              "place, district, quarter",
+              "temple",
+              "holder, container",
+              "[astrology] house, one of the twelve equal divisions of the ecliptic through which celestial bodies pass"
+            ],
+            "descendants": [
+              {
+                "language": "cop-akh",
+                "word": "ⲏⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-akh",
+                "word": "ⲏⲉⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-boh",
+                "word": "ⲏⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲏⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-lyc",
+                "word": "ⲏⲉⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-old",
+                "word": "ⲏⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲏⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲏⲉⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": 1,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ꜥ",
+            "type": "inh"
+          },
+          {
+            "language": "egy",
+            "form": "ꜥt",
+            "type": "inh"
+          }
+        ]
+      },
+      {
+        "etymology_text": "===Etymology 2===\n<div>From {{inh|egx-dem|egy|ꜥ|<hiero>a:Z1</hiero>|tr={{m|egy|ꜥ}}|arm, part, portion, pair, region}}.</div>",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "both arms or hands, the arms collectively",
+              "arm, hand",
+              "item, portion, piece",
+              "pair"
+            ],
+            "descendants": [
+              {
+                "language": "cop-boh",
+                "word": "ⲏⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲏⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": 2,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ꜥ",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:CDD|Ꜥ (03.1)|5–18}}\n* {{R:egx-dem:DG|52–53}}\n* {{R:cop:Černý|p=41–42}}\n* {{R:cop:Vycichl|p=52–53}}"
+  },
+  "ꜥ.t-sbꜣ": {
+    "pronunciations": [],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|ꜥt-sbꜣw|<hiero>a:t*pr-s-b-N14-A-A24</hiero>|tr={{l|egy|ꜥt-sbꜣw}}|school}}, from {{m|egy|ꜥt||room}} + {{m|egy|sbꜣw||teaching}}.</div>",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "school"
+            ],
+            "descendants": [
+              {
+                "language": "cop-boh",
+                "word": "ⲁⲛⲍⲏⲃ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲁⲛⲥⲏⲃⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ꜥt-sbꜣw",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|51, 420}}"
+  },
+  "yr": {
+    "pronunciations": [
+      "1=egx-dem|2=/joʔɾ/|3=/joɾ/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\nFrom {{inh|egx-dem|egy|jtrw|<hiero>i-t*:r-w-mw</hiero>|tr={{m|egy|jtrw}}|river}}.\n\n===Pronunciation===\n* {{IPA|egx-dem|/joʔɾ/|/joɾ/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "river, canal"
+            ],
+            "derived_terms": [
+              "yr-ꜥꜣ"
+            ],
+            "descendants": [
+              {
+                "language": "cop-boh",
+                "word": "ⲓⲟⲣ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲉⲓⲟⲟⲣ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "jtrw",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|50}}\n* {{R:egx-dem:CDD|Y (01.1)|11}}"
+  },
+  "yr-ꜥꜣ": {
+    "pronunciations": [
+      "1=egx-dem|2=/jəɾəˈʕoʔ/|3=/jəɾəˈʕaʔ/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\nFrom {{inh|egx-dem|egy|jtrw ꜥꜣ}}. {{surf|egx-dem|yr|t1=river, canal|ꜥꜣ|t2=great}}.\n\n===Pronunciation===\n* {{IPA|egx-dem|/jəɾəˈʕoʔ/|/jəɾəˈʕaʔ/}}",
+        "definitions": [
+          {
+            "part_of_speech": "proper noun",
+            "parameters": "",
+            "definitions": [
+              "the Nile"
+            ],
+            "descendants": [
+              {
+                "language": "cop-akh",
+                "word": "ⲓⲉⲣⲟ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-boh",
+                "word": "ⲓⲁⲣⲟ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲓⲉⲣⲁ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲉⲓⲉⲣⲟ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲓⲉⲣⲟ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "peo",
+                "word": "𐎱𐎡𐎼𐎠𐎺",
+                "level": 0,
+                "template_type": "desc",
+                "params": {
+                  "tr": "Pirāva",
+                  "bor": "1"
+                },
+                "children": []
+              },
+              {
+                "language": "elx-ach",
+                "word": "[<sup>h</sup>Pi-ra]-ma",
+                "level": 0,
+                "template_type": "desc",
+                "params": {
+                  "tr": "[<sup>h</sup>Pi-ra]-ma",
+                  "bor": "1"
+                },
+                "children": []
+              },
+              {
+                "language": "akk-nas",
+                "word": "𒅀𒊒𒀪𒌑",
+                "level": 0,
+                "template_type": "desc",
+                "params": {
+                  "tr": "ia-ru-ʾu-u₂",
+                  "bor": "1}}<ref>{{cite-web",
+                  "title": "Iaruʾu",
+                  "titleurl": "http://oracc.org/rinap/qpn-x-waters?Iaruʾu",
+                  "url": "http://oracc.org/rinap/",
+                  "site": "The Royal Inscriptions of the Neo-Assyrian Period"
+                },
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "jtrw ꜥꜣ",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "<references/>\n* {{R:egx-dem:DG|50}}\n* {{R:egx-dem:CDD|Y (01.1)|12}}\n* Mahlich, Elena. [https://www.academia.edu/44688252/The_Appellation_of_the_River_Nile_in_Achaemenid_Texts \"The Appellation of the River Nile in Achaemenid Texts\"]. ''Egyptian Loanwords in Languages of the Ancient Near East''. Ménant (1897), 131-157."
+  },
+  "wynn": {
+    "pronunciations": [
+      "1=egx-dem|2=*/wa(j).jaˈniːn/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\nA metathesized borrowing from the {{der|egx-dem|arc-imp|-}} gentilic plural {{m|arc-imp|𐡉𐡅𐡍𐡉𐡍|tr=ywnyn|ts=*yawnāyīn|t=Greeks}}, ultimately derived from {{der|egx-dem|grc|Ἴων|Ἰᾱ́ϝων|Ionian}}. Compare {{cog|arc-jla|יַוְנָאֵי|יַוְנָאִין|tr=yawnāʾīn|t=Greeks}}.\n\n===Pronunciation===\n* {{IPA|egx-dem|*/wa(j).jaˈniːn/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "Greek "
+            ],
+            "descendants": [
+              {
+                "language": "cop-akh",
+                "word": "ⲟⲩⲁⲉⲓⲁⲛⲓⲛ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-boh",
+                "word": "ⲟⲩⲉⲓⲛⲓⲛ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲟⲩⲁⲓⲛⲓⲛ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "arc-imp",
+            "form": "-",
+            "type": "der"
+          },
+          {
+            "language": "grc",
+            "form": "Ἴων",
+            "type": "der"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|80}}\n* {{R:cop:Černý|213}}\n* Brugsch, F. Chabas and Eug. Revillout (1911) ''Revue Égyptologique publiée sous la direction de MM.''  [https://archive.org/stream/revuegyptologi13pari#page/106/mode/2up Vol. XIII, page 107], Paris"
+  },
+  "wpṱ": {
+    "pronunciations": [
+      "1=egx-dem|2=/wepʰˈweːt/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|wpwtj|<hiero>wp:p-w-t:y-D54-A1</hiero>|tr={{m|egy|wpwtj}}}}. Compare {{cog|xmr|𐦠𐦧𐦣𐦵|ts=aput(ə)}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/wepʰˈweːt/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "messenger"
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "wpwtj",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|85}}\n* {{R:egx-dem:CDD|W (09.1)|77}}"
+  },
+  "wrṱ": {
+    "pronunciations": [
+      "1=egx-dem|2=/weɾt/|3=/waɾt/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\nBorrowed from {{bor|egx-dem|sem}} (compare {{cog|arc|𐡅𐡀𐡓𐡃𐡀|tr=warda}}, {{cog|ar|وردة|tr=warda}}), ultimately from {{der|egx-dem|ira-old}}.\n\n===Pronunciation===\n* {{IPA|egx-dem|/weɾt/|/waɾt/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "rose "
+            ],
+            "descendants": [
+              {
+                "language": "cop",
+                "word": "ⲟⲩⲣⲧ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          },
+          {
+            "part_of_speech": "proper noun",
+            "parameters": "",
+            "definitions": []
+          }
+        ],
+        "etymology_number": null
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG}}\n* {{R:cop:Černý}}"
+  },
+  "wsr-mꜣꜥ.t-rꜥ": {
+    "pronunciations": [
+      "1=egx-dem|2=/ʔusmaʕˈɾeːʕ/|a=[[w:Demotic (Egyptian)|Early Demotic]], c. 650 {{BCE}}",
+      "1=egx-dem|2=/ʔəsmaɾˈɾeː/|3=~|4=/ʔəsmanˈɾeː/|a=[[w:Demotic (Egyptian)|Middle Demotic]], c. 300 {{BCE}}"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Alternative forms===\n* {{alter|egx-dem|smn-rꜥ|ns-mn-rꜥ|wsy-mn-rꜥ}}\n\n===Etymology===\n{{inh+|egx-dem|egy-lat|wsr-mꜣꜥt-rꜥ}}. See there for more.\n\n===Pronunciation===\n* {{IPA|egx-dem|/ʔusmaʕˈɾeːʕ/|a=[[w:Demotic (Egyptian)|Early Demotic]], c. 650 {{BCE}}}}\n* {{IPA|egx-dem|/ʔəsmaɾˈɾeː/|~|/ʔəsmanˈɾeː/|a=[[w:Demotic (Egyptian)|Middle Demotic]], c. 300 {{BCE}}}}",
+        "definitions": [
+          {
+            "part_of_speech": "proper noun",
+            "parameters": "",
+            "definitions": [],
+            "descendants": [
+              {
+                "language": "grc-koi",
+                "word": "Ὀσυμανδύας",
+                "level": 0,
+                "template_type": "desc",
+                "params": {
+                  "q1": "semi-learned",
+                  "bor": "1"
+                },
+                "children": [
+                  {
+                    "language": "en",
+                    "word": "Ozymandias",
+                    "level": 1,
+                    "template_type": "desc",
+                    "params": {
+                      "bor": "1"
+                    },
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "language": "grc-koi",
+                "word": "Ζμανρής",
+                "level": 0,
+                "template_type": "desc",
+                "params": {
+                  "q1": "semi-learned",
+                  "bor": "1"
+                },
+                "children": []
+              },
+              {
+                "language": "grc-koi",
+                "word": "Σμανρής",
+                "level": 0,
+                "template_type": "desc",
+                "params": {
+                  "q1": "semi-learned",
+                  "bor": "1"
+                },
+                "children": []
+              }
+            ],
+            "alternative_forms": [
+              {
+                "form": "smn-rꜥ"
+              },
+              {
+                "form": "ns-mn-rꜥ"
+              },
+              {
+                "form": "wsy-mn-rꜥ"
+              }
+            ]
+          }
+        ],
+        "etymology_number": null
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": ""
+  },
+  "bk": {
+    "pronunciations": [
+      "1=egx-dem|2=/ˈβoːʔək/|q1=Early Demotic",
+      "1=egx-dem|2=/βoːk/|q1=Late Demotic"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "===Etymology 1===\n<div>From {{inh|egx-dem|egy|bꜣk|<hiero>bA-k:H_SPACE-A1</hiero>|tr={{m|egy|bꜣk}}|servant}}.</div>\n\n====Pronunciation====\n* {{IPA|egx-dem|/ˈβoːʔək/|q1=Early Demotic}}\n* {{IPA|egx-dem|/βoːk/|q1=Late Demotic}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "servant"
+            ],
+            "descendants": [
+              {
+                "language": "cop-boh",
+                "word": "ⲃⲱⲕ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": 1,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "bꜣk",
+            "type": "inh"
+          }
+        ]
+      },
+      {
+        "etymology_text": "===Etymology 2===\n<div>From {{inh|egx-dem|egy|bꜣkw|<hiero>bA-k:H_SPACE-w-D40:Z2</hiero>|tr={{m|egy|bꜣkw}}|work, taxes, tribute}}.</div>",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "work"
+            ]
+          }
+        ],
+        "etymology_number": 2,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "bꜣkw",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|124}}\n* {{R:egx-dem:Thus|9}}"
+  },
+  "p": {
+    "pronunciations": [],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "Alternative form of p.t"
+            ],
+            "alternative_forms_from_definitions": [
+              {
+                "form": "p.t"
+              }
+            ]
+          }
+        ],
+        "etymology_number": null
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": ""
+  },
+  "pr": {
+    "pronunciations": [
+      "1=egx-dem|2=/pʰoːɾ/",
+      "1=egx-dem|2=/pəɾ/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|pr|<hiero>pr:Z1</hiero>|tr={{m|egy|pr}}|house}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/pʰoːɾ/}} {{q|stressed}}, {{IPA|egx-dem|/pəɾ/}} {{q|unstressed}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "temple",
+              "house",
+              "palace"
+            ],
+            "usage_notes": "This word is almost entirely restricted to compounds. Contrary to earlier Egyptian, the ordinary word for house in Demotic is ꜥ.wy.",
+            "descendants": [
+              {
+                "language": "cop-sah",
+                "word": "ⲡⲉⲣ-",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "-ⲡⲱⲣ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "pr",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|132}}\n* {{R:egx-dem:Thus|9}}\n* {{R:cop:Černý|127}}"
+  },
+  "pr-ꜥꜣ": {
+    "pronunciations": [
+      "1=egx-dem|2=/pəɾˈʕoʔ/|3=/pəɾˈʕaʔ/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|pr-ꜥꜣ|<hiero>pr:aA</hiero>|tr={{l|egy|pr-ꜥꜣ}}|pharaoh}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/pəɾˈʕoʔ/|/pəɾˈʕaʔ/}} {{q|depending on dialect}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "king, pharaoh"
+            ],
+            "descendants": [
+              {
+                "language": "cop-akh",
+                "word": "ⲣⲣⲟ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-boh",
+                "word": "ⲟⲩⲣⲟ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-boh",
+                "word": "ⲡⲟⲩⲣⲟ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲣⲣⲁ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲉⲣⲣⲁ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲓⲣⲣⲁ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲉⲣⲁ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-lyc",
+                "word": "ⲣⲣⲟ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-old",
+                "word": "ⲉⲣⲟ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲣⲣⲟ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲉⲣⲟ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲟⲩⲣⲟ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "pr-ꜥꜣ",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": ""
+  },
+  "p.t": {
+    "pronunciations": [
+      "1=egx-dem|2=/pʰeʔ/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|pt|<hiero>p*t:N1</hiero>|tr={{l|egy|pt}}|sky}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/pʰeʔ/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "the sky, heavens"
+            ],
+            "descendants": [
+              {
+                "language": "cop",
+                "word": "ⲡⲉ}} {{q",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "Sahidic}}, {{l",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "cop",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "ⲫⲉ}} {{q",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "Bohairic}}, {{l",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "cop",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "ⲡⲏ}} {{q",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "Fayyumic",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "Akhmimic",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "pt",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": ""
+  },
+  "mꜣꜥ": {
+    "pronunciations": [
+      "1=egx-dem|2=/maʕ/",
+      "1=egx-dem|2=/ˈmuːʔəʕ/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "===Etymology 1===\n<div>{{unk|egx-dem}}. The once-popular derivation from {{cog|egy|bw|<hiero>b-w</hiero>|tr={{m|egy|bw}}|place, thing, -ness}} is untenable given the form of the Fayyumic descendant.<ref>{{R:cop:Černý|77}}</ref> A corresponding hieroglyphic Egyptian word {{m|egy|mꜣꜥ|<hiero>U2:a-N21-Z1:pr</hiero>|tr={{m|egy|mꜣꜥ}}|place}} is attested from the end of the Third Intermediate Period onward, especially in late temple inscriptions, with the earliest certain attestation being in Papyrus Brooklyn 47.218.84,<ref name=Meeks>Meeks, Dimitri (1994) “Étymologies coptes. Notes et remarques” in ''Coptology: Past, Present and Future: Studies in Honour of Professor Rodolphe Kasser'', Louvain: Orientalia Lovaniensia Analecta 61, page 203–204. Meeks dates the papyrus to the Third Intermediate Period in this article, but [https://www.trismegistos.org/hhp/detail.php?tm=111740 Trismegistos] and the [http://aaew.bbaw.de/tla/servlet/GetTextDetails?f=0&l=0&db=0&tc=19952 ''Thesaurus Linguae Aegyptiae''] place it in the reign of {{w|Psamtik I}}, citing his 2006 “Mythes et legendes du Delta d’après le papyrus 47.218.8” in ''Mémoires publiés par les membres de l’Institut français d’archéologie orientale du Caire'' 125, pages 458–491.</ref> but this is contemporaneous with the spread of early Demotic. Meeks proposes that another term {{m|egy|bpꜣt}} attested at the beginning of the Ramesside Period might be an early writing of the same word, but the absence of the final ayin is problematic.<ref name=Meeks /></div>\n\n====Pronunciation====\n* {{IPA|egx-dem|/maʕ/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "place",
+              "cenotaph"
+            ],
+            "descendants": [
+              {
+                "language": "cop-akh",
+                "word": "ⲙⲁ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-boh",
+                "word": "ⲙⲁ",
+                "level": 0,
+                "template_type": "desc",
+                "params": {
+                  "q3": "only with {{m|cop|ⲛⲓⲃⲉⲛ}}"
+                },
+                "children": []
+              },
+              {
+                "language": "cop-boh",
+                "word": "ⲙⲟⲩ",
+                "level": 0,
+                "template_type": "desc",
+                "params": {
+                  "q3": "only with {{m|cop|ⲛⲓⲃⲉⲛ}}"
+                },
+                "children": []
+              },
+              {
+                "language": "cop-boh",
+                "word": "ⲙⲁⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": {
+                  "q3": "only with {{m|cop|ⲛⲓⲃⲉⲛ}}"
+                },
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲙⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": {
+                  "q3": "before genitive {{m|cop|ⲛ-}}"
+                },
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲙⲟⲩ",
+                "level": 0,
+                "template_type": "desc",
+                "params": {
+                  "q3": "before genitive {{m|cop|ⲛ-}}"
+                },
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲙⲁ",
+                "level": 0,
+                "template_type": "desc",
+                "params": {
+                  "q3": "before genitive {{m|cop|ⲛ-}}"
+                },
+                "children": []
+              },
+              {
+                "language": "cop-lyc",
+                "word": "ⲙⲁ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲙⲁ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": 1
+      },
+      {
+        "etymology_text": "===Etymology 2===\n<div>From {{inh|egx-dem|egy|mꜣꜥ|<hiero>mA-mAa:a:Y1</hiero>|tr={{m|egy|mꜣꜥ}}|to direct, to be true or just}}.</div>\n\n====Pronunciation====\n* {{IPA|egx-dem|/ˈmuːʔəʕ/}}",
+        "definitions": [
+          {
+            "part_of_speech": "verb",
+            "parameters": "",
+            "definitions": [
+              "to be true",
+              "to be justified"
+            ],
+            "descendants": [
+              {
+                "language": "der=1",
+                "word": "cop-sah",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "der=1",
+                "word": "ⲧⲙⲁⲓⲟ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "der=1",
+                "word": "ⲧⲙⲁⲉⲓⲟ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": 2,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "mꜣꜥ",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|149}}\n* {{R:egx-dem:CDD|M (10.1)|21–29}}\n<references/>"
+  },
+  "mšꜥ": {
+    "pronunciations": [],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|mšꜥ|<hiero>G20-S:a-D54</hiero>|tr={{m|egy|mšꜥ}}|to march}}.</div>",
+        "definitions": [
+          {
+            "part_of_speech": "verb",
+            "parameters": "",
+            "definitions": [
+              "[intransitive] to go, to walk, to travel"
+            ],
+            "descendants": [
+              {
+                "language": "cop-boh",
+                "word": "ⲙⲟϣⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲙⲟⲟϣⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "mšꜥ",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:cop:Černý|96}}\n* {{R:egx-dem:Thus|59}}\n* {{R:egx-dem:CDD|M (10.1)|244}}"
+  },
+  "nb": {
+    "pronunciations": [
+      "1=egx-dem|2=/niːβ/",
+      "1=egx-dem|2=/neːβ/",
+      "1=egx-dem|2=/ˈneːβə/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "===Etymology 1===\n<div>From {{inh|egx-dem|egy|nb|<hiero>nb</hiero>|tr={{l|egy|nb}}|all, every}}.</div>\n\n====Pronunciation====\n* {{IPA|egx-dem|/niːβ/}}\n\n====Determiner====\n{{head|egx-dem|determiner|head={{t2i-Egyd|nb}}}}\n\n# {{lb|egx-dem|definite}} [[all]], [[every]]\n# {{lb|egx-dem|indefinite}} [[any]]\n\n=====Descendants=====\n* {{desc|cop-akh|ⲛⲓⲙ}}\n* {{desc|cop-boh|ⲛⲓⲃⲉⲛ}}\n* {{desc|cop-fay|ⲛⲓⲃⲓ}}\n* {{desc|cop-lyc|ⲛⲓⲙ}}\n* {{desc|cop-oxy|ⲛⲓⲙ}}\n* {{desc|cop-ppp|ⲛⲓⲃ}}\n* {{desc|cop-sah|ⲛⲓⲙ}}",
+        "definitions": [
+          {
+            "part_of_speech": "determiner",
+            "parameters": "",
+            "definitions": [
+              "[definite] all, every",
+              "[indefinite] any"
+            ],
+            "descendants": [
+              {
+                "language": "cop-akh",
+                "word": "ⲛⲓⲙ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-boh",
+                "word": "ⲛⲓⲃⲉⲛ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲛⲓⲃⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-lyc",
+                "word": "ⲛⲓⲙ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-oxy",
+                "word": "ⲛⲓⲙ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-ppp",
+                "word": "ⲛⲓⲃ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲛⲓⲙ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": 1,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "nb",
+            "type": "inh"
+          }
+        ]
+      },
+      {
+        "etymology_text": "===Etymology 2===\n<div>From {{inh|egx-dem|egy|nb|<hiero>nb-A1</hiero>|tr={{l|egy|nb}}|lord}}.</div>\n\n====Pronunciation====\n* {{IPA|egx-dem|/neːβ/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "lord"
+            ],
+            "descendants": [
+              {
+                "language": "cop-boh",
+                "word": "ⲛⲏⲃ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-old",
+                "word": "ⲛⲏⲃ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": 2,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "nb",
+            "type": "inh"
+          }
+        ]
+      },
+      {
+        "etymology_text": "===Etymology 3===\n<div>From {{inh|egx-dem|egy|nbt|<hiero>nb:t</hiero>|tr={{l|egy|nbt}}|mistress, lady}}.</div>\n\n====Pronunciation====\n* {{IPA|egx-dem|/ˈneːβə/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "mistress, lady "
+            ]
+          }
+        ],
+        "etymology_number": 3,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "nbt",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|212–213}}\n* {{R:egx-dem:Thus|7}}"
+  },
+  "nby": {
+    "pronunciations": [
+      "1=egx-dem|2=/ˈnaβi/|ref={{cite-journal|author=Elmar Edel|title=Neues Material zur Herkunft der auslautenden Vokale -ⲉ und -ⲓ im Koptischen|journal=Zeitschrift für Ägyptische Sprache und Altertumskunde|year=1961|volume=86|issue=1|doi=10.1524/zaes.1961.86.1.107}}"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|nb|<hiero>nbw-G37</hiero>|tr={{l|egy|nb}}|damage, sin}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/ˈnaβi/|ref={{cite-journal|author=Elmar Edel|title=Neues Material zur Herkunft der auslautenden Vokale -ⲉ und -ⲓ im Koptischen|journal=Zeitschrift für Ägyptische Sprache und Altertumskunde|year=1961|volume=86|issue=1|doi=10.1524/zaes.1961.86.1.107}}}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "damage",
+              "iniquity, sin"
+            ],
+            "derived_terms": [
+              "nby n ḥwṱ"
+            ],
+            "descendants": [
+              {
+                "language": "cop-akh",
+                "word": "ⲛⲁⲃⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-boh",
+                "word": "ⲛⲟⲃⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲛⲁⲃⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲛⲁϥⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-lyc",
+                "word": "ⲛⲁⲃⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲛⲟⲃⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "nb",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "<references/>\n* {{R:egx-dem:DG|214}}"
+  },
+  "nbw": {
+    "pronunciations": [
+      "1=egx-dem|2=/nuːβ/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|nbw|<hiero>nbw</hiero>|tr={{l|egy|nbw}}|gold}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/nuːβ/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "gold"
+            ],
+            "descendants": [
+              {
+                "language": "cop",
+                "word": "ⲛⲟⲩⲃ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "nbw",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|214}}"
+  },
+  "nkt": {
+    "pronunciations": [
+      "1=egx-dem|2=/nəˈkʰaʔ/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|nkt|<hiero>n:k-t:Z9-Y1:Z2</hiero>|tr={{m|egy|nkt}}|some, a little bit}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/nəˈkʰaʔ/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "thing"
+            ],
+            "descendants": [
+              {
+                "language": "cop",
+                "word": "ⲛⲕⲁ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "nkt",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|229–230}}"
+  },
+  "ntr": {
+    "pronunciations": [
+      "1=egx-dem|2=/ˈnuːtə/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|nṯr|<hiero>nTr-Z1</hiero>|tr={{m|egy|nṯr}}|god}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/ˈnuːtə/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "god"
+            ],
+            "descendants": [
+              {
+                "language": "cop-akh",
+                "word": "ⲛⲟⲩⲛⲧⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-boh",
+                "word": "ⲛⲟⲩϯ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲛⲟⲩϯ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲛⲟⲩⲧⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "nṯr",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|232}}"
+  },
+  "rꜥ": {
+    "pronunciations": [
+      "1=egx-dem|2=/ɾeːʕ/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|rꜥ|{{egy-h|r:a-ra}}|tr={{l|egy|rꜥ}}|sun, Ra}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/ɾeːʕ/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "sun",
+              "[prefixed with ] the god Ra"
+            ],
+            "descendants": [
+              {
+                "language": "cop",
+                "word": "ⲣⲏ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": [
+                  {
+                    "language": "en",
+                    "word": "Re",
+                    "level": 1,
+                    "template_type": "desc",
+                    "params": {
+                      "bor": "1"
+                    },
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "rꜥ",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|242}}"
+  },
+  "rmt": {
+    "pronunciations": [
+      "1=egx-dem|2=/ˈɾoːmə/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|rmṯ|<hiero>r:T-A1</hiero>|tr={{l|egy|rmṯ}}|man, people}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/ˈɾoːmə/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "human, human being",
+              "man, male"
+            ],
+            "descendants": [
+              {
+                "language": "cop-akh",
+                "word": "ⲣⲱⲙⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-akh",
+                "word": "ⲣⲙ-",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-boh",
+                "word": "ⲣⲱⲙⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-boh",
+                "word": "ⲣⲉⲙ-",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲗⲱⲙⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲗⲟⲙⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲣⲱⲙⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲗⲉⲙ-",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲗⲉ-",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲣⲉⲙ-",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-lyc",
+                "word": "ⲣⲱⲙⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-lyc",
+                "word": "ⲣⲙ-",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-old",
+                "word": "ⲣⲱⲙⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-old",
+                "word": "ⲣⲟⲙ-",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲣⲱⲙⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲣⲙ-",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲣⲉⲙ-",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲣⲱⲙ-",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "rmṯ",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|247}}"
+  },
+  "ls": {
+    "pronunciations": [
+      "1=egx-dem|2=/las/|3=/les/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy||<hiero>n:ns-s-F51</hiero>|tr={{m|egy|ns}}|tongue}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/las/|/les/}} {{q|depending on dialect}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "tongue"
+            ],
+            "descendants": [
+              {
+                "language": "cop-akh",
+                "word": "ⲗⲉⲥ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-boh",
+                "word": "ⲗⲁⲥ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲗⲉⲥ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-old",
+                "word": "ⲗⲁⲥ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲗⲁⲥ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|263}}"
+  },
+  "hꜥleṱ": {
+    "pronunciations": [
+      "1=egx-dem|2=/ħaʕˈleːt/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\nFrom {{m|egx-dem||{{t2i-Egyd|ḥ-2|l|P5|w-Y1}}|tr={{l|egx-dem|ḥl}}|to fly}}.\n\n===Pronunciation===\n* {{IPA|egx-dem|/ħaʕˈleːt/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "bird"
+            ],
+            "descendants": [
+              {
+                "language": "cop",
+                "word": "ϩⲁⲗⲏⲧ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|270}}\n\n{{C|egx-dem|Animals}}"
+  },
+  "hy": {
+    "pronunciations": [
+      "1=egx-dem|2=/haj/",
+      "1=egx-dem|2=/hej/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "===Etymology 1===\n<div>From {{inh|egx-dem|egy|hj|<hiero>h-i-D52-A1</hiero>|tr={{m|egy|hj}}|husband}}.</div>\n\n====Pronunciation====\n* {{IPA|egx-dem|/haj/}}, {{IPA|egx-dem|/hej/}} {{q|depending on dialect}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "husband"
+            ],
+            "descendants": [
+              {
+                "language": "cop",
+                "word": "ϩⲁⲓ}} {{q",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "Sahidic",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "Bohairic}}, {{l",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "cop",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "ϩⲉⲓ}} {{q",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "Fayyumic",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "Akhmimic}}, {{l",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "cop",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "ϩⲉⲉⲓ}} {{q",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "Lycopolitan",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": 1,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "hj",
+            "type": "inh"
+          }
+        ]
+      },
+      {
+        "etymology_text": "===Etymology 2===\n<div>From {{inh|egx-dem|egy|hꜣj|<hiero>h-A-D54</hiero>|tr={{m|egy|hꜣj}}|to descend}}.</div>",
+        "definitions": [
+          {
+            "part_of_speech": "verb",
+            "parameters": "",
+            "definitions": [
+              "[intransitive] to fall, to descend, to perish"
+            ],
+            "descendants": [
+              {
+                "language": "cop",
+                "word": "ϩⲉ}} {{q",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "Sahidic}}, {{l",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "cop",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "ϩⲉⲓ}} {{q",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "Bohairic",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": 2,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "hꜣj",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:cop:Černý|270}}\n* {{R:egx-dem:DG|266, 267}}\n* {{R:egx-dem:Thus|9, 78}}\n* {{R:egx-dem:CDD|H (10.1)|11}}"
+  },
+  "ḥm.t": {
+    "pronunciations": [
+      "1=egx-dem|2=/ˈħiːmə/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|ḥmt|<hiero>N41:t-B1</hiero>|tr={{m|egy|ḥmt}}|woman, wife}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/ˈħiːmə/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "wife"
+            ],
+            "descendants": [
+              {
+                "language": "cop-akh",
+                "word": "ϩⲓⲙⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ϩⲏⲙ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-lyc",
+                "word": "ϩⲓⲙⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-old",
+                "word": "ϩⲓⲙⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ϩⲓⲙⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ϩⲓⲙ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ḥmt",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|306}}\n* {{R:egx-dem:Thus|9}}"
+  },
+  "ḥnꜥ": {
+    "pronunciations": [
+      "1=egx-dem|2=*/ħəl/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|ḥnꜥ|<hiero>H-n:a</hiero>|tr={{l|egy|ḥnꜥ}}|with, and}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|*/ħəl/}} {{qual|nominal state}}",
+        "definitions": [
+          {
+            "part_of_speech": "preposition",
+            "parameters": "",
+            "definitions": [
+              "and, with, or"
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ḥnꜥ",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "<references/>"
+  },
+  "ḥry": {
+    "pronunciations": [
+      "1=egx-dem|2=/ħəˈɾaj/|3=/ħəˈɾej/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|ḥrj|<hiero>Hr:r-y:N1-A1</hiero>|tr={{m|egy|ḥrj}}|supervisor, boss}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/ħəˈɾaj/|/ħəˈɾej/}} {{q|depending on dialect}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "chief, superior, master"
+            ],
+            "descendants": [
+              {
+                "language": "grc",
+                "word": "ρι-",
+                "level": 0,
+                "template_type": "desc",
+                "params": {
+                  "bor": "1"
+                },
+                "children": []
+              },
+              {
+                "language": "grc",
+                "word": "φρι-",
+                "level": 0,
+                "template_type": "desc",
+                "params": {
+                  "bor": "1",
+                  "der": "1"
+                },
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ḥrj",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|324}}\n* {{R:egx-dem:CDD|Ḥ (09.1)|219–226}}"
+  },
+  "ḥrry": {
+    "pronunciations": [
+      "1=egx-dem|2=/ħəˈɾeːɾə/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|ḥrrt|<hiero>Hr:r-r:*t-M2</hiero>|tr={{l|egy|ḥrrt}}}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/ħəˈɾeːɾə/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "flower"
+            ],
+            "descendants": [
+              {
+                "language": "cop-boh",
+                "word": "ϩⲣⲏⲣⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ϩⲗⲏⲣⲓ}} {{see desc",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ϩⲣⲏⲣⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ḥrrt",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|326}}"
+  },
+  "ḥl": {
+    "pronunciations": [
+      "1=egx-dem|2=/ħoːl/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|ḥrj|<hiero>Hr:r-N31</hiero>|tr={{m|egy|ḥrj}}|to become distant, to fly off}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/ħoːl/}}",
+        "definitions": [
+          {
+            "part_of_speech": "verb",
+            "parameters": "",
+            "definitions": [
+              "to fly"
+            ],
+            "derived_terms": [
+              "",
+              "hꜥleṱ"
+            ],
+            "descendants": [
+              {
+                "language": "cop",
+                "word": "ϩⲱⲗ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ḥrj",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|327}}"
+  },
+  "ḥt": {
+    "pronunciations": [
+      "1=egx-dem|2=/ħat/|3=/ħet/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|ḥḏ|<hiero>HD-S12:N33A</hiero>|tr={{l|egy|ḥḏ}}|silver}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/ħat/|/ħet/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "silver",
+              "silver coin",
+              "money"
+            ],
+            "descendants": [
+              {
+                "language": "cop",
+                "word": "ϩⲁⲧ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ḥḏ",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|335}}"
+  },
+  "ḥtr": {
+    "pronunciations": [
+      "1=egx-dem|2=/ħəˈtʰoʔ/|3=/ħəˈtʰaʔ/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|ḥtrj|<hiero>H-t*:r-E1</hiero>|tr={{l|egy|ḥtrj}}|team of animals}}, with written variant <hiero>H-t*:r-E6</hiero> when applied to horses.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/ħəˈtʰoʔ/|/ħəˈtʰaʔ/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "horse",
+              "team of horses"
+            ],
+            "descendants": [
+              {
+                "language": "cop-boh",
+                "word": "ϩⲑⲟ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ϩⲧⲟ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ḥtrj",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|342}}"
+  },
+  "sbꜣ.t": {
+    "pronunciations": [
+      "1=egx-dem|2=/səˈβoːʔ/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy||<hiero>s-b-sbA-A-i-i-t:Y1</hiero>|tr={{m|egy|sbꜣyt}}|instruction, teaching}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/səˈβoːʔ/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "teaching"
+            ],
+            "descendants": [
+              {
+                "language": "cop-akh",
+                "word": "ⲥⲃⲟⲩ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-boh",
+                "word": "ⲥⲃⲱ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲥⲃⲱ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-lyc",
+                "word": "ⲥⲃⲱ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-lyc",
+                "word": "ⲥⲃⲟⲩ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲥⲃⲱ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|421}}"
+  },
+  "sfy": {
+    "pronunciations": [
+      "1=egx-dem|2=/ˈseːfə/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|zft|<hiero>z:f:t-T30</hiero>|tr={{l|egy|zft}}|knife, sword}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/ˈseːfə/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "[feminine] sword",
+              "[masculine] knife"
+            ],
+            "descendants": [
+              {
+                "language": "cop",
+                "word": "ⲥⲏϥⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "zft",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|429}}\n* {{R:egx-dem:CDD|S (13.1)|200–201}}"
+  },
+  "sn": {
+    "pronunciations": [
+      "1=egx-dem|2=/son/|a=Bohairic,Sahidic",
+      "1=egx-dem|2=/san/|a=Akhmimic,Fayyumic"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|sn|<hiero>sn-n:A1</hiero>|tr={{m|egy|sn}}}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/son/|a=Bohairic,Sahidic}}\n* {{IPA|egx-dem|/san/|a=Akhmimic,Fayyumic}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "brother"
+            ],
+            "descendants": [
+              {
+                "language": "cop",
+                "word": "ⲥⲟⲛ}} {{q",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "Sahidic",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "Bohairic}}, {{l",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "cop",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "ⲥⲁⲛ}} {{q",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "Fayyumic",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop",
+                "word": "Akhmimic",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "sn",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|435–436}}"
+  },
+  "snf": {
+    "pronunciations": [
+      "1=egx-dem|2=/səˈnof/|3=/səˈnaf/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|znf|<hiero>z:n:f-D26</hiero>|tr={{m|egy|znf}}|blood}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/səˈnof/|/səˈnaf/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "blood"
+            ],
+            "descendants": [
+              {
+                "language": "cop-akh",
+                "word": "ⲥⲛⲁϥ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-boh",
+                "word": "ⲥⲛⲟϥ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲥⲛⲁϥ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲥⲛⲟϥ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-lyc",
+                "word": "ⲥⲛⲁϥ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-old",
+                "word": "ⲥⲛⲟⲃ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲥⲛⲟϥ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲥⲛⲟⲃ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "znf",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|438}}"
+  },
+  "srj": {
+    "pronunciations": [],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|sr|<hiero>s-r-A21</hiero>|tr={{l|egy|sr}}|official, magistrate}}.</div>",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "[usually, in the plural] official, magistrate"
+            ],
+            "descendants": [
+              {
+                "language": "cop",
+                "word": "ⲥⲓⲟⲩⲣ",
+                "level": 0,
+                "template_type": "desc",
+                "params": {
+                  "t": "eunuch"
+                },
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "sr",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|441}}\n* {{R:egx-dem:CDD|S (13.1)|293–297}}"
+  },
+  "sḏ": {
+    "pronunciations": [
+      "1=egx-dem|2=/səˈt͡ʃʼeʔ/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Pronunciation===\n* {{IPA|egx-dem|/səˈt͡ʃʼeʔ/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "locust"
+            ],
+            "descendants": [
+              {
+                "language": "cop",
+                "word": "ϣϫⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|482}}"
+  },
+  "šr": {
+    "pronunciations": [
+      "1=egx-dem|2=/ˈʃeːɾə/|q1=Bohairic, Sahidic",
+      "1=egx-dem|2=/ˈʃeːlə/|q1=Fayyumic"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|šr|<hiero>S:r-Xrd</hiero>|tr={{m|egy|šr}}|boy, lad, son}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/ˈʃeːɾə/|q1=Bohairic, Sahidic}}\n* {{IPA|egx-dem|/ˈʃeːlə/|q1=Fayyumic}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "son"
+            ],
+            "descendants": [
+              {
+                "language": "cop-boh",
+                "word": "ϣⲏⲣⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ϣⲏⲗⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ϣⲏⲣⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ϣⲏⲣⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "šr",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|516–517}}"
+  },
+  "gš": {
+    "pronunciations": [
+      "1=egx-dem|2=/kʼaʃ/|a=Bohairic",
+      "1=egx-dem|2=/kʼeʃ/|a=Akhmimic,Fayyumic"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|gꜣš|<hiero>g-A-S-qs-Hn:Z2</hiero>|tr={{l|egy|gꜣš}}|rush}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/kʼaʃ/|a=Bohairic}}\n* {{IPA|egx-dem|/kʼeʃ/|a=Akhmimic,Fayyumic}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "reed, rush"
+            ],
+            "descendants": [
+              {
+                "language": "cop-akh",
+                "word": "ⲕⲉϣ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-boh",
+                "word": "ⲕⲁϣ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-fay",
+                "word": "ⲕⲉϣ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲕⲁϣ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "gꜣš",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|593}}"
+  },
+  "tb": {
+    "pronunciations": [
+      "1=egx-dem|2=/ˈtʼoːβə/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\n<div>From {{inh|egx-dem|egy|ḏbt|<hiero>Db-b-t:O39</hiero>|tr={{m|egy|ḏbt}}}}.</div>\n\n===Pronunciation===\n* {{IPA|egx-dem|/ˈtʼoːβə/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "brick"
+            ],
+            "descendants": [
+              {
+                "language": "cop-boh",
+                "word": "ⲧⲱⲃⲓ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲧⲱⲃⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": [
+                  {
+                    "language": "ar",
+                    "word": "طُوب",
+                    "level": 1,
+                    "template_type": "desctree",
+                    "params": {
+                      "bor": "1"
+                    },
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲧⲱⲱⲃⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "ḏbt",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:DG|617}}"
+  },
+  "tše": {
+    "pronunciations": [
+      "1=egx-dem|2=/təˈʃeʔ/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\nFrom {{inh|egx-dem|egy|*tꜣšj}}, from {{m|egy|tꜣš||border}} + {{m|egy|-j|pos=''[[nisba]]'' ending}}.\n\n===Pronunciation===\n* {{IPA|egx-dem|/təˈʃeʔ/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "neighbor"
+            ],
+            "descendants": [
+              {
+                "language": "cop-boh",
+                "word": "ⲑⲉϣⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ⲧⲉϣⲉ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy",
+            "form": "*tꜣšj",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "* {{R:egx-dem:CDD|T (12.1)|296}}"
+  },
+  "ḏmpḥ": {
+    "pronunciations": [
+      "1=egx-dem|2=/t͡ʃəmˈpʰeħ/"
+    ],
+    "etymologies": [
+      {
+        "etymology_text": "==Demotic==\n\n===Etymology===\nFrom {{inh|egx-dem|egy-lat|ḏpḥ||apple}} <hiero>D:p-H-W-M2</hiero> Borrowed from a {{bor|egx-dem|sem}} language. Compare {{cog|he|תַּפּוּחַ|tr=tappūaḥ|t=apple}}, and {{cog|ar|تُفَّاح|t=apples}}.<ref>{{R:cop:Černý|314}}</ref>\n\n===Pronunciation===\n* {{IPA|egx-dem|/t͡ʃəmˈpʰeħ/}}",
+        "definitions": [
+          {
+            "part_of_speech": "noun",
+            "parameters": "",
+            "definitions": [
+              "apple"
+            ],
+            "descendants": [
+              {
+                "language": "cop-boh",
+                "word": "ϫⲉⲙⲫⲉϩ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ϫⲙ̄ⲡⲉϩ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ϫⲉⲙⲡⲉϩ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ϫⲙ̄ⲡⲏϩ",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "ϫⲏⲡⲉϩ}}",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              },
+              {
+                "language": "cop-sah",
+                "word": "342",
+                "level": 0,
+                "template_type": "desc",
+                "params": null,
+                "children": []
+              }
+            ]
+          }
+        ],
+        "etymology_number": null,
+        "etymology_ancestors": [
+          {
+            "language": "egy-lat",
+            "form": "ḏpḥ",
+            "type": "inh"
+          }
+        ]
+      }
+    ],
+    "related_terms": [],
+    "see_also": [],
+    "references": "<references/>"
+  },
+  "Category:Demotic determiners": {
+    "pronunciations": [],
+    "etymologies": [],
+    "related_terms": [],
+    "see_also": [],
+    "references": ""
+  },
+  "Category:Demotic multiword terms": {
+    "pronunciations": [],
+    "etymologies": [],
+    "related_terms": [],
+    "see_also": [],
+    "references": ""
+  },
+  "Category:Demotic nouns": {
+    "pronunciations": [],
+    "etymologies": [],
+    "related_terms": [],
+    "see_also": [],
+    "references": ""
+  },
+  "Category:Demotic prepositions": {
+    "pronunciations": [],
+    "etymologies": [],
+    "related_terms": [],
+    "see_also": [],
+    "references": ""
+  },
+  "Category:Demotic verbs": {
+    "pronunciations": [],
+    "etymologies": [],
+    "related_terms": [],
+    "see_also": [],
+    "references": ""
+  }
+}

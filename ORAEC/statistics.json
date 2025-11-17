@@ -1,0 +1,11 @@
+{
+  "total_entries": 2177,
+  "with_coptic_word": 38,
+  "with_egyptian_id": 1695,
+  "with_egyptian_word": 32,
+  "with_demotic_id": 1827,
+  "with_demotic_word": 24,
+  "with_both_ids": 1345,
+  "egyptian_only": 350,
+  "demotic_only": 482
+}
