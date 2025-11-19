@@ -1,3 +1,35 @@
+# ORAEC etymology table parser
+
+This small script extracts the Coptic / Egyptian / Demotic etymology table from the local `ORAEC.htm` blog export and writes two outputs:
+
+- `oraec_etymologies.jsonl` — one JSON object per row (newline-delimited)
+- `oraec_etymologies.json` — an array of all rows
+
+Each row contains `coptic`, `egyptian`, and `demotic` objects with `text`, `html`, and `links` fields.
+
+Requirements
+ - Python 3.8+
+ - `beautifulsoup4`, `lxml` (see `requirements.txt`)
+
+Usage
+
+1. Install dependencies:
+
+   pip install -r requirements.txt
+
+2. Run the parser (defaults to `ORAEC.htm` in this folder):
+
+   python parse_etymology_table.py
+
+Or pass an explicit path to the HTML file:
+
+   python parse_etymology_table.py "C:\path\to\ORAEC.htm"
+
+Output files will be written next to the script.
+
+Notes & edge cases
+- The script looks for a table with headers containing the words "Coptic", "Egyptian" and "Demotic" (case-insensitive). If the blog page structure changes, it may not find the table.
+- Cells with links have their hrefs included in the `links` array; the `html` field preserves the inline HTML of the cell contents.
 # ORAEC - Coptic Etymologies Database
 
 ## Overview

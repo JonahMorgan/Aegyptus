@@ -376,6 +376,7 @@ class EgocentricLemmaNetworkBuilder:
         """
         networks = []
         debug_count = 0
+        total_defs_processed = 0
         
         for lemma_form, entry in egy_data.items():
             etymologies = entry.get('etymologies', [])
@@ -384,6 +385,7 @@ class EgocentricLemmaNetworkBuilder:
                 # Process each definition in this etymology
                 # Create ONE network per definition (POS/meaning), not one per etymology
                 for defn_idx, defn in enumerate(etymology.get('definitions', [])):
+                    total_defs_processed += 1
                     # Create network for THIS DEFINITION
                     network = {
                         'network_id': self.get_new_network_id(),
@@ -403,13 +405,6 @@ class EgocentricLemmaNetworkBuilder:
                     added_derived_terms = set()  # Track Egyptian derived forms
                     pos = defn.get('part_of_speech', 'unknown')
                     meanings = defn.get('definitions', [])
-                    
-                    # Skip if this is "alternative form of" another word
-                    if self.is_alternative_form_of(meanings):
-                        debug_count += 1
-                        if lemma_form == 'twr':
-                            print(f"   DEBUG twr: Skipping etym {etym_idx} def {defn_idx} because 'alternative form of'")
-                        continue
                     
                     # Extract hieroglyphs from definition or parameters
                     hieroglyphs = defn.get('hieroglyphs')
@@ -433,6 +428,10 @@ class EgocentricLemmaNetworkBuilder:
                     )
                     network['nodes'].append(main_node)
                     pos_main_nodes.append(main_node)
+                    
+                    if lemma_form == 'ꜣ' and etym_idx == 0 and defn_idx == 0:
+                        print(f"   DEBUG: Created main node, nodes now: {len(network['nodes'])}")
+                        print(f"   DEBUG: Network root lemma: {lemma_form}")
                     
                     # Add alternative forms as variant nodes with temporal evolution
                     # Group by inflection type (base, plural, godhood, etc.) for separate chains
@@ -996,12 +995,20 @@ class EgocentricLemmaNetworkBuilder:
                         network['edges'].append(edge)
                     
                     # Only add network if it has nodes (inside defn loop)
+                    if lemma_form == 'ꜣ' and etym_idx == 0 and defn_idx == 0:
+                        print(f"   DEBUG: About to check append condition")
+                        print(f"   DEBUG: network['nodes'] = {network['nodes']}")
+                        print(f"   DEBUG: bool(network['nodes']) = {bool(network['nodes'])}")
+                    
                     if network['nodes']:
                         networks.append(network)
-                        if lemma_form == 'twr':
-                            print(f"   DEBUG twr: Created network etym {etym_idx} def {defn_idx}, nodes={len(network['nodes'])}")
+                        if lemma_form == 'ꜣ' and etym_idx == 0 and defn_idx == 0:
+                            print(f"   DEBUG: APPENDED network for ꜣ! Total networks now: {len(networks)}")
+                    else:
+                        if lemma_form == 'ꜣ' and etym_idx == 0 and defn_idx == 0:
+                            print(f"   DEBUG: FAILED to append ꜣ network! Nodes empty? {network['nodes']}")
         
-        print(f"   DEBUG: Filtered as 'alternative form of': {debug_count} definitions")
+        print(f"   DEBUG: Total definitions processed: {total_defs_processed}")
         print(f"   DEBUG: Created networks: {len(networks)}")
         return networks
     

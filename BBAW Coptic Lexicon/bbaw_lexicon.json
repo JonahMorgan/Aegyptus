@@ -1,0 +1,867 @@
+[
+  {
+    "@attrs": {
+      "type": "hom",
+      "{http://www.w3.org/XML/1998/namespace}id": "C1",
+      "xml:id": "C1"
+    },
+    "form": [
+      {
+        "@attrs": {
+          "type": "lemma",
+          "{http://www.w3.org/XML/1998/namespace}id": "CF1",
+          "xml:id": "CF1"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "S"
+        },
+        "orth": "ⲁ"
+      },
+      {
+        "@attrs": {
+          "{http://www.w3.org/XML/1998/namespace}id": "CF2",
+          "xml:id": "CF2"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "S"
+        },
+        "orth": "ⲁ"
+      }
+    ],
+    "gramGrp": {
+      "pos": "Zahlzeichen",
+      "note": "erster Buchstabe des Alphabeths ⲁⲗⲫⲁ"
+    },
+    "sense": {
+      "@attrs": {
+        "{http://www.w3.org/XML/1998/namespace}id": "CS1",
+        "xml:id": "CS1"
+      },
+      "cit": {
+        "@attrs": {
+          "type": "translation"
+        },
+        "quote": [
+          {
+            "@attrs": {
+              "{http://www.w3.org/XML/1998/namespace}lang": "de"
+            },
+            "#text": "Eins"
+          },
+          {
+            "@attrs": {
+              "{http://www.w3.org/XML/1998/namespace}lang": "en"
+            },
+            "#text": "one"
+          },
+          {
+            "@attrs": {
+              "{http://www.w3.org/XML/1998/namespace}lang": "fr"
+            },
+            "#text": "un"
+          }
+        ],
+        "bibl": "CD 1a; CED 1; KoptHWb 1"
+      }
+    },
+    "id": "C1"
+  },
+  {
+    "@attrs": {
+      "type": "hom",
+      "{http://www.w3.org/XML/1998/namespace}id": "C2",
+      "xml:id": "C2"
+    },
+    "form": [
+      {
+        "@attrs": {
+          "type": "lemma",
+          "{http://www.w3.org/XML/1998/namespace}id": "CF3",
+          "xml:id": "CF3"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "S"
+        },
+        "orth": "ⲁ-",
+        "gramGrp": {
+          "pos": "Verbalpräfix",
+          "subc": "Status nominalis"
+        }
+      },
+      {
+        "@attrs": {
+          "type": "inflected",
+          "{http://www.w3.org/XML/1998/namespace}id": "CF4",
+          "xml:id": "CF4"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "S"
+        },
+        "orth": "ⲁ-",
+        "gramGrp": {
+          "pos": "Verbalpräfix",
+          "subc": "Status nominalis"
+        }
+      },
+      {
+        "@attrs": {
+          "type": "inflected",
+          "{http://www.w3.org/XML/1998/namespace}id": "CF5",
+          "xml:id": "CF5"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "B"
+        },
+        "orth": "ⲁ-",
+        "gramGrp": {
+          "pos": "Verbalpräfix",
+          "subc": "Status nominalis"
+        }
+      },
+      {
+        "@attrs": {
+          "type": "inflected",
+          "{http://www.w3.org/XML/1998/namespace}id": "CF6",
+          "xml:id": "CF6"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "A"
+        },
+        "orth": "ⲁ-",
+        "gramGrp": {
+          "pos": "Verbalpräfix",
+          "subc": "Status nominalis"
+        }
+      },
+      {
+        "@attrs": {
+          "type": "inflected",
+          "{http://www.w3.org/XML/1998/namespace}id": "CF7",
+          "xml:id": "CF7"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "L"
+        },
+        "orth": "ⲁ-",
+        "gramGrp": {
+          "pos": "Verbalpräfix",
+          "subc": "Status nominalis"
+        }
+      },
+      {
+        "@attrs": {
+          "type": "inflected",
+          "{http://www.w3.org/XML/1998/namespace}id": "CF8",
+          "xml:id": "CF8"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "F"
+        },
+        "orth": "ⲁ-",
+        "gramGrp": {
+          "pos": "Verbalpräfix",
+          "subc": "Status nominalis"
+        }
+      },
+      {
+        "@attrs": {
+          "type": "inflected",
+          "{http://www.w3.org/XML/1998/namespace}id": "CF9",
+          "xml:id": "CF9"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "Ak"
+        },
+        "orth": "ⲁ-",
+        "gramGrp": {
+          "pos": "Verbalpräfix",
+          "subc": "Status nominalis"
+        }
+      },
+      {
+        "@attrs": {
+          "type": "inflected",
+          "{http://www.w3.org/XML/1998/namespace}id": "CF10",
+          "xml:id": "CF10"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "S"
+        },
+        "orth": "ⲁ⸗",
+        "gramGrp": {
+          "pos": "Verbalpräfix",
+          "subc": "Status pronominalis"
+        }
+      },
+      {
+        "@attrs": {
+          "type": "inflected",
+          "{http://www.w3.org/XML/1998/namespace}id": "CF11",
+          "xml:id": "CF11"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "B"
+        },
+        "orth": "ⲁ⸗",
+        "gramGrp": {
+          "pos": "Verbalpräfix",
+          "subc": "Status pronominalis"
+        }
+      },
+      {
+        "@attrs": {
+          "type": "inflected",
+          "{http://www.w3.org/XML/1998/namespace}id": "CF12",
+          "xml:id": "CF12"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "A"
+        },
+        "orth": "ⲁ⸗",
+        "gramGrp": {
+          "pos": "Verbalpräfix",
+          "subc": "Status pronominalis"
+        }
+      },
+      {
+        "@attrs": {
+          "type": "inflected",
+          "{http://www.w3.org/XML/1998/namespace}id": "CF13",
+          "xml:id": "CF13"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "L"
+        },
+        "orth": "ⲁ⸗",
+        "gramGrp": {
+          "pos": "Verbalpräfix",
+          "subc": "Status pronominalis"
+        }
+      },
+      {
+        "@attrs": {
+          "type": "inflected",
+          "{http://www.w3.org/XML/1998/namespace}id": "CF14",
+          "xml:id": "CF14"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "F"
+        },
+        "orth": "ⲁ⸗",
+        "gramGrp": {
+          "pos": "Verbalpräfix",
+          "subc": "Status pronominalis"
+        }
+      },
+      {
+        "@attrs": {
+          "type": "inflected",
+          "{http://www.w3.org/XML/1998/namespace}id": "CF15",
+          "xml:id": "CF15"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "Ak"
+        },
+        "orth": "ⲁ⸗",
+        "gramGrp": {
+          "pos": "Verbalpräfix",
+          "subc": "Status pronominalis"
+        }
+      }
+    ],
+    "gramGrp": {
+      "pos": "Verbalpräfix",
+      "subc": "Perfekt ⲁ-"
+    },
+    "xr": [
+      {
+        "@attrs": {
+          "type": "syn"
+        },
+        "ref": {
+          "@attrs": {
+            "target": "#ⲁϩ(ⲁ)-"
+          },
+          "#text": "Verbalpräfix Perfekt I"
+        }
+      },
+      {
+        "@attrs": {
+          "type": "syn"
+        },
+        "ref": {
+          "@attrs": {
+            "target": "#ϩⲁ-"
+          },
+          "#text": "Verbalpräfix Perfekt I"
+        }
+      }
+    ],
+    "sense": {
+      "@attrs": {
+        "{http://www.w3.org/XML/1998/namespace}id": "CS2",
+        "xml:id": "CS2"
+      },
+      "cit": {
+        "@attrs": {
+          "type": "translation"
+        },
+        "def": [
+          {
+            "@attrs": {
+              "{http://www.w3.org/XML/1998/namespace}lang": "de"
+            },
+            "#text": "Präfix Perfekt I"
+          },
+          {
+            "@attrs": {
+              "{http://www.w3.org/XML/1998/namespace}lang": "en"
+            },
+            "#text": "verbal prefix perfect I"
+          },
+          {
+            "@attrs": {
+              "{http://www.w3.org/XML/1998/namespace}lang": "fr"
+            },
+            "#text": "préfixe verbal parfait I"
+          }
+        ],
+        "bibl": "CD 1a; CED 1; KoptHWb 1; DELC 1-2"
+      }
+    },
+    "id": "C2"
+  },
+  {
+    "@attrs": {
+      "type": "hom",
+      "{http://www.w3.org/XML/1998/namespace}id": "C3",
+      "xml:id": "C3"
+    },
+    "form": [
+      {
+        "@attrs": {
+          "type": "lemma",
+          "{http://www.w3.org/XML/1998/namespace}id": "CF16",
+          "xml:id": "CF16"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "S"
+        },
+        "orth": "ⲁ-"
+      },
+      {
+        "@attrs": {
+          "{http://www.w3.org/XML/1998/namespace}id": "CF17",
+          "xml:id": "CF17"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "S"
+        },
+        "orth": "ⲁ-"
+      },
+      {
+        "@attrs": {
+          "{http://www.w3.org/XML/1998/namespace}id": "CF18",
+          "xml:id": "CF18"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "B"
+        },
+        "orth": "ⲁ-"
+      },
+      {
+        "@attrs": {
+          "{http://www.w3.org/XML/1998/namespace}id": "CF19",
+          "xml:id": "CF19"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "A"
+        },
+        "orth": "ⲁ-"
+      },
+      {
+        "@attrs": {
+          "{http://www.w3.org/XML/1998/namespace}id": "CF20",
+          "xml:id": "CF20"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "L"
+        },
+        "orth": "ⲁ-"
+      },
+      {
+        "@attrs": {
+          "{http://www.w3.org/XML/1998/namespace}id": "CF21",
+          "xml:id": "CF21"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "F"
+        },
+        "orth": "ⲁ-"
+      },
+      {
+        "@attrs": {
+          "{http://www.w3.org/XML/1998/namespace}id": "CF22",
+          "xml:id": "CF22"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "Ak"
+        },
+        "orth": "ⲁ-"
+      },
+      {
+        "@attrs": {
+          "{http://www.w3.org/XML/1998/namespace}id": "CF23",
+          "xml:id": "CF23"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "A"
+        },
+        "orth": "ⲉ-"
+      },
+      {
+        "@attrs": {
+          "{http://www.w3.org/XML/1998/namespace}id": "CF24",
+          "xml:id": "CF24"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "L"
+        },
+        "orth": "ⲉ-"
+      },
+      {
+        "@attrs": {
+          "{http://www.w3.org/XML/1998/namespace}id": "CF25",
+          "xml:id": "CF25"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "Ak"
+        },
+        "orth": "ⲉ-"
+      }
+    ],
+    "gramGrp": {
+      "pos": "Verbalpräfix",
+      "subc": "Imperativpräfix ⲁ-"
+    },
+    "sense": {
+      "@attrs": {
+        "{http://www.w3.org/XML/1998/namespace}id": "CS3",
+        "xml:id": "CS3"
+      },
+      "cit": {
+        "@attrs": {
+          "type": "translation"
+        },
+        "def": [
+          {
+            "@attrs": {
+              "{http://www.w3.org/XML/1998/namespace}lang": "de"
+            },
+            "#text": "Präformativ des Imperativs"
+          },
+          {
+            "@attrs": {
+              "{http://www.w3.org/XML/1998/namespace}lang": "en"
+            },
+            "#text": "prefix of imperative"
+          },
+          {
+            "@attrs": {
+              "{http://www.w3.org/XML/1998/namespace}lang": "fr"
+            },
+            "#text": "préfixe de l'impératif"
+          }
+        ],
+        "bibl": "CD 1a; CED 1; KoptHWb 1; DELC 2-3"
+      }
+    },
+    "id": "C3"
+  },
+  {
+    "@attrs": {
+      "type": "hom",
+      "{http://www.w3.org/XML/1998/namespace}id": "C4",
+      "xml:id": "C4"
+    },
+    "form": [
+      {
+        "@attrs": {
+          "type": "lemma",
+          "{http://www.w3.org/XML/1998/namespace}id": "CF26",
+          "xml:id": "CF26"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "S"
+        },
+        "orth": "ⲁ-"
+      },
+      {
+        "@attrs": {
+          "{http://www.w3.org/XML/1998/namespace}id": "CF27",
+          "xml:id": "CF27"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "S"
+        },
+        "orth": "ⲁ-"
+      },
+      {
+        "@attrs": {
+          "{http://www.w3.org/XML/1998/namespace}id": "CF28",
+          "xml:id": "CF28"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "B"
+        },
+        "orth": "ⲁ-"
+      },
+      {
+        "@attrs": {
+          "{http://www.w3.org/XML/1998/namespace}id": "CF29",
+          "xml:id": "CF29"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "A"
+        },
+        "orth": "ⲁ-"
+      },
+      {
+        "@attrs": {
+          "{http://www.w3.org/XML/1998/namespace}id": "CF30",
+          "xml:id": "CF30"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "L"
+        },
+        "orth": "ⲁ-"
+      },
+      {
+        "@attrs": {
+          "{http://www.w3.org/XML/1998/namespace}id": "CF31",
+          "xml:id": "CF31"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "F"
+        },
+        "orth": "ⲁ-"
+      },
+      {
+        "@attrs": {
+          "{http://www.w3.org/XML/1998/namespace}id": "CF32",
+          "xml:id": "CF32"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "B"
+        },
+        "orth": "ⲁⲩ-"
+      }
+    ],
+    "gramGrp": {
+      "pos": "Partikel"
+    },
+    "xr": {
+      "@attrs": {
+        "type": "cf"
+      },
+      "ref": {
+        "@attrs": {
+          "target": "#ⲛⲁ-"
+        },
+        "#text": "ungefähr"
+      }
+    },
+    "sense": {
+      "@attrs": {
+        "{http://www.w3.org/XML/1998/namespace}id": "CS4",
+        "xml:id": "CS4"
+      },
+      "cit": {
+        "@attrs": {
+          "type": "translation"
+        },
+        "quote": [
+          {
+            "@attrs": {
+              "{http://www.w3.org/XML/1998/namespace}lang": "de"
+            },
+            "#text": "ungefähr"
+          },
+          {
+            "@attrs": {
+              "{http://www.w3.org/XML/1998/namespace}lang": "en"
+            },
+            "#text": "about"
+          },
+          {
+            "@attrs": {
+              "{http://www.w3.org/XML/1998/namespace}lang": "fr"
+            },
+            "#text": "approximativement, environ"
+          }
+        ],
+        "def": [
+          {
+            "@attrs": {
+              "{http://www.w3.org/XML/1998/namespace}lang": "de"
+            },
+            "#text": "unbestimme Angabe"
+          },
+          {
+            "@attrs": {
+              "{http://www.w3.org/XML/1998/namespace}lang": "en"
+            },
+            "#text": "marking indefinitness"
+          },
+          {
+            "@attrs": {
+              "{http://www.w3.org/XML/1998/namespace}lang": "fr"
+            },
+            "#text": "indiquant une approximation"
+          }
+        ],
+        "bibl": "CD 1ab; CED 1; KoptHWb 1; DELC 3; ChLCS 3a"
+      }
+    },
+    "id": "C4"
+  },
+  {
+    "@attrs": {
+      "type": "hom",
+      "{http://www.w3.org/XML/1998/namespace}id": "C5",
+      "xml:id": "C5"
+    },
+    "form": [
+      {
+        "@attrs": {
+          "type": "lemma",
+          "{http://www.w3.org/XML/1998/namespace}id": "CF33",
+          "xml:id": "CF33"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "S"
+        },
+        "orth": "ⲁ-"
+      },
+      {
+        "@attrs": {
+          "{http://www.w3.org/XML/1998/namespace}id": "CF34",
+          "xml:id": "CF34"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "S"
+        },
+        "orth": "ⲁ-"
+      },
+      {
+        "@attrs": {
+          "{http://www.w3.org/XML/1998/namespace}id": "CF35",
+          "xml:id": "CF35"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "B"
+        },
+        "orth": "ⲁ-"
+      },
+      {
+        "@attrs": {
+          "{http://www.w3.org/XML/1998/namespace}id": "CF36",
+          "xml:id": "CF36"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "L"
+        },
+        "orth": "ⲁ-"
+      },
+      {
+        "@attrs": {
+          "{http://www.w3.org/XML/1998/namespace}id": "CF37",
+          "xml:id": "CF37"
+        },
+        "usg": {
+          "@attrs": {
+            "type": "geo"
+          },
+          "#text": "F"
+        },
+        "orth": "ⲁ-"
+      }
+    ],
+    "gramGrp": {
+      "pos": "Nominalpräfix",
+      "gen": "m.",
+      "subc": "zur Bildung von Ortsangaben"
+    },
+    "xr": {
+      "@attrs": {
+        "type": "cf"
+      },
+      "ref": [
+        {
+          "@attrs": {
+            "target": "#ⲁⲛⲍⲏⲃⲉ"
+          },
+          "#text": "Schule"
+        },
+        {
+          "@attrs": {
+            "target": "#ⲁⲛⲁϩⲱⲣ"
+          },
+          "#text": "Schatzhaus, Speicher"
+        }
+      ]
+    },
+    "sense": {
+      "@attrs": {
+        "{http://www.w3.org/XML/1998/namespace}id": "CS5",
+        "xml:id": "CS5"
+      },
+      "cit": [
+        {
+          "@attrs": {
+            "type": "example"
+          },
+          "quote": [
+            "ⲁⲛⲍⲏⲃⲉ",
+            "ⲁⲛⲁϩⲱⲣ"
+          ]
+        },
+        {
+          "@attrs": {
+            "type": "translation"
+          },
+          "quote": [
+            {
+              "@attrs": {
+                "{http://www.w3.org/XML/1998/namespace}lang": "de"
+              },
+              "#text": "Haus, Gebiet, Umgebung"
+            },
+            {
+              "@attrs": {
+                "{http://www.w3.org/XML/1998/namespace}lang": "en"
+              },
+              "#text": "house, region, environment"
+            },
+            {
+              "@attrs": {
+                "{http://www.w3.org/XML/1998/namespace}lang": "fr"
+              },
+              "#text": "domaine, région, environnement"
+            }
+          ],
+          "bibl": "KoptHWb 1"
+        }
+      ]
+    },
+    "id": "C5"
+  }
+]
